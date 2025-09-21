@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>STOAN – MVP Vanilla</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -35,7 +40,8 @@
                         <option value="Programación">Programación</option>
                     </select>
                     <label for="busqueda" class="sr-only">Buscar retos</label>
-                    <input id="busqueda" placeholder="Buscar por título o tags" aria-label="Buscar retos por título o etiquetas" />
+                    <input id="busqueda" placeholder="Buscar por título o tags"
+                        aria-label="Buscar retos por título o etiquetas" />
                 </div>
             </div>
             <div id="listaRetos" class="grid" role="list" aria-label="Lista de retos activos"></div>
@@ -48,7 +54,8 @@
                     <div class="row gap-16">
                         <div class="flex-2">
                             <label for="titulo">Título</label>
-                            <input id="titulo" placeholder="Ej: Logo minimalista para app sustentable" aria-required="true" aria-describedby="titulo-help" />
+                            <input id="titulo" placeholder="Ej: Logo minimalista para app sustentable"
+                                aria-required="true" aria-describedby="titulo-help" />
                             <div id="titulo-help" class="sr-only">Ingresa un título descriptivo para tu reto</div>
                         </div>
                         <div class="flex-1">
@@ -70,23 +77,28 @@
                     <div class="row gap-16">
                         <div class="flex-1">
                             <label for="premio">Premio (USD)</label>
-                            <input id="premio" type="number" value="300" min="0" step="1" aria-required="true" aria-describedby="premio-help" />
+                            <input id="premio" type="number" value="300" min="0" step="1" aria-required="true"
+                                aria-describedby="premio-help" />
                             <div id="premio-help" class="sr-only">Monto del premio en dólares estadounidenses</div>
                         </div>
                         <div class="flex-1">
                             <label for="dias">Duración (días)</label>
-                            <input id="dias" type="number" value="5" min="1" step="1" aria-required="true" aria-describedby="dias-help" />
+                            <input id="dias" type="number" value="5" min="1" step="1" aria-required="true"
+                                aria-describedby="dias-help" />
                             <div id="dias-help" class="sr-only">Número de días para completar el reto</div>
                         </div>
                         <div class="flex-1">
                             <label for="tags">Tags (separados por coma)</label>
                             <input id="tags" aria-describedby="tags-help" />
-                            <div id="tags-help" class="sr-only">Etiquetas separadas por comas para categorizar el reto</div>
+                            <div id="tags-help" class="sr-only">Etiquetas separadas por comas para categorizar el reto
+                            </div>
                         </div>
                     </div>
                     <div class="bar">
-                        <button class="btn" id="btnPublicar" type="submit" aria-describedby="publicar-help">Publicar reto</button>
-                        <div id="publicar-help" class="sr-only">Haz clic para publicar el reto con los datos ingresados</div>
+                        <button class="btn" id="btnPublicar" type="submit" aria-describedby="publicar-help">Publicar
+                            reto</button>
+                        <div id="publicar-help" class="sr-only">Haz clic para publicar el reto con los datos ingresados
+                        </div>
                     </div>
                 </form>
                 <aside class="card" role="complementary" aria-labelledby="como-funciona-heading">

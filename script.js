@@ -1,227 +1,322 @@
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
-const uid = () => Math.random().toString(36).slice(2, 9);
+const generarId = () => Math.random().toString(36).slice(2, 9);
 
-let state = { retos: [], subs: [], players: {} };
+let estado = { retos: [], subs: [], jugadores: {} };
 
 // Seed inicial
-state.retos = [
-    { id: uid(), title: 'Logo minimalista para app sustentable', cat: 'Diseño', desc: 'SVG + guía de color', prize: 200, status: 'activo', tags: 'logo, diseño, svg, sustentable' },
-    { id: uid(), title: 'Plan TikTok para café de especialidad', cat: 'Marketing', desc: 'Calendario + hashtags', prize: 300, status: 'activo', tags: 'tiktok, marketing, café, redes sociales' },
-    { id: uid(), title: 'App móvil para delivery local', cat: 'Programación', desc: 'React Native + backend', prize: 500, status: 'activo', tags: 'react, mobile, delivery, app' },
-    { id: uid(), title: 'Investigación UX para fintech', cat: 'Investigación', desc: 'Entrevistas + análisis', prize: 400, status: 'activo', tags: 'ux, investigación, fintech, entrevistas' }
+estado.retos = [
+    {
+        id: generarId(),
+        title: 'Logo minimalista para app sustentable',
+        cat: 'Diseño',
+        desc: 'SVG + guía de color',
+        prize: 200,
+        status: 'activo',
+        tags: 'logo, diseño, svg, sustentable'
+    },
+    {
+        id: generarId(),
+        title: 'Plan TikTok para café de especialidad',
+        cat: 'Marketing',
+        desc: 'Calendario + hashtags',
+        prize: 300,
+        status: 'activo',
+        tags: 'tiktok, marketing, café, redes sociales'
+    },
+    {
+        id: generarId(),
+        title: 'App móvil para delivery local',
+        cat: 'Programación',
+        desc: 'React Native + backend',
+        prize: 500,
+        status: 'activo',
+        tags: 'react, mobile, delivery, app'
+    },
+    {
+        id: generarId(),
+        title: 'Investigación UX para fintech',
+        cat: 'Investigación',
+        desc: 'Entrevistas + análisis',
+        prize: 400,
+        status: 'activo',
+        tags: 'ux, investigación, fintech, entrevistas'
+    }
 ];
 
 // ===== SISTEMA DE NOTIFICACIONES TOAST =====
-function showToast(message, type = 'success', duration = 3000) {
-    const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
-    toast.textContent = message;
-    document.body.appendChild(toast);
-    
+/**
+ * Muestra una notificación toast con animaciones de entrada y salida
+ * @method mostrarNotificacion
+ * @param {string} mensaje - El mensaje que se mostrará en la notificación
+ * @param {string} tipo - El tipo de notificación (success, error, warning, info)
+ * @param {number} duracion - Duración en milisegundos que permanecerá visible la notificación
+ * @return {void}
+ */
+function mostrarNotificacion(mensaje, tipo = 'success', duracion = 3000) {
+    const notificacion = document.createElement('div');
+    notificacion.className = `toast ${tipo}`;
+    notificacion.textContent = mensaje;
+    document.body.appendChild(notificacion);
+
     // Animar entrada
-    setTimeout(() => toast.classList.add('show'), 100);
-    
+    setTimeout(() => notificacion.classList.add('show'), 100);
+
     // Remover después del tiempo especificado
     setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    }, duration);
+        notificacion.classList.remove('show');
+        setTimeout(() => notificacion.remove(), 300);
+    }, duracion);
 }
 
 // ===== ANIMACIONES DE LOADING =====
-function showLoading(element) {
-    element.classList.add('loading');
+/**
+ * Aplica la clase loading a un elemento para mostrar animación de carga
+ * @method mostrarCargando
+ * @param {HTMLElement} elemento - El elemento DOM al que se aplicará la clase loading
+ * @return {void}
+ */
+function mostrarCargando(elemento) {
+    elemento.classList.add('loading');
 }
 
-function hideLoading(element) {
-    element.classList.remove('loading');
+/**
+ * Remueve la clase loading de un elemento para ocultar animación de carga
+ * @method ocultarCargando
+ * @param {HTMLElement} elemento - El elemento DOM del que se removerá la clase loading
+ * @return {void}
+ */
+function ocultarCargando(elemento) {
+    elemento.classList.remove('loading');
 }
 
 // ===== VALIDACIÓN CON ANIMACIONES =====
-function validateField(field, errorMessage = '') {
-    if (!field.value.trim()) {
-        field.classList.add('shake');
-        if (errorMessage) showToast(errorMessage, 'error');
-        setTimeout(() => field.classList.remove('shake'), 500);
+/**
+ * Valida que un campo de formulario no esté vacío y muestra animación de error si es necesario
+ * @method validarCampo
+ * @param {HTMLInputElement} campo - El campo de entrada que se va a validar
+ * @param {string} mensajeError - Mensaje de error que se mostrará si la validación falla
+ * @return {boolean} True si el campo es válido, false si está vacío
+ */
+function validarCampo(campo, mensajeError = '') {
+    if (!campo.value.trim()) {
+        campo.classList.add('shake');
+        if (mensajeError) mostrarNotificacion(mensajeError, 'error');
+        setTimeout(() => campo.classList.remove('shake'), 500);
         return false;
     }
     return true;
 }
 
-function route() {
+/**
+ * Maneja el enrutamiento de la aplicación basado en el hash de la URL
+ * @method enrutar
+ * @return {void}
+ */
+function enrutar() {
     const hash = location.hash || '#/explorar';
-    const name = hash.split('/')[1];
-    
+    const nombre = hash.split('/')[1];
+
     // Animar transición entre secciones
-    $$('.section').forEach(s => {
-        s.classList.remove('visible');
+    $$('.section').forEach(seccion => {
+        seccion.classList.remove('visible');
     });
-    
+
     // Mostrar nueva sección con animación
     setTimeout(() => {
-        if ($('#' + name)) {
-            $('#' + name).classList.add('visible');
+        if ($('#' + nombre)) {
+            $('#' + nombre).classList.add('visible');
         }
     }, 150);
-    
+
     // Actualizar navegación activa
-    $$('.nav a').forEach(a => a.classList.remove('active'));
-    const link = $$('.nav a').find(a => a.getAttribute('href') === hash);
-    if (link) link.classList.add('active');
-    
+    $$('.nav a').forEach(enlace => enlace.classList.remove('active'));
+    const enlaceActivo = $$('.nav a').find(enlace => enlace.getAttribute('href') === hash);
+    if (enlaceActivo) enlaceActivo.classList.add('active');
+
     // Renderizar contenido según la sección
-    if (name === 'explorar') {
-        setTimeout(() => renderLista(), 200);
+    if (nombre === 'explorar') {
+        setTimeout(() => renderizarLista(), 200);
     }
-    if (name === 'leaderboard') {
-        setTimeout(() => renderLeaderboard(), 200);
+    if (nombre === 'leaderboard') {
+        setTimeout(() => renderizarTablaClasificacion(), 200);
     }
 }
 
-function renderLista(retos = state.retos) {
+/**
+ * Renderiza la lista de retos en el grid de la interfaz
+ * @method renderizarLista
+ * @param {Array} retos - Array de objetos reto que se van a renderizar (por defecto usa estado.retos)
+ * @return {void}
+ */
+function renderizarLista(retos = estado.retos) {
     const grid = $('#listaRetos');
-    
+
     if (retos.length === 0) {
         grid.innerHTML = '<div class="empty">No se encontraron retos</div>';
         return;
     }
-    
-    grid.innerHTML = retos.map(r => `
+
+    grid.innerHTML = retos.map(reto => `
         <div class="card">
-            <h3>${r.title}</h3>
-            <p class="small muted">${r.desc}</p>
+            <h3>${reto.title}</h3>
+            <p class="small muted">${reto.desc}</p>
             <div class="row" style="margin: 8px 0;">
-                ${r.tags ? r.tags.split(',').map(tag => 
-                    `<span class="tag">${tag.trim()}</span>`
-                ).join('') : ''}
+                ${reto.tags ? reto.tags.split(',').map(etiqueta =>
+        `<span class="tag">${etiqueta.trim()}</span>`
+    ).join('') : ''}
             </div>
             <div class="bar">
-                <span class="small">Premio: USD ${r.prize}</span>
-                <a class="btn secondary" href="#/detalle/${r.id}">Ver reto</a>
+                <span class="small">Premio: USD ${reto.prize}</span>
+                <a class="btn secondary" href="#/detalle/${reto.id}">Ver reto</a>
             </div>
         </div>
     `).join('');
 }
 
-function renderLeaderboard() {
-    const arr = Object.values(state.players);
-    const container = $('#tablaLeaderboard');
-    
-    if (arr.length === 0) {
-        container.innerHTML = '<div class="empty">No hay jugadores aún</div>';
+/**
+ * Renderiza la tabla de clasificación con los jugadores y sus puntos
+ * @method renderizarTablaClasificacion
+ * @return {void}
+ */
+function renderizarTablaClasificacion() {
+    const arregloJugadores = Object.values(estado.jugadores);
+    const contenedor = $('#tablaLeaderboard');
+
+    if (arregloJugadores.length === 0) {
+        contenedor.innerHTML = '<div class="empty">No hay jugadores aún</div>';
         return;
     }
-    
-    container.innerHTML = arr.map(p => `
-        <div>${p.name} – ${p.points} puntos</div>
+
+    contenedor.innerHTML = arregloJugadores.map(jugador => `
+        <div>${jugador.name} – ${jugador.points} puntos</div>
     `).join('');
 }
 
 // ===== SISTEMA DE BÚSQUEDA EN TIEMPO REAL =====
-function setupSearch() {
-    const searchInput = $('#busqueda');
-    const categoryFilter = $('#filtroCat');
-    
-    function filterRetos() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const selectedCategory = categoryFilter.value;
-        
-        let filteredRetos = state.retos.filter(reto => {
-            const matchesSearch = !searchTerm || 
-                reto.title.toLowerCase().includes(searchTerm) ||
-                reto.desc.toLowerCase().includes(searchTerm) ||
-                (reto.tags && reto.tags.toLowerCase().includes(searchTerm));
-            
-            const matchesCategory = !selectedCategory || reto.cat === selectedCategory;
-            
-            return matchesSearch && matchesCategory;
+/**
+ * Configura los event listeners para el sistema de búsqueda y filtrado en tiempo real
+ * @method configurarBusqueda
+ * @return {void}
+ */
+function configurarBusqueda() {
+    const entradaBusqueda = $('#busqueda');
+    const filtroCategoria = $('#filtroCat');
+
+    /**
+     * Filtra los retos basado en el término de búsqueda y la categoría seleccionada
+     * @method filtrarRetos
+     * @return {void}
+     */
+    function filtrarRetos() {
+        const terminoBusqueda = entradaBusqueda.value.toLowerCase();
+        const categoriaSeleccionada = filtroCategoria.value;
+
+        let retosFiltrados = estado.retos.filter(reto => {
+            const coincideBusqueda = !terminoBusqueda ||
+                reto.title.toLowerCase().includes(terminoBusqueda) ||
+                reto.desc.toLowerCase().includes(terminoBusqueda) ||
+                (reto.tags && reto.tags.toLowerCase().includes(terminoBusqueda));
+
+            const coincideCategoria = !categoriaSeleccionada || reto.cat === categoriaSeleccionada;
+
+            return coincideBusqueda && coincideCategoria;
         });
-        
-        renderLista(filteredRetos);
+
+        renderizarLista(retosFiltrados);
     }
-    
-    searchInput.addEventListener('input', filterRetos);
-    categoryFilter.addEventListener('change', filterRetos);
+
+    entradaBusqueda.addEventListener('input', filtrarRetos);
+    filtroCategoria.addEventListener('change', filtrarRetos);
 }
 
 // ===== FORMULARIO CON VALIDACIÓN Y ANIMACIONES =====
-function setupForm() {
-    const form = $('form');
-    const btnPublicar = $('#btnPublicar');
-    
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const titulo = $('#titulo');
-        const categoria = $('#categoria');
-        const descripcion = $('#descripcion');
-        const premio = $('#premio');
-        const dias = $('#dias');
-        const tags = $('#tags');
-        
+/**
+ * Configura los event listeners del formulario de creación de retos
+ * @method configurarFormulario
+ * @return {void}
+ */
+function configurarFormulario() {
+    const formulario = $('form');
+    const botonPublicar = $('#btnPublicar');
+
+    formulario.addEventListener('submit', (evento) => {
+        evento.preventDefault();
+
+        const campoTitulo = $('#titulo');
+        const campoCategoria = $('#categoria');
+        const campoDescripcion = $('#descripcion');
+        const campoPremio = $('#premio');
+        const campoDias = $('#dias');
+        const campoTags = $('#tags');
+
         // Validar campos requeridos
-        let isValid = true;
-        
-        if (!validateField(titulo, 'El título es requerido')) isValid = false;
-        if (!validateField(descripcion, 'La descripción es requerida')) isValid = false;
-        if (!validateField(premio, 'El premio es requerido')) isValid = false;
-        if (!validateField(dias, 'La duración es requerida')) isValid = false;
-        
-        if (!isValid) return;
-        
+        let esValido = true;
+
+        if (!validarCampo(campoTitulo, 'El título es requerido')) esValido = false;
+        if (!validarCampo(campoDescripcion, 'La descripción es requerida')) esValido = false;
+        if (!validarCampo(campoPremio, 'El premio es requerido')) esValido = false;
+        if (!validarCampo(campoDias, 'La duración es requerida')) esValido = false;
+
+        if (!esValido) return;
+
         // Mostrar loading
-        showLoading(btnPublicar);
-        btnPublicar.textContent = 'Publicando...';
-        
+        mostrarCargando(botonPublicar);
+        botonPublicar.textContent = 'Publicando...';
+
         // Simular delay de publicación
         setTimeout(() => {
             const nuevoReto = {
-                id: uid(),
-                title: titulo.value,
-                cat: categoria.value,
-                desc: descripcion.value,
-                prize: parseInt(premio.value),
-                days: parseInt(dias.value),
-                tags: tags.value,
+                id: generarId(),
+                title: campoTitulo.value,
+                cat: campoCategoria.value,
+                desc: campoDescripcion.value,
+                prize: parseInt(campoPremio.value),
+                days: parseInt(campoDias.value),
+                tags: campoTags.value,
                 status: 'activo'
             };
-            
-            state.retos.unshift(nuevoReto); // Agregar al inicio
-            
+
+            estado.retos.unshift(nuevoReto); // Agregar al inicio
+
             // Limpiar formulario
-            form.reset();
-            
+            formulario.reset();
+
             // Ocultar loading
-            hideLoading(btnPublicar);
-            btnPublicar.textContent = 'Publicar reto';
-            
+            ocultarCargando(botonPublicar);
+            botonPublicar.textContent = 'Publicar reto';
+
             // Mostrar notificación y navegar
-            showToast('¡Reto publicado exitosamente!', 'success');
-            
+            mostrarNotificacion('¡Reto publicado exitosamente!', 'success');
+
             setTimeout(() => {
                 location.hash = '#/explorar';
             }, 1000);
-            
+
         }, 1500);
     });
 }
 
 // ===== INICIALIZACIÓN =====
-function init() {
+/**
+ * Inicializa la aplicación configurando todos los event listeners y mostrando mensaje de bienvenida
+ * @method inicializar
+ * @return {void}
+ */
+function inicializar() {
     // Configurar eventos
-    setupSearch();
-    setupForm();
-    
+    configurarBusqueda();
+    configurarFormulario();
+
     // Mostrar mensaje de bienvenida
     setTimeout(() => {
-        showToast('¡Bienvenido a STOAN! 🚀', 'success', 4000);
+        mostrarNotificacion('¡Bienvenido a STOAN! 🚀', 'success', 4000);
     }, 1000);
 }
 
 // Event listeners
-window.addEventListener('hashchange', route);
+window.addEventListener('hashchange', enrutar);
 
 // Inicializar aplicación
-document.addEventListener('DOMContentLoaded', init);
-route();
+document.addEventListener('DOMContentLoaded', inicializar);
+enrutar();
