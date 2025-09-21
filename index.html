@@ -1,10 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="es">
 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>STOAN – MVP Vanilla</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header role="banner">
+        <nav class="nav" role="navigation" aria-label="Navegación principal">
+            <div class="brand" role="banner">STOAN<span class="dot" aria-hidden="true">●</span></div>
+            <a href="#/explorar" data-route aria-label="Ver retos activos">Retos</a>
+            <a href="#/nuevo" data-route aria-label="Publicar nuevo reto">Publicar reto</a>
+            <a href="#/leaderboard" data-route aria-label="Ver ranking de usuarios">Ranking</a>
+            <a href="#/acerca" data-route aria-label="Información sobre STOAN">Acerca</a>
+            <span class="muted small auto-margin" aria-label="Estado del sistema">MVP vanilla • LocalStorage</span>
+        </nav>
+    </header>
+    <main role="main">
+        <section class="kpi" id="kpis" aria-label="Estadísticas principales" role="region"></section>
+        <section id="explorar" class="section visible" role="region" aria-labelledby="explorar-heading">
+            <div class="bar">
+                <h2 id="explorar-heading">Retos activos</h2>
+                <div class="row" role="search" aria-label="Filtros de búsqueda">
+                    <label for="filtroCat" class="sr-only">Filtrar por categoría</label>
+                    <select id="filtroCat" aria-label="Seleccionar categoría para filtrar retos">
+                        <option value="">Todas las categorías</option>
+                        <option value="Diseño">Diseño</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Producto">Producto</option>
+                        <option value="Investigación">Investigación</option>
+                        <option value="Programación">Programación</option>
+                    </select>
+                    <label for="busqueda" class="sr-only">Buscar retos</label>
+                    <input id="busqueda" placeholder="Buscar por título o tags" aria-label="Buscar retos por título o etiquetas" />
+                </div>
+            </div>
+            <div id="listaRetos" class="grid" role="list" aria-label="Lista de retos activos"></div>
+        </section>
+
+        <section id="nuevo" class="section" role="region" aria-labelledby="nuevo-heading">
+            <h2 id="nuevo-heading">Publicar un reto</h2>
+            <div class="split">
+                <form class="card" role="form" aria-label="Formulario para publicar nuevo reto">
+                    <div class="row gap-16">
+                        <div class="flex-2">
+                            <label for="titulo">Título</label>
+                            <input id="titulo" placeholder="Ej: Logo minimalista para app sustentable" aria-required="true" aria-describedby="titulo-help" />
+                            <div id="titulo-help" class="sr-only">Ingresa un título descriptivo para tu reto</div>
+                        </div>
+                        <div class="flex-1">
+                            <label for="categoria">Categoría</label>
+                            <select id="categoria" aria-required="true">
+                                <option value="Diseño">Diseño</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Producto">Producto</option>
+                                <option value="Investigación">Investigación</option>
+                                <option value="Programación">Programación</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="descripcion">Descripción</label>
+                        <textarea id="descripcion" aria-required="true" aria-describedby="descripcion-help"></textarea>
+                        <div id="descripcion-help" class="sr-only">Describe detalladamente los requisitos del reto</div>
+                    </div>
+                    <div class="row gap-16">
+                        <div class="flex-1">
+                            <label for="premio">Premio (USD)</label>
+                            <input id="premio" type="number" value="300" min="0" step="1" aria-required="true" aria-describedby="premio-help" />
+                            <div id="premio-help" class="sr-only">Monto del premio en dólares estadounidenses</div>
+                        </div>
+                        <div class="flex-1">
+                            <label for="dias">Duración (días)</label>
+                            <input id="dias" type="number" value="5" min="1" step="1" aria-required="true" aria-describedby="dias-help" />
+                            <div id="dias-help" class="sr-only">Número de días para completar el reto</div>
+                        </div>
+                        <div class="flex-1">
+                            <label for="tags">Tags (separados por coma)</label>
+                            <input id="tags" aria-describedby="tags-help" />
+                            <div id="tags-help" class="sr-only">Etiquetas separadas por comas para categorizar el reto</div>
+                        </div>
+                    </div>
+                    <div class="bar">
+                        <button class="btn" id="btnPublicar" type="submit" aria-describedby="publicar-help">Publicar reto</button>
+                        <div id="publicar-help" class="sr-only">Haz clic para publicar el reto con los datos ingresados</div>
+                    </div>
+                </form>
+                <aside class="card" role="complementary" aria-labelledby="como-funciona-heading">
+                    <h3 id="como-funciona-heading">Cómo funciona</h3>
+                    <ol class="small" role="list">
+                        <li>Publicás el reto con premio y fecha límite.</li>
+                        <li>La comunidad envía soluciones y vota.</li>
+                        <li>Curadores validan; elegís ganadores.</li>
+                        <li>Pagás el premio y recibís insights del resto.</li>
+                    </ol>
+                </aside>
+            </div>
+        </section>
+
+        <section id="detalle" class="section" role="region" aria-label="Detalle del reto"></section>
+        <section id="leaderboard" class="section" role="region" aria-labelledby="leaderboard-heading">
+            <h2 id="leaderboard-heading">Ranking</h2>
+            <div class="card leader" id="tablaLeaderboard" role="table" aria-label="Tabla de ranking de usuarios"></div>
+        </section>
+        <section id="acerca" class="section" role="region" aria-labelledby="acerca-heading">
+            <div class="card">
+                <h3 id="acerca-heading">¿Qué es STOAN?</h3>
+                <p>Marketplace de micro‑retos gamificado.</p>
+            </div>
+        </section>
+        <footer class="footer small muted" role="contentinfo">MVP educativo. Sin backend real.</footer>
+    </main>
+    <script src="script.js"></script>
 </body>
+
 </html>
