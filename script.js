@@ -1,142 +1,3 @@
-// ===== LOCAL STORAGE FUNCTIONS =====
-
-/**
- * Guarda datos en localStorage
- * @method guardarEnLocalStorage
- * @param {string} clave - La clave para identificar los datos
- * @param {any} datos - Los datos a guardar
- * @return {void}
- */
-const guardarEnLocalStorage = (clave, datos) => {
-  try {
-    localStorage.setItem(clave, JSON.stringify(datos));
-  } catch (error) {
-    console.error('Error al guardar en localStorage:', error);
-  }
-};
-
-/**
- * Carga datos desde localStorage
- * @method cargarDesdeLocalStorage
- * @param {string} clave - La clave para identificar los datos
- * @param {any} valorPorDefecto - Valor por defecto si no hay datos guardados
- * @return {any} Los datos cargados o el valor por defecto
- */
-const cargarDesdeLocalStorage = (clave, valorPorDefecto = null) => {
-  try {
-    const datos = localStorage.getItem(clave);
-    return datos ? JSON.parse(datos) : valorPorDefecto;
-  } catch (error) {
-    console.error('Error al cargar desde localStorage:', error);
-    return valorPorDefecto;
-  }
-};
-
-/**
- * Guarda la colección de álbumes
- * @method guardarColeccion
- * @return {void}
- */
-const guardarColeccion = () => {
-  const coleccion = document.getElementById("lista-coleccion");
-  const albumesEnColeccion = [];
-  
-  coleccion.querySelectorAll('.tarjeta-album').forEach(album => {
-    const id = album.getAttribute('data-id');
-    const reseña = album.querySelector('.reseña-guardada');
-    
-    let reseñaData = null;
-    if (reseña && reseña.style.display !== 'none') {
-      const texto = reseña.querySelector('.texto-reseña-guardado')?.textContent;
-      const puntaje = reseña.querySelector('.puntaje-reseña-guardado')?.textContent;
-      
-      if (texto && puntaje) {
-        reseñaData = {
-          texto: texto.replace(/^"(.*)"$/, '$1'), // Remover comillas
-          puntaje: puntaje.replace(/^Puntaje: (\d+)\/10$/, '$1') // Extraer solo el número
-        };
-      }
-    }
-    
-    albumesEnColeccion.push({
-      id: parseInt(id),
-      reseña: reseñaData
-    });
-  });
-  
-  guardarEnLocalStorage('coleccionAlbumes', albumesEnColeccion);
-};
-
-/**
- * Carga la colección de álbumes guardada
- * @method cargarColeccion
- * @return {void}
- */
-const cargarColeccion = () => {
-  const coleccionGuardada = cargarDesdeLocalStorage('coleccionAlbumes', []);
-  
-  coleccionGuardada.forEach(albumData => {
-    const estrella = document.querySelector(`[data-id="${albumData.id}"]`);
-    if (estrella && !estrella.classList.contains('activo')) {
-      // Simular click en la estrella para agregar a la colección
-      agregarAColeccion(estrella);
-      
-      // Si hay reseña guardada, restaurarla
-      if (albumData.reseña) {
-        setTimeout(() => {
-          const albumEnColeccion = document.querySelector(`#coleccion .tarjeta-album[data-id='${albumData.id}']`);
-          if (albumEnColeccion) {
-            const seccionReseña = albumEnColeccion.querySelector('.seccion-reseña');
-            const entradasReseña = seccionReseña.querySelector('.entradas-reseña');
-            const reseñaGuardada = seccionReseña.querySelector('.reseña-guardada');
-            const textoReseñaGuardado = seccionReseña.querySelector('.texto-reseña-guardado');
-            const puntajeReseñaGuardado = seccionReseña.querySelector('.puntaje-reseña-guardado');
-            
-            // Llenar los campos
-            textoReseñaGuardado.textContent = `"${albumData.reseña.texto}"`;
-            puntajeReseñaGuardado.textContent = `Puntaje: ${albumData.reseña.puntaje}/10`;
-            
-            // Ocultar inputs y mostrar reseña guardada
-            entradasReseña.style.display = 'none';
-            reseñaGuardada.style.display = 'block';
-          }
-        }, 100);
-      }
-    }
-  });
-};
-
-/**
- * Guarda los filtros de búsqueda
- * @method guardarFiltros
- * @return {void}
- */
-const guardarFiltros = () => {
-  const filtros = {
-    busqueda: document.getElementById('busqueda').value,
-    artista: document.getElementById('filtro-artista').value
-  };
-  guardarEnLocalStorage('filtrosBusqueda', filtros);
-};
-
-/**
- * Carga los filtros de búsqueda guardados
- * @method cargarFiltros
- * @return {void}
- */
-const cargarFiltros = () => {
-  const filtros = cargarDesdeLocalStorage('filtrosBusqueda', {});
-  
-  filtros.busqueda && (document.getElementById('busqueda').value = filtros.busqueda);
-  
-  if (filtros.artista) {
-    document.getElementById('filtro-artista').value = filtros.artista;
-    filtrarPorArtista();
-  }
-};
-
-// ===== DATOS DE ÁLBUMES =====
-
 const albumes = [
   {
     nombre: "California",
@@ -265,6 +126,142 @@ const albumes = [
   }
 ];
 
+
+/**
+ * Guarda datos en localStorage
+ * @method guardarEnLocalStorage
+ * @param {string} clave - La clave para identificar los datos
+ * @param {any} datos - Los datos a guardar
+ * @return {void}
+ */
+const guardarEnLocalStorage = (clave, datos) => {
+  try {
+    localStorage.setItem(clave, JSON.stringify(datos));
+  } catch (error) {
+    console.error('Error al guardar en localStorage:', error);
+  }
+};
+
+/**
+ * Carga datos desde localStorage
+ * @method cargarDesdeLocalStorage
+ * @param {string} clave - La clave para identificar los datos
+ * @param {any} valorPorDefecto - Valor por defecto si no hay datos guardados
+ * @return {any} Los datos cargados o el valor por defecto
+ */
+const cargarDesdeLocalStorage = (clave, valorPorDefecto = null) => {
+  try {
+    const datos = localStorage.getItem(clave);
+    return datos ? JSON.parse(datos) : valorPorDefecto;
+  } catch (error) {
+    console.error('Error al cargar desde localStorage:', error);
+    return valorPorDefecto;
+  }
+};
+
+/**
+ * Guarda la colección de álbumes
+ * @method guardarColeccion
+ * @return {void}
+ */
+const guardarColeccion = () => {
+  const coleccion = document.getElementById("lista-coleccion");
+  const albumesEnColeccion = [];
+
+  coleccion.querySelectorAll('.tarjeta-album').forEach(album => {
+    const id = album.getAttribute('data-id');
+    const reseña = album.querySelector('.reseña-guardada');
+
+    let reseñaData = null;
+    if (reseña && reseña.style.display !== 'none') {
+      const texto = reseña.querySelector('.texto-reseña-guardado')?.textContent;
+      const puntaje = reseña.querySelector('.puntaje-reseña-guardado')?.textContent;
+
+      if (texto && puntaje) {
+        reseñaData = {
+          texto: texto.replace(/^"(.*)"$/, '$1'), // Remover comillas
+          puntaje: puntaje.replace(/^Puntaje: (\d+)\/10$/, '$1') // Extraer solo el número
+        };
+      }
+    }
+
+    albumesEnColeccion.push({
+      id: parseInt(id),
+      reseña: reseñaData
+    });
+  });
+
+  guardarEnLocalStorage('coleccionAlbumes', albumesEnColeccion);
+};
+
+/**
+ * Carga la colección de álbumes guardada
+ * @method cargarColeccion
+ * @return {void}
+ */
+const cargarColeccion = () => {
+  const coleccionGuardada = cargarDesdeLocalStorage('coleccionAlbumes', []);
+
+  coleccionGuardada.forEach(albumData => {
+    const estrella = document.querySelector(`[data-id="${albumData.id}"]`);
+    if (estrella && !estrella.classList.contains('activo')) {
+      // Simular click en la estrella para agregar a la colección
+      agregarAColeccion(estrella);
+
+      // Si hay reseña guardada, restaurarla
+      if (albumData.reseña) {
+        setTimeout(() => {
+          const albumEnColeccion = document.querySelector(`#coleccion .tarjeta-album[data-id='${albumData.id}']`);
+          if (albumEnColeccion) {
+            const seccionReseña = albumEnColeccion.querySelector('.seccion-reseña');
+            const entradasReseña = seccionReseña.querySelector('.entradas-reseña');
+            const reseñaGuardada = seccionReseña.querySelector('.reseña-guardada');
+            const textoReseñaGuardado = seccionReseña.querySelector('.texto-reseña-guardado');
+            const puntajeReseñaGuardado = seccionReseña.querySelector('.puntaje-reseña-guardado');
+
+            // Llenar los campos
+            textoReseñaGuardado.textContent = `"${albumData.reseña.texto}"`;
+            puntajeReseñaGuardado.textContent = `Puntaje: ${albumData.reseña.puntaje}/10`;
+
+            // Ocultar inputs y mostrar reseña guardada
+            entradasReseña.style.display = 'none';
+            reseñaGuardada.style.display = 'block';
+          }
+        }, 100);
+      }
+    }
+  });
+};
+
+/**
+ * Guarda los filtros de búsqueda
+ * @method guardarFiltros
+ * @return {void}
+ */
+const guardarFiltros = () => {
+  const filtros = {
+    busqueda: document.getElementById('busqueda').value,
+    artista: document.getElementById('filtro-artista').value
+  };
+  guardarEnLocalStorage('filtrosBusqueda', filtros);
+};
+
+/**
+ * Carga los filtros de búsqueda guardados
+ * @method cargarFiltros
+ * @return {void}
+ */
+const cargarFiltros = () => {
+  const filtros = cargarDesdeLocalStorage('filtrosBusqueda', {});
+
+  filtros.busqueda && (document.getElementById('busqueda').value = filtros.busqueda);
+
+  if (filtros.artista) {
+    document.getElementById('filtro-artista').value = filtros.artista;
+    filtrarPorArtista();
+  }
+};
+
 /**
  * Guarda la reseña y puntaje de un álbum
  * @method guardarReseña
@@ -306,7 +303,7 @@ const guardarReseña = (boton) => {
   entradaReseña.value = '';
   entradaPuntaje.value = '';
   actualizarContador(entradaReseña);
-  
+
   // Guardar en localStorage
   guardarColeccion();
 };
@@ -352,10 +349,10 @@ const actualizarContador = (entrada) => {
   const contador = entrada.parentElement.querySelector('.contador-caracteres');
   const longitudActual = entrada.value.length;
   contador.textContent = `${longitudActual}/100`;
-  
+
   // Cambiar color si se acerca al límite
-  contador.style.color = longitudActual > 80 ? '#ff6b6b' : 
-                         longitudActual > 60 ? '#ffa500' : '#666';
+  contador.style.color = longitudActual > 80 ? '#ff6b6b' :
+    longitudActual > 60 ? '#ffa500' : '#666';
 };
 
 /**
@@ -372,7 +369,7 @@ const agregarAColeccion = (estrella) => {
     // Quitar de la colección
     estrella.classList.remove("activo");
     estrella.textContent = "☆";
-    
+
     // Buscar y quitar el álbum en la colección
     const idAlbum = estrella.getAttribute("data-id");
     const albumEnColeccion = document.querySelector(`#coleccion .tarjeta-album[data-id='${idAlbum}']`);
@@ -380,10 +377,10 @@ const agregarAColeccion = (estrella) => {
 
     // Actualizar contador
     contador.textContent = coleccion.children.length;
-    
+
     // Guardar en localStorage
     guardarColeccion();
-    
+
   } else {
     // Agregar a la colección
     estrella.classList.add("activo");
@@ -438,7 +435,7 @@ const agregarAColeccion = (estrella) => {
 
     // Actualizar contador
     contador.textContent = coleccion.children.length;
-    
+
     // Guardar en localStorage
     guardarColeccion();
   }
@@ -499,7 +496,7 @@ const buscarAlbumes = () => {
     album.artista.toLowerCase().includes(texto)
   );
   mostrarCatalogo(resultado);
-  
+
   // Guardar filtros en localStorage
   guardarFiltros();
 };
@@ -513,7 +510,7 @@ const filtrarPorArtista = () => {
   const artista = document.getElementById("filtro-artista").value;
   const resultado = artista === "" ? albumes : albumes.filter(album => album.artista === artista);
   mostrarCatalogo(resultado);
-  
+
   // Guardar filtros en localStorage
   guardarFiltros();
 };
@@ -522,21 +519,21 @@ const filtrarPorArtista = () => {
 document.addEventListener("DOMContentLoaded", () => {
   mostrarCatalogo();
   cargarArtistas();
-  
+
   // Cargar datos guardados
   cargarFiltros();
   cargarColeccion();
-  
+
   // Agregar eventos para guardar automáticamente cuando cambien los filtros
   const inputBusqueda = document.getElementById('busqueda');
   const selectArtista = document.getElementById('filtro-artista');
-  
+
   inputBusqueda.addEventListener('input', () => {
     // Guardar con un pequeño delay para evitar guardar en cada tecla
     clearTimeout(window.busquedaTimeout);
     window.busquedaTimeout = setTimeout(guardarFiltros, 500);
   });
-  
+
   selectArtista.addEventListener('change', guardarFiltros);
 });
 
@@ -550,24 +547,24 @@ const limpiarDatos = () => {
     // Limpiar localStorage
     localStorage.removeItem('coleccionAlbumes');
     localStorage.removeItem('filtrosBusqueda');
-    
+
     // Limpiar la interfaz
     document.getElementById('busqueda').value = '';
     document.getElementById('filtro-artista').value = '';
-    
+
     // Limpiar colección
     document.getElementById('lista-coleccion').innerHTML = '';
     document.getElementById('contador').textContent = '0';
-    
+
     // Limpiar estrellas activas
     document.querySelectorAll('.estrella.activo').forEach(estrella => {
       estrella.classList.remove('activo');
       estrella.textContent = '☆';
     });
-    
+
     // Mostrar catálogo completo
     mostrarCatalogo();
-    
+
     alert('Datos limpiados correctamente');
   }
 };
