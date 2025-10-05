@@ -128,7 +128,8 @@ const albumes = [
 
 
 /**
- * Guarda datos en localStorage
+ * Guarda datos en localStorage, muy util porque modulariza cosaas
+ * que podriamos hacer una por una en las otras funciones.
  * @method guardarEnLocalStorage
  * @param {string} clave - La clave para identificar los datos
  * @param {any} datos - Los datos a guardar
@@ -367,7 +368,7 @@ const agregarAColeccion = (estrella) => {
 
   if (estrella.classList.contains("activo")) {
     // Quitar de la colección
-    estrella.classList.remove("activo");
+    estrella.classList.remove("activo");//eso de classList es para manejar clases CSS
     estrella.textContent = "☆";
 
     // Buscar y quitar el álbum en la colección
@@ -375,11 +376,11 @@ const agregarAColeccion = (estrella) => {
     const albumEnColeccion = document.querySelector(`#coleccion .tarjeta-album[data-id='${idAlbum}']`);
     albumEnColeccion?.remove();
 
+    // Guardar en localStorage para limpiar reseñas si corresponde
+    guardarColeccion();
+
     // Actualizar contador
     contador.textContent = coleccion.children.length;
-
-    // Guardar en localStorage
-    guardarColeccion();
 
   } else {
     // Agregar a la colección
@@ -474,7 +475,12 @@ let mostrarCatalogo = (lista = albumes) => {
  */
 const cargarArtistas = () => {
   const filtro = document.getElementById("filtro-artista");
-  const artistas = [...new Set(albumes.map(album => album.artista))]; // artistas únicos
+  const artistas = [];
+  for (let album of albumes) {
+    if (!artistas.includes(album.artista)) {
+      artistas.push(album.artista);
+    }
+  }
 
   artistas.forEach(artista => {
     const option = document.createElement("option");
