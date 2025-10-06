@@ -204,7 +204,7 @@ const crearTarjetaColeccion = (album, id, resenaGuardada) => {
   seccionResena.className = "seccion-resena";
   seccionResena.innerHTML = `
     <div class="entradas-resena">
-      <input type="text" placeholder="Escribe tu resena breve..." maxlength="100" class="texto-resena">
+      <input type="text" placeholder="Escribe tu reseña breve..." maxlength="100" class="texto-resena">
       <span class="contador-caracteres">0/100</span>
       <select class="entrada-puntaje">
         <option value="">Selecciona puntaje</option>
