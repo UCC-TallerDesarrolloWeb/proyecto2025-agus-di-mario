@@ -14,7 +14,6 @@
 - Agustín Di Mario
 
 ## Estado Actual
-- Página principal implementada (`index.html`).
 - Catálogo dinámico renderizado desde un arreglo local.
 - Persistencia de filtros y colección mediante `localStorage`.
 - Mockup y sketch incluidos en sus carpetas correspondientes.
