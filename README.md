@@ -8,10 +8,7 @@
 - [Tecnologías](#tecnologías)
 
 ## Resumen
-**Mi Colección de Álbumes** es una aplicación web estática que permite explorar un catálogo de discos, filtrarlos por artista y crear una colección personal con reseñas y puntajes personalizados. Los datos se guardan en `localStorage` para conservar la experiencia de usuario entre visitas.
-
-- **Repositorio:** [proyecto2025-agus-di-mario](https://github.com/agusdimario/proyecto2025-agus-di-mario)
-- **Publicación:** [Sitio en GitHub Pages](https://agusdimario.github.io/proyecto2025-agus-di-mario/) _(se actualizará tras el despliegue)_
+**Mi Colección de Álbumes** es una aplicación web  que permite explorar un catálogo de discos, filtrarlos por artista y crear una colección personal con reseñas y puntajes personalizados. Los datos se guardan en `localStorage` para conservar la experiencia de usuario entre visitas.
 
 ## Autores
 - Agustín Di Mario
