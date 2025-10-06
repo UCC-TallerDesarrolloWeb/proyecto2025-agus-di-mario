@@ -31,12 +31,12 @@
 - Botón para limpiar filtros y datos guardados.
 
 ## Tecnologías
-| Categoría       | Herramienta        |
-|-----------------|--------------------|
-| Lenguaje marcado| HTML5              |
-| Estilos         | CSS3               |
-| Lógica          | JavaScript (ES6+)  |
-| Tipografía      | Google Fonts (Inter)|
-| Deploy          | GitHub Pages       |
+| Categoría        | Herramienta          |
+|------------------|----------------------|
+| Lenguaje marcado | HTML5                |
+| Estilos          | CSS3                 |
+| Lógica           | JavaScript (ES6+)    |
+| Tipografía       | Google Fonts (Inter) |
+| Deploy           | GitHub Pages         |
 
 

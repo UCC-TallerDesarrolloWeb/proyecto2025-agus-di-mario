@@ -166,7 +166,7 @@ const guardarColeccion = () => guardarEnLocalStorage(STORAGE_KEYS.COLECCION, col
 
 const agregarAlbumAEstado = (id) => {
   if (!estaEnColeccion(id)) {
-    coleccionActual.push({ id, reseña: null });
+    coleccionActual.push({ id, resena: null });
     guardarColeccion();
   }
 };
@@ -179,15 +179,15 @@ const quitarAlbumDeEstado = (id) => {
   }
 };
 
-const actualizarReseñaEnEstado = (id, reseña) => {
+const actualizarResenaEnEstado = (id, resena) => {
   const entrada = coleccionActual.find(item => item.id === id);
   if (entrada) {
-    entrada.reseña = reseña;
+    entrada.resena = resena;
     guardarColeccion();
   }
 };
 
-const crearTarjetaColeccion = (album, id, reseñaGuardada) => {
+const crearTarjetaColeccion = (album, id, resenaGuardada) => {
   const tarjeta = document.createElement("div");
   tarjeta.className = "tarjeta-album";
   tarjeta.setAttribute("data-id", id);
@@ -200,42 +200,42 @@ const crearTarjetaColeccion = (album, id, reseñaGuardada) => {
     </div>
   `;
 
-  const seccionReseña = document.createElement("div");
-  seccionReseña.className = "seccion-reseña";
-  seccionReseña.innerHTML = `
-    <div class="entradas-reseña">
-      <input type="text" placeholder="Escribe tu reseña breve..." maxlength="100" class="texto-reseña">
+  const seccionResena = document.createElement("div");
+  seccionResena.className = "seccion-resena";
+  seccionResena.innerHTML = `
+    <div class="entradas-resena">
+      <input type="text" placeholder="Escribe tu resena breve..." maxlength="100" class="texto-resena">
       <span class="contador-caracteres">0/100</span>
       <select class="entrada-puntaje">
         <option value="">Selecciona puntaje</option>
         ${OPCIONES_PUNTAJE}
       </select>
-      <button onclick="guardarReseña(this)" class="boton-guardar">Guardar</button>
+      <button onclick="guardarResena(this)" class="boton-guardar">Guardar</button>
     </div>
-    <div class="reseña-guardada" style="display: none;">
-      <p class="texto-reseña-guardado"></p>
-      <p class="puntaje-reseña-guardado"></p>
-      <button onclick="editarReseña(this)" class="boton-editar">Editar</button>
+    <div class="resena-guardada" style="display: none;">
+      <p class="texto-resena-guardado"></p>
+      <p class="puntaje-resena-guardado"></p>
+      <button onclick="editarResena(this)" class="boton-editar">Editar</button>
     </div>
   `;
 
-  tarjeta.appendChild(seccionReseña);
+  tarjeta.appendChild(seccionResena);
 
-  const entradaReseña = seccionReseña.querySelector(".texto-reseña");
-  if (entradaReseña) {
-    entradaReseña.addEventListener("input", () => actualizarContador(entradaReseña));
+  const entradaResena = seccionResena.querySelector(".texto-resena");
+  if (entradaResena) {
+    entradaResena.addEventListener("input", () => actualizarContador(entradaResena));
   }
 
-  if (reseñaGuardada && reseñaGuardada.texto && reseñaGuardada.puntaje) {
-    const entradasReseña = seccionReseña.querySelector(".entradas-reseña");
-    const reseñaMostrada = seccionReseña.querySelector(".reseña-guardada");
-    const textoReseñaGuardado = seccionReseña.querySelector(".texto-reseña-guardado");
-    const puntajeReseñaGuardado = seccionReseña.querySelector(".puntaje-reseña-guardado");
+  if (resenaGuardada && resenaGuardada.texto && resenaGuardada.puntaje) {
+    const entradasResena = seccionResena.querySelector(".entradas-resena");
+    const resenaMostrada = seccionResena.querySelector(".resena-guardada");
+    const textoResenaGuardado = seccionResena.querySelector(".texto-resena-guardado");
+    const puntajeResenaGuardado = seccionResena.querySelector(".puntaje-resena-guardado");
 
-    textoReseñaGuardado.textContent = `"${reseñaGuardada.texto}"`;
-    puntajeReseñaGuardado.textContent = `Puntaje: ${reseñaGuardada.puntaje}/10`;
-    entradasReseña.style.display = "none";
-    reseñaMostrada.style.display = "block";
+    textoResenaGuardado.textContent = `"${resenaGuardada.texto}"`;
+    puntajeResenaGuardado.textContent = `Puntaje: ${resenaGuardada.puntaje}/10`;
+    entradasResena.style.display = "none";
+    resenaMostrada.style.display = "block";
   }
 
   return tarjeta;
@@ -254,7 +254,7 @@ const renderColeccion = () => {
     if (!album) {
       return;
     }
-    const tarjeta = crearTarjetaColeccion(album, item.id, item.reseña);
+    const tarjeta = crearTarjetaColeccion(album, item.id, item.resena);
     contenedor.appendChild(tarjeta);
   });
 };
@@ -468,28 +468,28 @@ const actualizarContador = (entrada) => {
   }
 };
 
-const guardarReseña = (boton) => {
-  const seccionReseña = boton.closest(".seccion-reseña");
-  if (!seccionReseña) {
+const guardarResena = (boton) => {
+  const seccionResena = boton.closest(".seccion-resena");
+  if (!seccionResena) {
     return;
   }
 
-  const entradaReseña = seccionReseña.querySelector(".texto-reseña");
-  const entradaPuntaje = seccionReseña.querySelector(".entrada-puntaje");
-  const entradasReseña = seccionReseña.querySelector(".entradas-reseña");
-  const reseñaGuardada = seccionReseña.querySelector(".reseña-guardada");
-  const textoReseñaGuardado = seccionReseña.querySelector(".texto-reseña-guardado");
-  const puntajeReseñaGuardado = seccionReseña.querySelector(".puntaje-reseña-guardado");
+  const entradaresena = seccionResena.querySelector(".texto-resena");
+  const entradaPuntaje = seccionResena.querySelector(".entrada-puntaje");
+  const entradasresena = seccionResena.querySelector(".entradas-resena");
+  const resenaGuardada = seccionResena.querySelector(".resena-guardada");
+  const textoresenaGuardado = seccionResena.querySelector(".texto-resena-guardado");
+  const puntajeresenaGuardado = seccionResena.querySelector(".puntaje-resena-guardado");
 
-  if (!entradaReseña || !entradaPuntaje || !entradasReseña || !reseñaGuardada) {
+  if (!entradaresena || !entradaPuntaje || !entradasresena || !resenaGuardada) {
     return;
   }
 
-  const textoReseña = entradaReseña.value.trim();
+  const textoresena = entradaresena.value.trim();
   const puntaje = entradaPuntaje.value;
 
-  if (!textoReseña) {
-    alert("Por favor, escribe una reseña");
+  if (!textoresena) {
+    alert("Por favor, escribe una resena");
     return;
   }
 
@@ -498,17 +498,17 @@ const guardarReseña = (boton) => {
     return;
   }
 
-  textoReseñaGuardado.textContent = `"${textoReseña}"`;
-  puntajeReseñaGuardado.textContent = `Puntaje: ${puntaje}/10`;
+  textoresenaGuardado.textContent = `"${textoresena}"`;
+  puntajeresenaGuardado.textContent = `Puntaje: ${puntaje}/10`;
 
-  entradasReseña.style.display = "none";
-  reseñaGuardada.style.display = "block";
+  entradasresena.style.display = "none";
+  resenaGuardada.style.display = "block";
 
-  entradaReseña.value = "";
+  entradaresena.value = "";
   entradaPuntaje.value = "";
-  actualizarContador(entradaReseña);
+  actualizarContador(entradaresena);
 
-  const tarjeta = seccionReseña.closest(".tarjeta-album");
+  const tarjeta = seccionResena.closest(".tarjeta-album");
   if (!tarjeta) {
     return;
   }
@@ -518,36 +518,36 @@ const guardarReseña = (boton) => {
     return;
   }
 
-  actualizarReseñaEnEstado(idAlbum, { texto: textoReseña, puntaje });
+  actualizarResenaEnEstado(idAlbum, { texto: textoresena, puntaje });
   actualizarVistaColeccion();
 };
 
-const editarReseña = (boton) => {
-  const seccionReseña = boton.closest(".seccion-reseña");
-  if (!seccionReseña) {
+const editarResena = (boton) => {
+  const seccionresena = boton.closest(".seccion-resena");
+  if (!seccionresena) {
     return;
   }
 
-  const entradaReseña = seccionReseña.querySelector(".texto-reseña");
-  const entradaPuntaje = seccionReseña.querySelector(".entrada-puntaje");
-  const entradasReseña = seccionReseña.querySelector(".entradas-reseña");
-  const reseñaGuardada = seccionReseña.querySelector(".reseña-guardada");
-  const textoReseñaGuardado = seccionReseña.querySelector(".texto-reseña-guardado");
-  const puntajeReseñaGuardado = seccionReseña.querySelector(".puntaje-reseña-guardado");
+  const entradaresena = seccionresena.querySelector(".texto-resena");
+  const entradaPuntaje = seccionresena.querySelector(".entrada-puntaje");
+  const entradasresena = seccionresena.querySelector(".entradas-resena");
+  const resenaGuardada = seccionresena.querySelector(".resena-guardada");
+  const textoresenaGuardado = seccionresena.querySelector(".texto-resena-guardado");
+  const puntajeresenaGuardado = seccionresena.querySelector(".puntaje-resena-guardado");
 
-  if (!entradaReseña || !entradaPuntaje || !entradasReseña || !reseñaGuardada) {
+  if (!entradaresena || !entradaPuntaje || !entradasresena || !resenaGuardada) {
     return;
   }
 
-  const textoActual = textoReseñaGuardado.textContent.replace(/^"(.*)"$/, "$1");
-  const puntajeActual = puntajeReseñaGuardado.textContent.replace(/^Puntaje: (\d+)\/10$/, "$1");
+  const textoActual = textoresenaGuardado.textContent.replace(/^"(.*)"$/, "$1");
+  const puntajeActual = puntajeresenaGuardado.textContent.replace(/^Puntaje: (\d+)\/10$/, "$1");
 
-  entradaReseña.value = textoActual;
+  entradaresena.value = textoActual;
   entradaPuntaje.value = puntajeActual;
-  actualizarContador(entradaReseña);
+  actualizarContador(entradaresena);
 
-  entradasReseña.style.display = "block";
-  reseñaGuardada.style.display = "none";
+  entradasresena.style.display = "block";
+  resenaGuardada.style.display = "none";
 };
 
 const limpiarDatos = () => {

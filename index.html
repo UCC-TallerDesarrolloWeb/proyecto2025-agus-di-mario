@@ -15,9 +15,9 @@
   <header>
     <h1>Mi Colección de Álbumes</h1>
     <nav>
-      <input type="text" id="busqueda" placeholder="Buscar álbum o artista">
+        <label for="busqueda"></label><input type="text" id="busqueda" placeholder="Buscar álbum o artista">
       <button id="boton-buscar" onclick="buscarAlbumes()">Buscar</button>
-      <select id="filtro-artista" onchange="filtrarPorArtista()">
+        <label for="filtro-artista"></label><select id="filtro-artista" onchange="filtrarPorArtista()">
         <option value="">-- Filtrar por artista --</option>
       </select>
       <button id="boton-limpiar" onclick="limpiarDatos()" title="Limpiar todos los datos guardados">Limpiar</button>
