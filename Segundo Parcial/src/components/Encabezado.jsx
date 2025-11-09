@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import logo from '@assets/branding/logo.png'
-import { useTema } from '@context/TemaContext'
 import Boton from './Boton'
+import InterruptorTema from './InterruptorTema'
 import './Encabezado.scss'
 
 /**
@@ -19,7 +19,6 @@ import './Encabezado.scss'
 function Encabezado({ tipo = 'inicio', alBuscar, alLimpiar, alCambiarFiltro, artistas = [], valorBusqueda = '', valorArtista = '' }) {
   const ubicacion = useLocation()
   const navigate = useNavigate()
-  const { tema, alternarTema } = useTema()
   const esInicio = tipo === 'inicio' || ubicacion.pathname === '/'
 
   /**
@@ -103,17 +102,7 @@ function Encabezado({ tipo = 'inicio', alBuscar, alLimpiar, alCambiarFiltro, art
             )}
           </>
         )}
-        <Boton
-          type="button"
-          variante="fantasma"
-          className="boton-tema"
-          aria-pressed={tema === 'oscuro'}
-          aria-label={`Cambiar a modo ${tema === 'oscuro' ? 'claro' : 'oscuro'}`}
-          title={`Cambiar a modo ${tema === 'oscuro' ? 'claro' : 'oscuro'}`}
-          onClick={alternarTema}
-        >
-          {tema === 'oscuro' ? 'Modo oscuro' : 'Modo claro'}
-        </Boton>
+        <InterruptorTema className="app-header__switch" />
       </nav>
     </header>
   )

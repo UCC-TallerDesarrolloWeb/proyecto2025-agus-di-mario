@@ -16,6 +16,7 @@ body,
 
 body {
   color: $color-text;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 main {
@@ -30,9 +31,16 @@ h2 {
   @include sr-only;
 }
 
-[data-tema='oscuro'] body {
+[data-tema='oscuro'] html,
+[data-tema='oscuro'] body,
+[data-tema='oscuro'] #root,
+[data-tema='oscuro'] .app-shell {
   background-color: $color-dark-bg;
   color: $color-dark-text;
+}
+
+[data-tema='oscuro'] .app-shell {
+  min-height: 100vh;
 }
 
 [data-tema='oscuro'] .app-header {

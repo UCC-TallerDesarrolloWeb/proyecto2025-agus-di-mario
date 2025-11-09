@@ -77,9 +77,8 @@
   background-color: $color-danger-hover;
 }
 
-.boton-tema {
-  border-color: rgba(255, 255, 255, 0.35);
-  color: #fff;
+.app-header__switch {
+  margin-left: 0.25rem;
 }
 
 @media (max-width: 768px) {
@@ -93,6 +92,11 @@
   .nav-link {
     width: 100%;
     max-width: 300px;
+  }
+
+  .app-header__switch {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .app-header__title {
