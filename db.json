@@ -1,0 +1,16 @@
+{
+  "albums": [
+    { "id": 1, "nombre": "California", "artista": "blink-182", "imagen": "Blink-182_-_Calfornia.jpg" },
+    { "id": 2, "nombre": "Neighborhoods", "artista": "blink-182", "imagen": "Blink-182_-_Neighborhoods_cover.jpg" },
+    { "id": 3, "nombre": "Nine", "artista": "blink-182", "imagen": "Blink-182_-_Nine.png" },
+    { "id": 4, "nombre": "Take Off Your Pants and Jacket", "artista": "blink-182", "imagen": "Blink-182_-_Take_Off_Your_Pants_and_Jacket_cover.jpg" },
+    { "id": 5, "nombre": "Live at the Royal Albert Hall", "artista": "Bring Me The Horizon", "imagen": "BMTHroyalalberthall.jpg" },
+    { "id": 6, "nombre": "Collide With The Sky", "artista": "Pierce The Veil", "imagen": "CollidewiththeSkycover.jpg" },
+    { "id": 7, "nombre": "Copacetic", "artista": "Knuckle Puck", "imagen": "Copacetic_KP.jpg" },
+    { "id": 8, "nombre": "Danger Days: The True Lives of the Fabulous Killjoys", "artista": "My Chemical Romance", "imagen": "Danger_Days-album-2010.jpg" },
+    { "id": 9, "nombre": "Father of All...", "artista": "Green Day", "imagen": "Father_of_All.jpg" },
+    { "id": 10, "nombre": "Wasting Light", "artista": "Foo Fighters", "imagen": "Foo_Fighters_Wasting_Light_Album_Cover.jpg" },
+    { "id": 11, "nombre": "Revolution Radio", "artista": "Green Day", "imagen": "GreenDayRevRad.jpg" },
+    { "id": 12, "nombre": "Heavy Love", "artista": "Man Overboard", "imagen": "Heavy_Love_Man_Overboard.png" }
+  ]
+}
