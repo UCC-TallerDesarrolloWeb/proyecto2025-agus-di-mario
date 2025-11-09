@@ -9,10 +9,10 @@ utilidades documentadas para la persistencia en `localStorage`.
 ## Características Clave
 
 - Ruteo con `react-router-dom`, `useNavigate` y un `LayoutPrincipal` que emplea `<Outlet />`.
-- Contexto `TemaProvider` + `useTema` para alternar entre modo claro/oscuro y guardar la preferencia.
 - Componente genérico `Boton` reutilizado en encabezados, formularios y páginas.
 - Validaciones accesibles en tiempo real (`onChange`) dentro de `SeccionResena`, con mensajes `aria-live`.
 - Catálogo derivado de JSON local y carátulas importadas desde `/src/assets/albums` mediante `import.meta.glob`.
+- Persistencia de filtros, reseñas y favoritos en `localStorage` a través del módulo `api/albumes`.
 
 ## Estructura de Carpetas
 
@@ -21,9 +21,8 @@ src/
 ├── api            # Funciones para trabajar con localStorage y datos
 ├── assets         # Branding + álbumes
 ├── components     # Componentes con su .scss
-├── context        # TemaProvider y hook useTema
 ├── data           # JSON + helper para resolver imágenes
-├── pages          # Rutas Inicio, Coleccion y 404
+├── pages          # Rutas Inicio y Coleccion
 ├── styles         # Reset, variables, mixins y global.scss
 └── utils          # Utilidades compartidas (storage)
 ```

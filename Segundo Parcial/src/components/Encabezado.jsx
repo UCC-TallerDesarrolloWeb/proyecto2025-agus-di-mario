@@ -1,7 +1,6 @@
 import {Link, useLocation, useNavigate} from 'react-router-dom'
 import logo from '@assets/logo.png'
 import Boton from './Boton'
-import InterruptorTema from './InterruptorTema'
 import '@styles/Encabezado.scss'
 
 /**
@@ -113,7 +112,6 @@ function Encabezado({
                         )}
                     </>
                 )}
-                <InterruptorTema className="app-header__switch"/>
             </nav>
         </header>
     )

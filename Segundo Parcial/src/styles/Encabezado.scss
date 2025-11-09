@@ -77,10 +77,6 @@
   background-color: $color-danger-hover;
 }
 
-.app-header__switch {
-  margin-left: 0.25rem;
-}
-
 @media (max-width: 768px) {
   .app-header__nav {
     flex-direction: column;
@@ -92,11 +88,6 @@
   .nav-link {
     width: 100%;
     max-width: 300px;
-  }
-
-  .app-header__switch {
-    width: 100%;
-    justify-content: space-between;
   }
 
   .app-header__title {

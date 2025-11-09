@@ -3,7 +3,6 @@ import './App.css'
 import '@styles/global.scss'
 import Inicio from '@pages/Inicio'
 import Coleccion from '@pages/Coleccion'
-import PaginaNoEncontrada from '@pages/PaginaNoEncontrada'
 import LayoutPrincipal from '@components/LayoutPrincipal'
 
 /**
@@ -17,7 +16,6 @@ function Aplicacion() {
                 <Route element={<LayoutPrincipal/>}>
                     <Route path="/" element={<Inicio/>}/>
                     <Route path="/mi-coleccion" element={<Coleccion/>}/>
-                    <Route path="*" element={<PaginaNoEncontrada/>}/>
                 </Route>
             </Routes>
         </div>
