@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { leerJSON, escribirJSON } from '@utils/storage'
+import {createContext, useContext, useEffect, useMemo, useState} from 'react'
+import {escribirJSON, leerJSON} from '@utils/storage'
 
 const CLAVE_TEMA = 'preferenciaTema'
 
@@ -10,28 +10,28 @@ const TemaContexto = createContext(null)
  * @param {{children: React.ReactNode}} props - Elementos que recibirán el contexto.
  * @returns {JSX.Element} Wrapper con el contexto de tema.
  */
-export function TemaProvider({ children }) {
-  const temaInicial = obtenerTemaInicial()
-  const [tema, setTema] = useState(temaInicial)
+export function TemaProvider({children}) {
+    const temaInicial = obtenerTemaInicial()
+    const [tema, setTema] = useState(temaInicial)
 
-  useEffect(() => {
-    escribirJSON(CLAVE_TEMA, tema)
-    if (typeof document !== 'undefined') {
-      document.documentElement.dataset.tema = tema
+    useEffect(() => {
+        escribirJSON(CLAVE_TEMA, tema)
+        if (typeof document !== 'undefined') {
+            document.documentElement.dataset.tema = tema
+        }
+    }, [tema])
+
+    /**
+     * Alterna entre los modos claro y oscuro y lo persiste.
+     * @returns {void}
+     */
+    function alternarTema() {
+        setTema((valorActual) => (valorActual === 'oscuro' ? 'claro' : 'oscuro'))
     }
-  }, [tema])
 
-  /**
-   * Alterna entre los modos claro y oscuro y lo persiste.
-   * @returns {void}
-   */
-  function alternarTema() {
-    setTema((valorActual) => (valorActual === 'oscuro' ? 'claro' : 'oscuro'))
-  }
+    const valor = useMemo(() => ({tema, alternarTema}), [tema])
 
-  const valor = useMemo(() => ({ tema, alternarTema }), [tema])
-
-  return <TemaContexto.Provider value={valor}>{children}</TemaContexto.Provider>
+    return <TemaContexto.Provider value={valor}>{children}</TemaContexto.Provider>
 }
 
 /**
@@ -40,11 +40,11 @@ export function TemaProvider({ children }) {
  */
 // eslint-disable-next-line react-refresh/only-export-components
 export function useTema() {
-  const contexto = useContext(TemaContexto)
-  if (!contexto) {
-    throw new Error('useTema debe utilizarse dentro de un TemaProvider')
-  }
-  return contexto
+    const contexto = useContext(TemaContexto)
+    if (!contexto) {
+        throw new Error('useTema debe utilizarse dentro de un TemaProvider')
+    }
+    return contexto
 }
 
 /**
@@ -52,9 +52,9 @@ export function useTema() {
  * @returns {'claro'|'oscuro'} Tema inicial.
  */
 function obtenerTemaInicial() {
-  if (typeof window === 'undefined') {
-    return 'claro'
-  }
-  const almacenado = leerJSON(CLAVE_TEMA, 'claro')
-  return almacenado === 'oscuro' ? 'oscuro' : 'claro'
+    if (typeof window === 'undefined') {
+        return 'claro'
+    }
+    const almacenado = leerJSON(CLAVE_TEMA, 'claro')
+    return almacenado === 'oscuro' ? 'oscuro' : 'claro'
 }

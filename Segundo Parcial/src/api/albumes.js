@@ -1,9 +1,9 @@
-import { albumes as catalogo } from '@data/albumes'
-import { leerJSON, escribirJSON } from '@utils/storage'
+import {albumes as catalogo} from '@data/albumes'
+import {escribirJSON, leerJSON} from '@utils/storage'
 
 const CLAVES_STORAGE = {
-  coleccion: 'miColeccion',
-  filtros: 'filtros',
+    coleccion: 'miColeccion',
+    filtros: 'filtros',
 }
 
 /**
@@ -11,18 +11,17 @@ const CLAVES_STORAGE = {
  * @returns {Promise<Array<{id:number,nombre:string,artista:string,imagen:string}>>}
  */
 export async function obtenerAlbumes() {
-  return catalogo.map(album => ({ ...album }))
+    return catalogo.map(album => ({...album}))
 }
 
 /**
  * Obtiene la colección del usuario desde localStorage.
- * @returns {Array<{id:number,nombre:string,artista:string,imagen:string,resena:{texto:string,puntaje:number}|null}>}
  */
 export function obtenerColeccion() {
-  return leerJSON(CLAVES_STORAGE.coleccion, []).map(item => ({
-    ...item,
-    resena: item.resena ?? null,
-  }))
+    return leerJSON(CLAVES_STORAGE.coleccion, []).map(item => ({
+        ...item,
+        resena: item.resena ?? null,
+    }))
 }
 
 /**
@@ -31,13 +30,13 @@ export function obtenerColeccion() {
  * @returns {Array} Colección actualizada.
  */
 export function agregarAColeccion(album) {
-  const coleccionActual = obtenerColeccion()
-  const existe = coleccionActual.some(item => item.id === album.id)
-  if (!existe) {
-    coleccionActual.push({ ...album, resena: null })
-    escribirJSON(CLAVES_STORAGE.coleccion, coleccionActual)
-  }
-  return coleccionActual
+    const coleccionActual = obtenerColeccion()
+    const existe = coleccionActual.some(item => item.id === album.id)
+    if (!existe) {
+        coleccionActual.push({...album, resena: null})
+        escribirJSON(CLAVES_STORAGE.coleccion, coleccionActual)
+    }
+    return coleccionActual
 }
 
 /**
@@ -46,10 +45,10 @@ export function agregarAColeccion(album) {
  * @returns {Array} Colección resultante.
  */
 export function quitarDeColeccion(albumId) {
-  const coleccionActual = obtenerColeccion()
-  const filtrada = coleccionActual.filter(item => item.id !== albumId)
-  escribirJSON(CLAVES_STORAGE.coleccion, filtrada)
-  return filtrada
+    const coleccionActual = obtenerColeccion()
+    const filtrada = coleccionActual.filter(item => item.id !== albumId)
+    escribirJSON(CLAVES_STORAGE.coleccion, filtrada)
+    return filtrada
 }
 
 /**
@@ -59,14 +58,14 @@ export function quitarDeColeccion(albumId) {
  * @returns {{id:number,resena:{texto:string,puntaje:number}}|null} Registro actualizado o null si no existe.
  */
 export function guardarResena(albumId, resena) {
-  const coleccionActual = obtenerColeccion()
-  const posicion = coleccionActual.findIndex(item => item.id === albumId)
-  if (posicion === -1) {
-    return null
-  }
-  coleccionActual[posicion] = { ...coleccionActual[posicion], resena }
-  escribirJSON(CLAVES_STORAGE.coleccion, coleccionActual)
-  return { id: albumId, resena: coleccionActual[posicion].resena }
+    const coleccionActual = obtenerColeccion()
+    const posicion = coleccionActual.findIndex(item => item.id === albumId)
+    if (posicion === -1) {
+        return null
+    }
+    coleccionActual[posicion] = {...coleccionActual[posicion], resena}
+    escribirJSON(CLAVES_STORAGE.coleccion, coleccionActual)
+    return {id: albumId, resena: coleccionActual[posicion].resena}
 }
 
 /**
@@ -75,9 +74,9 @@ export function guardarResena(albumId, resena) {
  * @returns {{texto:string,puntaje:number}|null} Datos guardados o null si no existe.
  */
 export function obtenerResena(albumId) {
-  const coleccionActual = obtenerColeccion()
-  const registro = coleccionActual.find(item => item.id === albumId)
-  return registro?.resena ?? null
+    const coleccionActual = obtenerColeccion()
+    const registro = coleccionActual.find(item => item.id === albumId)
+    return registro?.resena ?? null
 }
 
 /**
@@ -85,7 +84,7 @@ export function obtenerResena(albumId) {
  * @returns {{busqueda:string,artista:string}|null} Valores guardados o null.
  */
 export function obtenerFiltros() {
-  return leerJSON(CLAVES_STORAGE.filtros, null)
+    return leerJSON(CLAVES_STORAGE.filtros, null)
 }
 
 /**
@@ -94,11 +93,11 @@ export function obtenerFiltros() {
  * @returns {void}
  */
 export function guardarFiltros(filtros) {
-  if (!filtros.busqueda && !filtros.artista) {
-    localStorage.removeItem(CLAVES_STORAGE.filtros)
-    return
-  }
-  escribirJSON(CLAVES_STORAGE.filtros, filtros)
+    if (!filtros.busqueda && !filtros.artista) {
+        localStorage.removeItem(CLAVES_STORAGE.filtros)
+        return
+    }
+    escribirJSON(CLAVES_STORAGE.filtros, filtros)
 }
 
 /**
@@ -106,6 +105,6 @@ export function guardarFiltros(filtros) {
  * @returns {void}
  */
 export function limpiarDatos() {
-  localStorage.removeItem(CLAVES_STORAGE.coleccion)
-  localStorage.removeItem(CLAVES_STORAGE.filtros)
+    localStorage.removeItem(CLAVES_STORAGE.coleccion)
+    localStorage.removeItem(CLAVES_STORAGE.filtros)
 }

@@ -7,13 +7,13 @@
  * @returns {T} Contenido almacenado o el valor por defecto.
  */
 export function leerJSON(clave, valorPorDefecto, storage = window.localStorage) {
-  try {
-    const texto = storage.getItem(clave)
-    return texto ? JSON.parse(texto) : valorPorDefecto
-  } catch (error) {
-    console.error(`Error al leer ${clave} desde localStorage`, error)
-    return valorPorDefecto
-  }
+    try {
+        const texto = storage.getItem(clave)
+        return texto ? JSON.parse(texto) : valorPorDefecto
+    } catch (error) {
+        console.error(`Error al leer ${clave} desde localStorage`, error)
+        return valorPorDefecto
+    }
 }
 
 /**
@@ -24,9 +24,9 @@ export function leerJSON(clave, valorPorDefecto, storage = window.localStorage) 
  * @returns {void}
  */
 export function escribirJSON(clave, valor, storage = window.localStorage) {
-  try {
-    storage.setItem(clave, JSON.stringify(valor))
-  } catch (error) {
-    console.error(`Error al guardar ${clave} en localStorage`, error)
-  }
+    try {
+        storage.setItem(clave, JSON.stringify(valor))
+    } catch (error) {
+        console.error(`Error al guardar ${clave} en localStorage`, error)
+    }
 }

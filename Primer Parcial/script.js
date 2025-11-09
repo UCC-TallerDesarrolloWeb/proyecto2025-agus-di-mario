@@ -1,129 +1,129 @@
 const albumes = [
-  {
-    nombre: "California",
-    artista: "blink-182",
-    imagen: "Blink-182_-_Calfornia.jpg"
-  },
-  {
-    nombre: "Neighborhoods",
-    artista: "blink-182",
-    imagen: "Blink-182_-_Neighborhoods_cover.jpg"
-  },
-  {
-    nombre: "Nine",
-    artista: "blink-182",
-    imagen: "Blink-182_-_Nine.png"
-  },
-  {
-    nombre: "Take Off Your Pants and Jacket",
-    artista: "blink-182",
-    imagen: "Blink-182_-_Take_Off_Your_Pants_and_Jacket_cover.jpg"
-  },
-  {
-    nombre: "The Mark, Tom and Travis Show",
-    artista: "blink-182",
-    imagen: "Blink-182_-_The_Mark,_Tom_and_Travis_Show_(The_Enema_Strikes_Back!)_cover.jpg"
-  },
-  {
-    nombre: "Live at the Royal Albert Hall",
-    artista: "Bring Me The Horizon",
-    imagen: "BMTHroyalalberthall.jpg"
-  },
-  {
-    nombre: "Collide With The Sky",
-    artista: "Pierce The Veil",
-    imagen: "CollidewiththeSkycover.jpg"
-  },
-  {
-    nombre: "Copacetic",
-    artista: "Knuckle Puck",
-    imagen: "Copacetic_KP.jpg"
-  },
-  {
-    nombre: "Danger Days: The True Lives of the Fabulous Killjoys",
-    artista: "My Chemical Romance",
-    imagen: "Danger_Days-album-2010.jpg"
-  },
-  {
-    nombre: "Father of All...",
-    artista: "Green Day",
-    imagen: "Father_of_All.jpg"
-  },
-  {
-    nombre: "Wasting Light",
-    artista: "Foo Fighters",
-    imagen: "Foo_Fighters_Wasting_Light_Album_Cover.jpg"
-  },
-  {
-    nombre: "Revolution Radio",
-    artista: "Green Day",
-    imagen: "GreenDayRevRad.jpg"
-  },
-  {
-    nombre: "Heavy Love",
-    artista: "Man Overboard",
-    imagen: "Heavy_Love_Man_Overboard.png"
-  },
-  {
-    nombre: "Tell Me About Tomorrow",
-    artista: "Jxdn",
-    imagen: "Jxdn_Tell_Me_About_Tomorrow.png"
-  },
-  {
-    nombre: "Shapeshifter",
-    artista: "Knuckle Puck",
-    imagen: "Knuckle_Puck_Shapeshifter.jpg"
-  },
-  {
-    nombre: "Life's Not Out to Get You",
-    artista: "Neck Deep",
-    imagen: "Life's_Not_Out_to_Get_You.jpg"
-  },
-  {
-    nombre: "Misadventures",
-    artista: "Pierce The Veil",
-    imagen: "Misadventures.jpg"
-  },
-  {
-    nombre: "Nevermind",
-    artista: "Nirvana",
-    imagen: "NirvanaNevermindalbumcover.jpg"
-  },
-  {
-    nombre: "The Peace and The Panic",
-    artista: "Neck Deep",
-    imagen: "Peace_and_the_Panic.jpg"
-  },
-  {
-    nombre: "White Noise",
-    artista: "PVRIS",
-    imagen: "PVRIS_White_Noise.jpg"
-  },
-  {
-    nombre: "Real Talk",
-    artista: "Man Overboard",
-    imagen: "Real_Talk_Man_Overboard.jpg"
-  },
-  {
-    nombre: "Selfish Machines",
-    artista: "Pierce The Veil",
-    imagen: "Selfish_Machines.jpg"
-  },
-  {
-    nombre: "Underclass Hero",
-    artista: "Sum 41",
-    imagen: "SUM_41_UNDERCLASS_HERO.jpg"
-  },
-  {
-    nombre: "The Story So Far (album)",
-    artista: "The Story So Far",
-    imagen: "The_Story_So_Far_-_The_Story_So_Far_(album).jpg"
-  },
-  {
-    nombre: "Proper Dose",
-    artista: "The Story So Far",
-    imagen: "TSSFProperDose.jpg"
-  }
+    {
+        nombre: "California",
+        artista: "blink-182",
+        imagen: "Blink-182_-_Calfornia.jpg"
+    },
+    {
+        nombre: "Neighborhoods",
+        artista: "blink-182",
+        imagen: "Blink-182_-_Neighborhoods_cover.jpg"
+    },
+    {
+        nombre: "Nine",
+        artista: "blink-182",
+        imagen: "Blink-182_-_Nine.png"
+    },
+    {
+        nombre: "Take Off Your Pants and Jacket",
+        artista: "blink-182",
+        imagen: "Blink-182_-_Take_Off_Your_Pants_and_Jacket_cover.jpg"
+    },
+    {
+        nombre: "The Mark, Tom and Travis Show",
+        artista: "blink-182",
+        imagen: "Blink-182_-_The_Mark,_Tom_and_Travis_Show_(The_Enema_Strikes_Back!)_cover.jpg"
+    },
+    {
+        nombre: "Live at the Royal Albert Hall",
+        artista: "Bring Me The Horizon",
+        imagen: "BMTHroyalalberthall.jpg"
+    },
+    {
+        nombre: "Collide With The Sky",
+        artista: "Pierce The Veil",
+        imagen: "CollidewiththeSkycover.jpg"
+    },
+    {
+        nombre: "Copacetic",
+        artista: "Knuckle Puck",
+        imagen: "Copacetic_KP.jpg"
+    },
+    {
+        nombre: "Danger Days: The True Lives of the Fabulous Killjoys",
+        artista: "My Chemical Romance",
+        imagen: "Danger_Days-album-2010.jpg"
+    },
+    {
+        nombre: "Father of All...",
+        artista: "Green Day",
+        imagen: "Father_of_All.jpg"
+    },
+    {
+        nombre: "Wasting Light",
+        artista: "Foo Fighters",
+        imagen: "Foo_Fighters_Wasting_Light_Album_Cover.jpg"
+    },
+    {
+        nombre: "Revolution Radio",
+        artista: "Green Day",
+        imagen: "GreenDayRevRad.jpg"
+    },
+    {
+        nombre: "Heavy Love",
+        artista: "Man Overboard",
+        imagen: "Heavy_Love_Man_Overboard.png"
+    },
+    {
+        nombre: "Tell Me About Tomorrow",
+        artista: "Jxdn",
+        imagen: "Jxdn_Tell_Me_About_Tomorrow.png"
+    },
+    {
+        nombre: "Shapeshifter",
+        artista: "Knuckle Puck",
+        imagen: "Knuckle_Puck_Shapeshifter.jpg"
+    },
+    {
+        nombre: "Life's Not Out to Get You",
+        artista: "Neck Deep",
+        imagen: "Life's_Not_Out_to_Get_You.jpg"
+    },
+    {
+        nombre: "Misadventures",
+        artista: "Pierce The Veil",
+        imagen: "Misadventures.jpg"
+    },
+    {
+        nombre: "Nevermind",
+        artista: "Nirvana",
+        imagen: "NirvanaNevermindalbumcover.jpg"
+    },
+    {
+        nombre: "The Peace and The Panic",
+        artista: "Neck Deep",
+        imagen: "Peace_and_the_Panic.jpg"
+    },
+    {
+        nombre: "White Noise",
+        artista: "PVRIS",
+        imagen: "PVRIS_White_Noise.jpg"
+    },
+    {
+        nombre: "Real Talk",
+        artista: "Man Overboard",
+        imagen: "Real_Talk_Man_Overboard.jpg"
+    },
+    {
+        nombre: "Selfish Machines",
+        artista: "Pierce The Veil",
+        imagen: "Selfish_Machines.jpg"
+    },
+    {
+        nombre: "Underclass Hero",
+        artista: "Sum 41",
+        imagen: "SUM_41_UNDERCLASS_HERO.jpg"
+    },
+    {
+        nombre: "The Story So Far (album)",
+        artista: "The Story So Far",
+        imagen: "The_Story_So_Far_-_The_Story_So_Far_(album).jpg"
+    },
+    {
+        nombre: "Proper Dose",
+        artista: "The Story So Far",
+        imagen: "TSSFProperDose.jpg"
+    }
 ];
 
 const RUTA_IMAGENES = "../Segundo Parcial/src/assets/albums/";
@@ -131,17 +131,16 @@ const RUTA_IMAGENES = "../Segundo Parcial/src/assets/albums/";
 /**
  * Obtiene la ruta completa de una imagen del catálogo.
  * @param {string} nombreArchivo Nombre del archivo de imagen.
- * @param {string} RUTA_IMAGENES Ruta base de las imágenes.
  * @returns {string} Ruta absoluta dentro del proyecto.
  */
 const obtenerRutaImagen = (nombreArchivo) => `${RUTA_IMAGENES}${nombreArchivo}`;
 
 const STORAGE_KEYS = {
-  COLECCION: "coleccionAlbumes",
-  FILTROS: "filtrosBusqueda"
+    COLECCION: "coleccionAlbumes",
+    FILTROS: "filtrosBusqueda"
 };
 
-const OPCIONES_PUNTAJE = Array.from({ length: 10 }, (_, index) => `<option value="${index + 1}">${index + 1}</option>`).join("");
+const OPCIONES_PUNTAJE = Array.from({length: 10}, (_, index) => `<option value="${index + 1}">${index + 1}</option>`).join("");
 
 let coleccionActual = [];
 
@@ -151,11 +150,11 @@ let coleccionActual = [];
  * @param {*} datos Información a almacenar.
  */
 const guardarEnLocalStorage = (clave, datos) => {
-  try {
-    localStorage.setItem(clave, JSON.stringify(datos));
-  } catch (error) {
-    console.error("Error al guardar en localStorage:", error);
-  }
+    try {
+        localStorage.setItem(clave, JSON.stringify(datos));
+    } catch (error) {
+        console.error("Error al guardar en localStorage:", error);
+    }
 };
 
 /**
@@ -165,21 +164,21 @@ const guardarEnLocalStorage = (clave, datos) => {
  * @returns {*} Datos parseados o el valor por defecto.
  */
 const cargarDesdeLocalStorage = (clave, valorPorDefecto = null) => {
-  try {
-    const datos = localStorage.getItem(clave);
-    return datos ? JSON.parse(datos) : valorPorDefecto;
-  } catch (error) {
-    console.error("Error al cargar desde localStorage:", error);
-    return valorPorDefecto;
-  }
+    try {
+        const datos = localStorage.getItem(clave);
+        return datos ? JSON.parse(datos) : valorPorDefecto;
+    } catch (error) {
+        console.error("Error al cargar desde localStorage:", error);
+        return valorPorDefecto;
+    }
 };
 
 /**
  * Actualiza la colección en memoria desde localStorage.
  */
 const cargarEstadoColeccion = () => {
-  const datos = cargarDesdeLocalStorage(STORAGE_KEYS.COLECCION, []);
-  coleccionActual = Array.isArray(datos) ? datos : [];
+    const datos = cargarDesdeLocalStorage(STORAGE_KEYS.COLECCION, []);
+    coleccionActual = Array.isArray(datos) ? datos : [];
 };
 
 /**
@@ -206,10 +205,10 @@ const guardarColeccion = () => guardarEnLocalStorage(STORAGE_KEYS.COLECCION, col
  * @param {number} id Identificador del álbum a añadir.
  */
 const agregarAlbumAEstado = (id) => {
-  if (!estaEnColeccion(id)) {
-    coleccionActual.push({ id, resena: null });
-    guardarColeccion();
-  }
+    if (!estaEnColeccion(id)) {
+        coleccionActual.push({id, resena: null});
+        guardarColeccion();
+    }
 };
 
 /**
@@ -217,11 +216,11 @@ const agregarAlbumAEstado = (id) => {
  * @param {number} id Identificador del álbum a quitar.
  */
 const quitarAlbumDeEstado = (id) => {
-  const nuevaColeccion = coleccionActual.filter(item => item.id !== id);
-  if (nuevaColeccion.length !== coleccionActual.length) {
-    coleccionActual = nuevaColeccion;
-    guardarColeccion();
-  }
+    const nuevaColeccion = coleccionActual.filter(item => item.id !== id);
+    if (nuevaColeccion.length !== coleccionActual.length) {
+        coleccionActual = nuevaColeccion;
+        guardarColeccion();
+    }
 };
 
 /**
@@ -230,11 +229,11 @@ const quitarAlbumDeEstado = (id) => {
  * @param {{texto: string, puntaje: string}|null} resena Datos de reseña a almacenar.
  */
 const actualizarResenaEnEstado = (id, resena) => {
-  const entrada = coleccionActual.find(item => item.id === id);
-  if (entrada) {
-    entrada.resena = resena;
-    guardarColeccion();
-  }
+    const entrada = coleccionActual.find(item => item.id === id);
+    if (entrada) {
+        entrada.resena = resena;
+        guardarColeccion();
+    }
 };
 
 /**
@@ -245,11 +244,11 @@ const actualizarResenaEnEstado = (id, resena) => {
  * @returns {HTMLDivElement} Tarjeta generada.
  */
 const crearTarjetaColeccion = (album, id, resenaGuardada) => {
-  const tarjeta = document.createElement("div");
-  tarjeta.className = "tarjeta-album";
-  tarjeta.setAttribute("data-id", id);
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "tarjeta-album";
+    tarjeta.setAttribute("data-id", id);
 
-  tarjeta.innerHTML = `
+    tarjeta.innerHTML = `
     <img src="${obtenerRutaImagen(album.imagen)}" alt="${album.nombre}">
     <div class="info-album">
       <h3>${album.nombre}</h3>
@@ -257,9 +256,9 @@ const crearTarjetaColeccion = (album, id, resenaGuardada) => {
     </div>
   `;
 
-  const seccionResena = document.createElement("div");
-  seccionResena.className = "seccion-resena";
-  seccionResena.innerHTML = `
+    const seccionResena = document.createElement("div");
+    seccionResena.className = "seccion-resena";
+    seccionResena.innerHTML = `
     <div class="entradas-resena">
       <input type="text" placeholder="Escribe tu reseña breve..." maxlength="100" class="texto-resena">
       <span class="contador-caracteres">0/100</span>
@@ -276,85 +275,85 @@ const crearTarjetaColeccion = (album, id, resenaGuardada) => {
     </div>
   `;
 
-  tarjeta.appendChild(seccionResena);
+    tarjeta.appendChild(seccionResena);
 
-  const entradaResena = seccionResena.querySelector(".texto-resena");
-  if (entradaResena) {
-    entradaResena.addEventListener("input", () => actualizarContador(entradaResena));
-  }
+    const entradaResena = seccionResena.querySelector(".texto-resena");
+    if (entradaResena) {
+        entradaResena.addEventListener("input", () => actualizarContador(entradaResena));
+    }
 
-  if (resenaGuardada && resenaGuardada.texto && resenaGuardada.puntaje) {
-    const entradasResena = seccionResena.querySelector(".entradas-resena");
-    const resenaMostrada = seccionResena.querySelector(".resena-guardada");
-    const textoResenaGuardado = seccionResena.querySelector(".texto-resena-guardado");
-    const puntajeResenaGuardado = seccionResena.querySelector(".puntaje-resena-guardado");
+    if (resenaGuardada && resenaGuardada.texto && resenaGuardada.puntaje) {
+        const entradasResena = seccionResena.querySelector(".entradas-resena");
+        const resenaMostrada = seccionResena.querySelector(".resena-guardada");
+        const textoResenaGuardado = seccionResena.querySelector(".texto-resena-guardado");
+        const puntajeResenaGuardado = seccionResena.querySelector(".puntaje-resena-guardado");
 
-    textoResenaGuardado.textContent = `"${resenaGuardada.texto}"`;
-    puntajeResenaGuardado.textContent = `Puntaje: ${resenaGuardada.puntaje}/10`;
-    entradasResena.style.display = "none";
-    resenaMostrada.style.display = "block";
-  }
+        textoResenaGuardado.textContent = `"${resenaGuardada.texto}"`;
+        puntajeResenaGuardado.textContent = `Puntaje: ${resenaGuardada.puntaje}/10`;
+        entradasResena.style.display = "none";
+        resenaMostrada.style.display = "block";
+    }
 
-  return tarjeta;
+    return tarjeta;
 };
 
 /**
  * Inserta todas las tarjetas de la colección en el DOM.
  */
 const renderColeccion = () => {
-  const contenedor = document.getElementById("lista-coleccion");
-  if (!contenedor) {
-    return;
-  }
-
-  contenedor.innerHTML = "";
-
-  coleccionActual.forEach(item => {
-    const album = obtenerAlbumPorId(item.id);
-    if (!album) {
-      return;
+    const contenedor = document.getElementById("lista-coleccion");
+    if (!contenedor) {
+        return;
     }
-    const tarjeta = crearTarjetaColeccion(album, item.id, item.resena);
-    contenedor.appendChild(tarjeta);
-  });
+
+    contenedor.innerHTML = "";
+
+    coleccionActual.forEach(item => {
+        const album = obtenerAlbumPorId(item.id);
+        if (!album) {
+            return;
+        }
+        const tarjeta = crearTarjetaColeccion(album, item.id, item.resena);
+        contenedor.appendChild(tarjeta);
+    });
 };
 
 /**
  * Actualiza la cifra visible de álbumes guardados.
  */
 const actualizarContadorColeccion = () => {
-  const contador = document.getElementById("contador");
-  if (contador) {
-    contador.textContent = coleccionActual.length;
-  }
+    const contador = document.getElementById("contador");
+    if (contador) {
+        contador.textContent = coleccionActual.length;
+    }
 };
 
 /**
  * Sincroniza la vista de la colección con el estado actual.
  */
 const actualizarVistaColeccion = () => {
-  renderColeccion();
-  actualizarContadorColeccion();
+    renderColeccion();
+    actualizarContadorColeccion();
 };
 
 /**
  * Cambia la apariencia de las estrellas según si el álbum está guardado.
  */
 const aplicarEstadoEstrellas = () => {
-  document.querySelectorAll(".estrella").forEach(estrella => {
-    const id = parseInt(estrella.getAttribute("data-id"), 10);
-    if (Number.isNaN(id)) {
-      return;
-    }
+    document.querySelectorAll(".estrella").forEach(estrella => {
+        const id = parseInt(estrella.getAttribute("data-id"), 10);
+        if (Number.isNaN(id)) {
+            return;
+        }
 
-    if (estaEnColeccion(id)) {
-      estrella.classList.add("activo");
-      estrella.textContent = "\u2605";
-    } else {
-      estrella.classList.remove("activo");
-      estrella.textContent = "\u2606";
-    }
-  });
+        if (estaEnColeccion(id)) {
+            estrella.classList.add("activo");
+            estrella.textContent = "\u2605";
+        } else {
+            estrella.classList.remove("activo");
+            estrella.textContent = "\u2606";
+        }
+    });
 };
 
 /**
@@ -362,20 +361,20 @@ const aplicarEstadoEstrellas = () => {
  * @param {Array<{nombre: string, artista: string, imagen: string}>} [lista=albumes] Lista personalizada.
  */
 let mostrarCatalogo = (lista = albumes) => {
-  const contenedor = document.getElementById("lista-albumes");
-  if (!contenedor) {
-    return;
-  }
-
-  let contenido = "";
-
-  lista.forEach(album => {
-    const albumId = albumes.indexOf(album);
-    if (albumId === -1) {
-      return;
+    const contenedor = document.getElementById("lista-albumes");
+    if (!contenedor) {
+        return;
     }
 
-    contenido += `
+    let contenido = "";
+
+    lista.forEach(album => {
+        const albumId = albumes.indexOf(album);
+        if (albumId === -1) {
+            return;
+        }
+
+        contenido += `
       <div class="tarjeta-album" data-id="${albumId}">
         <img src="${obtenerRutaImagen(album.imagen)}" alt="${album.nombre}">
         <div class="info-album">
@@ -385,144 +384,144 @@ let mostrarCatalogo = (lista = albumes) => {
         </div>
       </div>
     `;
-  });
+    });
 
-  contenedor.innerHTML = contenido;
-  aplicarEstadoEstrellas();
+    contenedor.innerHTML = contenido;
+    aplicarEstadoEstrellas();
 };
 
 /**
  * Llena el select de artistas disponibles basándose en el catálogo.
  */
 const cargarArtistas = () => {
-  const filtro = document.getElementById("filtro-artista");
-  if (!filtro) {
-    return;
-  }
-
-  const artistasUnicos = [];
-  albumes.forEach(album => {
-    if (!artistasUnicos.includes(album.artista)) {
-      artistasUnicos.push(album.artista);
+    const filtro = document.getElementById("filtro-artista");
+    if (!filtro) {
+        return;
     }
-  });
 
-  const valorSeleccionado = filtro.value;
-  filtro.innerHTML = '<option value="">-- Filtrar por artista --</option>';
+    const artistasUnicos = [];
+    albumes.forEach(album => {
+        if (!artistasUnicos.includes(album.artista)) {
+            artistasUnicos.push(album.artista);
+        }
+    });
 
-  artistasUnicos.forEach(artista => {
-    const option = document.createElement("option");
-    option.value = artista;
-    option.textContent = artista;
-    filtro.appendChild(option);
-  });
+    const valorSeleccionado = filtro.value;
+    filtro.innerHTML = '<option value="">-- Filtrar por artista --</option>';
 
-  if (valorSeleccionado && artistasUnicos.includes(valorSeleccionado)) {
-    filtro.value = valorSeleccionado;
-  }
+    artistasUnicos.forEach(artista => {
+        const option = document.createElement("option");
+        option.value = artista;
+        option.textContent = artista;
+        filtro.appendChild(option);
+    });
+
+    if (valorSeleccionado && artistasUnicos.includes(valorSeleccionado)) {
+        filtro.value = valorSeleccionado;
+    }
 };
 
 /**
  * Guarda los valores actuales de búsqueda y filtro en localStorage.
  */
 const guardarFiltros = () => {
-  const input = document.getElementById("busqueda");
-  const filtro = document.getElementById("filtro-artista");
+    const input = document.getElementById("busqueda");
+    const filtro = document.getElementById("filtro-artista");
 
-  if (!input || !filtro) {
-    return;
-  }
+    if (!input || !filtro) {
+        return;
+    }
 
-  const filtros = {
-    busqueda: input.value,
-    artista: filtro.value
-  };
+    const filtros = {
+        busqueda: input.value,
+        artista: filtro.value
+    };
 
-  guardarEnLocalStorage(STORAGE_KEYS.FILTROS, filtros);
+    guardarEnLocalStorage(STORAGE_KEYS.FILTROS, filtros);
 };
 
 /**
  * Recupera los filtros guardados y aplica la vista correspondiente.
  */
 const cargarFiltros = () => {
-  const input = document.getElementById("busqueda");
-  const filtro = document.getElementById("filtro-artista");
+    const input = document.getElementById("busqueda");
+    const filtro = document.getElementById("filtro-artista");
 
-  if (!input || !filtro) {
-    return;
-  }
+    if (!input || !filtro) {
+        return;
+    }
 
-  const filtros = cargarDesdeLocalStorage(STORAGE_KEYS.FILTROS, {});
+    const filtros = cargarDesdeLocalStorage(STORAGE_KEYS.FILTROS, {});
 
-  if (filtros && typeof filtros.busqueda === "string") {
-    input.value = filtros.busqueda;
-  }
+    if (filtros && typeof filtros.busqueda === "string") {
+        input.value = filtros.busqueda;
+    }
 
-  if (filtros && typeof filtros.artista === "string") {
-    filtro.value = filtros.artista;
-  }
+    if (filtros && typeof filtros.artista === "string") {
+        filtro.value = filtros.artista;
+    }
 
-  if (filtro.value) {
-    filtrarPorArtista();
-  } else if (input.value) {
-    buscarAlbumes();
-  } else {
-    mostrarCatalogo();
-  }
+    if (filtro.value) {
+        filtrarPorArtista();
+    } else if (input.value) {
+        buscarAlbumes();
+    } else {
+        mostrarCatalogo();
+    }
 };
 
 /**
  * Ejecuta una búsqueda por texto libre sobre nombre y artista.
  */
 const buscarAlbumes = () => {
-  const input = document.getElementById("busqueda");
-  if (!input) {
-    return;
-  }
+    const input = document.getElementById("busqueda");
+    if (!input) {
+        return;
+    }
 
-  const texto = input.value.trim().toLowerCase();
-  const resultado = albumes.filter(album =>
-    album.nombre.toLowerCase().includes(texto) ||
-    album.artista.toLowerCase().includes(texto)
-  );
+    const texto = input.value.trim().toLowerCase();
+    const resultado = albumes.filter(album =>
+        album.nombre.toLowerCase().includes(texto) ||
+        album.artista.toLowerCase().includes(texto)
+    );
 
-  mostrarCatalogo(texto ? resultado : albumes);
-  guardarFiltros();
+    mostrarCatalogo(texto ? resultado : albumes);
+    guardarFiltros();
 };
 
 /**
  * Aplica el filtro por artista seleccionado en el combo.
  */
 const filtrarPorArtista = () => {
-  const select = document.getElementById("filtro-artista");
-  if (!select) {
-    return;
-  }
+    const select = document.getElementById("filtro-artista");
+    if (!select) {
+        return;
+    }
 
-  const artista = select.value;
-  const resultado = artista ? albumes.filter(album => album.artista === artista) : albumes;
+    const artista = select.value;
+    const resultado = artista ? albumes.filter(album => album.artista === artista) : albumes;
 
-  mostrarCatalogo(resultado);
-  guardarFiltros();
+    mostrarCatalogo(resultado);
+    guardarFiltros();
 };
 
 /**
  * Registra listeners para guardar automáticamente los filtros.
  */
 const registrarEventosDeFiltros = () => {
-  const input = document.getElementById("busqueda");
-  const select = document.getElementById("filtro-artista");
+    const input = document.getElementById("busqueda");
+    const select = document.getElementById("filtro-artista");
 
-  if (input) {
-    input.addEventListener("input", () => {
-      clearTimeout(window.busquedaTimeout);
-      window.busquedaTimeout = setTimeout(guardarFiltros, 500);
-    });
-  }
+    if (input) {
+        input.addEventListener("input", () => {
+            clearTimeout(window.busquedaTimeout);
+            window.busquedaTimeout = setTimeout(guardarFiltros, 500);
+        });
+    }
 
-  if (select) {
-    select.addEventListener("change", guardarFiltros);
-  }
+    if (select) {
+        select.addEventListener("change", guardarFiltros);
+    }
 };
 
 /**
@@ -530,23 +529,23 @@ const registrarEventosDeFiltros = () => {
  * @param {HTMLElement} estrella Elemento que disparó el evento.
  */
 const agregarAColeccion = (estrella) => {
-  const idAlbum = parseInt(estrella.getAttribute("data-id"), 10);
-  if (Number.isNaN(idAlbum)) {
-    return;
-  }
+    const idAlbum = parseInt(estrella.getAttribute("data-id"), 10);
+    if (Number.isNaN(idAlbum)) {
+        return;
+    }
 
-  if (estrella.classList.contains("activo")) {
-    estrella.classList.remove("activo");
-    estrella.textContent = "\u2606";
-    quitarAlbumDeEstado(idAlbum);
-  } else {
-    estrella.classList.add("activo");
-    estrella.textContent = "\u2605";
-    agregarAlbumAEstado(idAlbum);
-  }
+    if (estrella.classList.contains("activo")) {
+        estrella.classList.remove("activo");
+        estrella.textContent = "\u2606";
+        quitarAlbumDeEstado(idAlbum);
+    } else {
+        estrella.classList.add("activo");
+        estrella.textContent = "\u2605";
+        agregarAlbumAEstado(idAlbum);
+    }
 
-  actualizarVistaColeccion();
-  aplicarEstadoEstrellas();
+    actualizarVistaColeccion();
+    aplicarEstadoEstrellas();
 };
 
 /**
@@ -554,17 +553,17 @@ const agregarAColeccion = (estrella) => {
  * @param {HTMLInputElement} entrada Campo de texto observado.
  */
 const actualizarContador = (entrada) => {
-  const contador = entrada.parentElement.querySelector(".contador-caracteres");
-  const longitud = entrada.value.length;
-  contador.textContent = `${longitud}/100`;
+    const contador = entrada.parentElement.querySelector(".contador-caracteres");
+    const longitud = entrada.value.length;
+    contador.textContent = `${longitud}/100`;
 
-  if (longitud > 80) {
-    contador.style.color = "#ff6b6b";
-  } else if (longitud > 60) {
-    contador.style.color = "#ffa500";
-  } else {
-    contador.style.color = "#666";
-  }
+    if (longitud > 80) {
+        contador.style.color = "#ff6b6b";
+    } else if (longitud > 60) {
+        contador.style.color = "#ffa500";
+    } else {
+        contador.style.color = "#666";
+    }
 };
 
 /**
@@ -572,57 +571,57 @@ const actualizarContador = (entrada) => {
  * @param {HTMLButtonElement} boton Botón que dispara el guardado.
  */
 const guardarResena = (boton) => {
-  const seccionResena = boton.closest(".seccion-resena");
-  if (!seccionResena) {
-    return;
-  }
+    const seccionResena = boton.closest(".seccion-resena");
+    if (!seccionResena) {
+        return;
+    }
 
-  const entradaresena = seccionResena.querySelector(".texto-resena");
-  const entradaPuntaje = seccionResena.querySelector(".entrada-puntaje");
-  const entradasresena = seccionResena.querySelector(".entradas-resena");
-  const resenaGuardada = seccionResena.querySelector(".resena-guardada");
-  const textoresenaGuardado = seccionResena.querySelector(".texto-resena-guardado");
-  const puntajeresenaGuardado = seccionResena.querySelector(".puntaje-resena-guardado");
+    const entradaresena = seccionResena.querySelector(".texto-resena");
+    const entradaPuntaje = seccionResena.querySelector(".entrada-puntaje");
+    const entradasresena = seccionResena.querySelector(".entradas-resena");
+    const resenaGuardada = seccionResena.querySelector(".resena-guardada");
+    const textoresenaGuardado = seccionResena.querySelector(".texto-resena-guardado");
+    const puntajeresenaGuardado = seccionResena.querySelector(".puntaje-resena-guardado");
 
-  if (!entradaresena || !entradaPuntaje || !entradasresena || !resenaGuardada) {
-    return;
-  }
+    if (!entradaresena || !entradaPuntaje || !entradasresena || !resenaGuardada) {
+        return;
+    }
 
-  const textoresena = entradaresena.value.trim();
-  const puntaje = entradaPuntaje.value;
+    const textoresena = entradaresena.value.trim();
+    const puntaje = entradaPuntaje.value;
 
-  if (!textoresena) {
-    alert("Por favor, escribe una resena");
-    return;
-  }
+    if (!textoresena) {
+        alert("Por favor, escribe una resena");
+        return;
+    }
 
-  if (!puntaje) {
-    alert("Por favor, selecciona un puntaje del 1 al 10");
-    return;
-  }
+    if (!puntaje) {
+        alert("Por favor, selecciona un puntaje del 1 al 10");
+        return;
+    }
 
-  textoresenaGuardado.textContent = `"${textoresena}"`;
-  puntajeresenaGuardado.textContent = `Puntaje: ${puntaje}/10`;
+    textoresenaGuardado.textContent = `"${textoresena}"`;
+    puntajeresenaGuardado.textContent = `Puntaje: ${puntaje}/10`;
 
-  entradasresena.style.display = "none";
-  resenaGuardada.style.display = "block";
+    entradasresena.style.display = "none";
+    resenaGuardada.style.display = "block";
 
-  entradaresena.value = "";
-  entradaPuntaje.value = "";
-  actualizarContador(entradaresena);
+    entradaresena.value = "";
+    entradaPuntaje.value = "";
+    actualizarContador(entradaresena);
 
-  const tarjeta = seccionResena.closest(".tarjeta-album");
-  if (!tarjeta) {
-    return;
-  }
+    const tarjeta = seccionResena.closest(".tarjeta-album");
+    if (!tarjeta) {
+        return;
+    }
 
-  const idAlbum = parseInt(tarjeta.getAttribute("data-id"), 10);
-  if (Number.isNaN(idAlbum)) {
-    return;
-  }
+    const idAlbum = parseInt(tarjeta.getAttribute("data-id"), 10);
+    if (Number.isNaN(idAlbum)) {
+        return;
+    }
 
-  actualizarResenaEnEstado(idAlbum, { texto: textoresena, puntaje });
-  actualizarVistaColeccion();
+    actualizarResenaEnEstado(idAlbum, {texto: textoresena, puntaje});
+    actualizarVistaColeccion();
 };
 
 /**
@@ -630,78 +629,78 @@ const guardarResena = (boton) => {
  * @param {HTMLButtonElement} boton Botón de edición utilizado.
  */
 const editarResena = (boton) => {
-  const seccionresena = boton.closest(".seccion-resena");
-  if (!seccionresena) {
-    return;
-  }
+    const seccionresena = boton.closest(".seccion-resena");
+    if (!seccionresena) {
+        return;
+    }
 
-  const entradaresena = seccionresena.querySelector(".texto-resena");
-  const entradaPuntaje = seccionresena.querySelector(".entrada-puntaje");
-  const entradasresena = seccionresena.querySelector(".entradas-resena");
-  const resenaGuardada = seccionresena.querySelector(".resena-guardada");
-  const textoresenaGuardado = seccionresena.querySelector(".texto-resena-guardado");
-  const puntajeresenaGuardado = seccionresena.querySelector(".puntaje-resena-guardado");
+    const entradaresena = seccionresena.querySelector(".texto-resena");
+    const entradaPuntaje = seccionresena.querySelector(".entrada-puntaje");
+    const entradasresena = seccionresena.querySelector(".entradas-resena");
+    const resenaGuardada = seccionresena.querySelector(".resena-guardada");
+    const textoresenaGuardado = seccionresena.querySelector(".texto-resena-guardado");
+    const puntajeresenaGuardado = seccionresena.querySelector(".puntaje-resena-guardado");
 
-  if (!entradaresena || !entradaPuntaje || !entradasresena || !resenaGuardada) {
-    return;
-  }
+    if (!entradaresena || !entradaPuntaje || !entradasresena || !resenaGuardada) {
+        return;
+    }
 
-  const textoActual = textoresenaGuardado.textContent.replace(/^"(.*)"$/, "$1");
-  const puntajeActual = puntajeresenaGuardado.textContent.replace(/^Puntaje: (\d+)\/10$/, "$1");
+    const textoActual = textoresenaGuardado.textContent.replace(/^"(.*)"$/, "$1");
+    const puntajeActual = puntajeresenaGuardado.textContent.replace(/^Puntaje: (\d+)\/10$/, "$1");
 
-  entradaresena.value = textoActual;
-  entradaPuntaje.value = puntajeActual;
-  actualizarContador(entradaresena);
+    entradaresena.value = textoActual;
+    entradaPuntaje.value = puntajeActual;
+    actualizarContador(entradaresena);
 
-  entradasresena.style.display = "block";
-  resenaGuardada.style.display = "none";
+    entradasresena.style.display = "block";
+    resenaGuardada.style.display = "none";
 };
 
 /**
  * Borra la información persistida y vuelve la app a su estado inicial.
  */
 const limpiarDatos = () => {
-  if (!confirm("¿Estás seguro de que quieres limpiar todos los datos guardados? Esta acción no se puede deshacer.")) {
-    return;
-  }
+    if (!confirm("¿Estás seguro de que quieres limpiar todos los datos guardados? Esta acción no se puede deshacer.")) {
+        return;
+    }
 
-  localStorage.removeItem(STORAGE_KEYS.COLECCION);
-  localStorage.removeItem(STORAGE_KEYS.FILTROS);
+    localStorage.removeItem(STORAGE_KEYS.COLECCION);
+    localStorage.removeItem(STORAGE_KEYS.FILTROS);
 
-  coleccionActual = [];
+    coleccionActual = [];
 
-  const inputBusqueda = document.getElementById("busqueda");
-  const filtroArtista = document.getElementById("filtro-artista");
+    const inputBusqueda = document.getElementById("busqueda");
+    const filtroArtista = document.getElementById("filtro-artista");
 
-  if (inputBusqueda) {
-    inputBusqueda.value = "";
-  }
+    if (inputBusqueda) {
+        inputBusqueda.value = "";
+    }
 
-  if (filtroArtista) {
-    filtroArtista.value = "";
-  }
+    if (filtroArtista) {
+        filtroArtista.value = "";
+    }
 
-  actualizarVistaColeccion();
+    actualizarVistaColeccion();
 
-  if (document.getElementById("lista-albumes")) {
-    mostrarCatalogo();
-  }
+    if (document.getElementById("lista-albumes")) {
+        mostrarCatalogo();
+    }
 
-  aplicarEstadoEstrellas();
+    aplicarEstadoEstrellas();
 
-  alert("Datos limpiados correctamente");
+    alert("Datos limpiados correctamente");
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  cargarEstadoColeccion();
+    cargarEstadoColeccion();
 
-  if (document.getElementById("lista-albumes")) {
-    mostrarCatalogo();
-    cargarArtistas();
-    cargarFiltros();
-    registrarEventosDeFiltros();
-  }
+    if (document.getElementById("lista-albumes")) {
+        mostrarCatalogo();
+        cargarArtistas();
+        cargarFiltros();
+        registrarEventosDeFiltros();
+    }
 
-  actualizarVistaColeccion();
-  aplicarEstadoEstrellas();
+    actualizarVistaColeccion();
+    aplicarEstadoEstrellas();
 });

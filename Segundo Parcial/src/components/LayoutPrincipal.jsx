@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import {Outlet} from 'react-router-dom'
 import './LayoutPrincipal.scss'
 
 /**
@@ -6,11 +6,11 @@ import './LayoutPrincipal.scss'
  * @returns {JSX.Element} Layout base de la aplicación.
  */
 function LayoutPrincipal() {
-  return (
-    <div className="layout-principal">
-      <Outlet />
-    </div>
-  )
+    return (
+        <div className="layout-principal">
+            <Outlet/>
+        </div>
+    )
 }
 
 export default LayoutPrincipal

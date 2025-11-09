@@ -1,9 +1,13 @@
 # Frontend React - Mi Colección de Álbumes
 
 ## Resumen
-Aplicación creada con **React 19 + Vite** que replica el diseño original del proyecto HTML, pero con una arquitectura modular y mantenible. Se usan componentes autónomos con sus hojas SCSS, datos extraídos de `src/data/albumes.json` y utilidades documentadas para la persistencia en `localStorage`.
+
+Aplicación creada con **React 19 + Vite** que replica el diseño original del proyecto HTML, pero con una arquitectura
+modular y mantenible. Se usan componentes autónomos con sus hojas SCSS, datos extraídos de `src/data/albumes.json` y
+utilidades documentadas para la persistencia en `localStorage`.
 
 ## Características Clave
+
 - Ruteo con `react-router-dom`, `useNavigate` y un `LayoutPrincipal` que emplea `<Outlet />`.
 - Contexto `TemaProvider` + `useTema` para alternar entre modo claro/oscuro y guardar la preferencia.
 - Componente genérico `Boton` reutilizado en encabezados, formularios y páginas.
@@ -11,6 +15,7 @@ Aplicación creada con **React 19 + Vite** que replica el diseño original del p
 - Catálogo derivado de JSON local y carátulas importadas desde `/src/assets/albums` mediante `import.meta.glob`.
 
 ## Estructura de Carpetas
+
 ```
 src/
 ├── api            # Funciones para trabajar con localStorage y datos
@@ -24,7 +29,9 @@ src/
 ```
 
 ## Scripts
+
 Ejecutar dentro de esta carpeta (`/FRONTEND`):
+
 - `npm install`: instala dependencias.
 - `npm run dev`: inicia el entorno de desarrollo con HMR.
 - `npm run lint`: ejecuta ESLint (sin errores a la fecha).
@@ -32,6 +39,7 @@ Ejecutar dentro de esta carpeta (`/FRONTEND`):
 - `npm run preview`: sirve la build generada para validarla.
 
 ## Notas
+
 - Las imágenes del catálogo viven en `src/assets/albums`; no se aceptan estilos inline.
 - Para correr `json-server` con la data cruda se puede usar `db.json` en la raíz del repo.
 - Toda función expuesta incluye JSDoc y se procura mantener indentación de 2 espacios.

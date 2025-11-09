@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import './App.css'
 import '@styles/global.scss'
 import Inicio from '@pages/Inicio'
@@ -11,17 +11,17 @@ import LayoutPrincipal from '@components/LayoutPrincipal'
  * @returns {JSX.Element} Estructura de navegación.
  */
 function Aplicacion() {
-  return (
-    <div className="app-shell">
-      <Routes>
-        <Route element={<LayoutPrincipal />}>
-          <Route path="/" element={<Inicio />} />
-          <Route path="/mi-coleccion" element={<Coleccion />} />
-          <Route path="*" element={<PaginaNoEncontrada />} />
-        </Route>
-      </Routes>
-    </div>
-  )
+    return (
+        <div className="app-shell">
+            <Routes>
+                <Route element={<LayoutPrincipal/>}>
+                    <Route path="/" element={<Inicio/>}/>
+                    <Route path="/mi-coleccion" element={<Coleccion/>}/>
+                    <Route path="*" element={<PaginaNoEncontrada/>}/>
+                </Route>
+            </Routes>
+        </div>
+    )
 }
 
 export default Aplicacion
