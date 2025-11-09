@@ -1,0 +1,86 @@
+@use 'reset';
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:root {
+  font-family: $font-family-base;
+  color: $color-text;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  background-color: $color-body-bg;
+}
+
+body {
+  color: $color-text;
+}
+
+main {
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.sr-only {
+  @include sr-only;
+}
+
+[data-tema='oscuro'] body {
+  background-color: $color-dark-bg;
+  color: $color-dark-text;
+}
+
+[data-tema='oscuro'] .app-header {
+  background-color: #101010;
+}
+
+[data-tema='oscuro'] .app-header__subtitle {
+  color: $color-dark-muted;
+}
+
+[data-tema='oscuro'] .app-header__nav input,
+[data-tema='oscuro'] .app-header__nav select {
+  background-color: $color-dark-card;
+  border-color: $color-dark-border;
+  color: $color-dark-text;
+}
+
+[data-tema='oscuro'] .tarjeta-album {
+  background-color: $color-dark-card;
+  border-color: $color-dark-border;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+[data-tema='oscuro'] .info-album p {
+  color: $color-dark-muted;
+}
+
+[data-tema='oscuro'] .seccion-resena {
+  background-color: $color-dark-review-bg;
+  border: 1px solid $color-dark-border;
+}
+
+[data-tema='oscuro'] .texto-resena,
+[data-tema='oscuro'] .entrada-puntaje {
+  background-color: $color-dark-card;
+  border-color: $color-dark-border;
+  color: $color-dark-text;
+}
+
+[data-tema='oscuro'] .contador-caracteres {
+  color: $color-dark-muted;
+}
+
+[data-tema='oscuro'] .app-footer {
+  background-color: $color-dark-footer;
+}
+
+[data-tema='oscuro'] .coleccion-vacia,
+[data-tema='oscuro'] .not-found p {
+  color: $color-dark-muted;
+}

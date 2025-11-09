@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Agustín Di Mario">
+  <meta name="description" content="Colección personal de álbumes con reseñas guardadas">
+  <meta name="keywords" content="Música, Álbumes, Reseñas, Colección">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Colección</title>
+  <link rel="icon" type="image/png" href="FRONTEND/public/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Mi Colección de Álbumes</h1>
+    <nav>
+      <a href="index.html" class="nav-link">Volver al catálogo</a>
+      <button id="boton-limpiar" onclick="limpiarDatos()" title="Limpiar todos los datos guardados">Limpiar</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="coleccion">
+      <h2>Mi colección (<span id="contador">0</span>)</h2>
+      <div class="lista-coleccion" id="lista-coleccion"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 - Agustín Di Mario</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

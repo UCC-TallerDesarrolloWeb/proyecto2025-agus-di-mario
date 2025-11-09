@@ -1,0 +1,14 @@
+@use '../styles/variables' as *;
+
+.app-footer {
+  text-align: center;
+  padding: 15px;
+  background-color: $color-footer-bg;
+  color: #fff;
+  margin-top: 20px;
+}
+
+.app-footer p {
+  margin: 0;
+  font-size: 0.95rem;
+}
