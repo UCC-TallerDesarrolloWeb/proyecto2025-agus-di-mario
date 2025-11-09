@@ -11,7 +11,8 @@ utilidades documentadas para la persistencia en `localStorage`.
 - Ruteo con `react-router-dom`, `useNavigate` y un `LayoutPrincipal` que emplea `<Outlet />`.
 - Componente genérico `Boton` reutilizado en encabezados, formularios y páginas.
 - Validaciones accesibles en tiempo real (`onChange`) dentro de `SeccionResena`, con mensajes `aria-live`.
-- Catálogo derivado de JSON local y carátulas importadas desde `/src/assets/albums` mediante `import.meta.glob`.
+- Catálogo derivado de JSON local. Las carátulas se sirven desde `public/albums` y el JSON ya trae rutas absolutas
+  (no se usan imports ni `import.meta.glob`).
 - Persistencia de filtros, reseñas y favoritos en `localStorage` a través del módulo `api/albumes`.
 
 ## Estructura de Carpetas
@@ -19,9 +20,9 @@ utilidades documentadas para la persistencia en `localStorage`.
 ```
 src/
 ├── api            # Funciones para trabajar con localStorage y datos
-├── assets         # Branding + álbumes
+├── assets         # Branding (las carátulas viven en /public/albums)
 ├── components     # Componentes con su .scss
-├── data           # JSON + helper para resolver imágenes
+├── data           # JSON del catálogo (rutas absolutas a /public/albums)
 ├── pages          # Rutas Inicio y Coleccion
 ├── styles         # Reset, variables, mixins y global.scss
 └── utils          # Utilidades compartidas (storage)
@@ -39,6 +40,6 @@ Ejecutar dentro de esta carpeta (`/FRONTEND`):
 
 ## Notas
 
-- Las imágenes del catálogo viven en `src/assets/albums`; no se aceptan estilos inline.
+- Las imágenes del catálogo viven en `public/albums`; no se aceptan estilos inline.
 - Para correr `json-server` con la data cruda se puede usar `db.json` en la raíz del repo.
 - Toda función expuesta incluye JSDoc y se procura mantener indentación de 2 espacios.

@@ -9,9 +9,6 @@ const ERRORES_INICIALES = {texto: '', puntaje: ''}
 
 /**
  * Permite crear y gestionar la reseña de un álbum en la colección.
- * @param {{album:{id:number,nombre:string}}} props - Propiedades recibidas.
- * @param {{id:number,nombre:string}} props.album - Álbum asociado a la reseña.
- * @returns {JSX.Element} Bloque de reseña.
  */
 function SeccionResena({album}) {
     const [texto, setTexto] = useState('')

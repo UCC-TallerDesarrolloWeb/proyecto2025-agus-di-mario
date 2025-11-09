@@ -41,8 +41,7 @@ function TarjetaAlbum({album, variante = 'catalogo', esFavorito = false, alAlter
                         aria-label={esFavorito ? 'Quitar de mi colección' : 'Agregar a mi colección'}
                         onClick={() => alAlternarFavorito?.(album)}
                     >
-                        {esFavorito ? '★' : '☆'} // investigar si puedo usar otra cosa que no sea un caracter de
-                        estrellita
+                        {esFavorito ? '★' : '☆'}
                     </button>
                 )}
                 {hijos}

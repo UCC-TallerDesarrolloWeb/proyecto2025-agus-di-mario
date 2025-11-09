@@ -3,150 +3,150 @@
     "id": 1,
     "nombre": "California",
     "artista": "blink-182",
-    "imagen": "Blink-182_-_Calfornia.jpg"
+    "imagen": "/albums/Blink-182_-_Calfornia.jpg"
   },
   {
     "id": 2,
     "nombre": "Neighborhoods",
     "artista": "blink-182",
-    "imagen": "Blink-182_-_Neighborhoods_cover.jpg"
+    "imagen": "/albums/Blink-182_-_Neighborhoods_cover.jpg"
   },
   {
     "id": 3,
     "nombre": "Nine",
     "artista": "blink-182",
-    "imagen": "Blink-182_-_Nine.png"
+    "imagen": "/albums/Blink-182_-_Nine.png"
   },
   {
     "id": 4,
     "nombre": "Take Off Your Pants and Jacket",
     "artista": "blink-182",
-    "imagen": "Blink-182_-_Take_Off_Your_Pants_and_Jacket_cover.jpg"
+    "imagen": "/albums/Blink-182_-_Take_Off_Your_Pants_and_Jacket_cover.jpg"
   },
   {
     "id": 5,
     "nombre": "The Mark, Tom and Travis Show",
     "artista": "blink-182",
-    "imagen": "Blink-182_-_The_Mark,_Tom_and_Travis_Show_(The_Enema_Strikes_Back!)_cover.jpg"
+    "imagen": "/albums/Blink-182_-_The_Mark,_Tom_and_Travis_Show_(The_Enema_Strikes_Back!)_cover.jpg"
   },
   {
     "id": 6,
     "nombre": "Live at the Royal Albert Hall",
     "artista": "Bring Me The Horizon",
-    "imagen": "BMTHroyalalberthall.jpg"
+    "imagen": "/albums/BMTHroyalalberthall.jpg"
   },
   {
     "id": 7,
     "nombre": "Collide With The Sky",
     "artista": "Pierce The Veil",
-    "imagen": "CollidewiththeSkycover.jpg"
+    "imagen": "/albums/CollidewiththeSkycover.jpg"
   },
   {
     "id": 8,
     "nombre": "Copacetic",
     "artista": "Knuckle Puck",
-    "imagen": "Copacetic_KP.jpg"
+    "imagen": "/albums/Copacetic_KP.jpg"
   },
   {
     "id": 9,
     "nombre": "Danger Days: The True Lives of the Fabulous Killjoys",
     "artista": "My Chemical Romance",
-    "imagen": "Danger_Days-album-2010.jpg"
+    "imagen": "/albums/Danger_Days-album-2010.jpg"
   },
   {
     "id": 10,
     "nombre": "Father of All...",
     "artista": "Green Day",
-    "imagen": "Father_of_All.jpg"
+    "imagen": "/albums/Father_of_All.jpg"
   },
   {
     "id": 11,
     "nombre": "Wasting Light",
     "artista": "Foo Fighters",
-    "imagen": "Foo_Fighters_Wasting_Light_Album_Cover.jpg"
+    "imagen": "/albums/Foo_Fighters_Wasting_Light_Album_Cover.jpg"
   },
   {
     "id": 12,
     "nombre": "Revolution Radio",
     "artista": "Green Day",
-    "imagen": "GreenDayRevRad.jpg"
+    "imagen": "/albums/GreenDayRevRad.jpg"
   },
   {
     "id": 13,
     "nombre": "Heavy Love",
     "artista": "Man Overboard",
-    "imagen": "Heavy_Love_Man_Overboard.png"
+    "imagen": "/albums/Heavy_Love_Man_Overboard.png"
   },
   {
     "id": 14,
     "nombre": "Tell Me About Tomorrow",
     "artista": "Jxdn",
-    "imagen": "Jxdn_Tell_Me_About_Tomorrow.png"
+    "imagen": "/albums/Jxdn_Tell_Me_About_Tomorrow.png"
   },
   {
     "id": 15,
     "nombre": "Shapeshifter",
     "artista": "Knuckle Puck",
-    "imagen": "Knuckle_Puck_Shapeshifter.jpg"
+    "imagen": "/albums/Knuckle_Puck_Shapeshifter.jpg"
   },
   {
     "id": 16,
     "nombre": "Life's Not Out to Get You",
     "artista": "Neck Deep",
-    "imagen": "Life's_Not_Out_to_Get_You.jpg"
+    "imagen": "/albums/Life's_Not_Out_to_Get_You.jpg"
   },
   {
     "id": 17,
     "nombre": "Misadventures",
     "artista": "Pierce The Veil",
-    "imagen": "Misadventures.jpg"
+    "imagen": "/albums/Misadventures.jpg"
   },
   {
     "id": 18,
     "nombre": "Nevermind",
     "artista": "Nirvana",
-    "imagen": "NirvanaNevermindalbumcover.jpg"
+    "imagen": "/albums/NirvanaNevermindalbumcover.jpg"
   },
   {
     "id": 19,
     "nombre": "The Peace and The Panic",
     "artista": "Neck Deep",
-    "imagen": "Peace_and_the_Panic.jpg"
+    "imagen": "/albums/Peace_and_the_Panic.jpg"
   },
   {
     "id": 20,
     "nombre": "White Noise",
     "artista": "PVRIS",
-    "imagen": "PVRIS_White_Noise.jpg"
+    "imagen": "/albums/PVRIS_White_Noise.jpg"
   },
   {
     "id": 21,
     "nombre": "Real Talk",
     "artista": "Man Overboard",
-    "imagen": "Real_Talk_Man_Overboard.jpg"
+    "imagen": "/albums/Real_Talk_Man_Overboard.jpg"
   },
   {
     "id": 22,
     "nombre": "Selfish Machines",
     "artista": "Pierce The Veil",
-    "imagen": "Selfish_Machines.jpg"
+    "imagen": "/albums/Selfish_Machines.jpg"
   },
   {
     "id": 23,
     "nombre": "Underclass Hero",
     "artista": "Sum 41",
-    "imagen": "SUM_41_UNDERCLASS_HERO.jpg"
+    "imagen": "/albums/SUM_41_UNDERCLASS_HERO.jpg"
   },
   {
     "id": 24,
-    "nombre": "The Story So Far (album)",
+    "nombre": "The Story So Far",
     "artista": "The Story So Far",
-    "imagen": "The_Story_So_Far_-_The_Story_So_Far_(album).jpg"
+    "imagen": "/albums/The_Story_So_Far_-_The_Story_So_Far_(album).jpg"
   },
   {
     "id": 25,
     "nombre": "Proper Dose",
     "artista": "The Story So Far",
-    "imagen": "TSSFProperDose.jpg"
+    "imagen": "/albums/TSSFProperDose.jpg"
   }
 ]

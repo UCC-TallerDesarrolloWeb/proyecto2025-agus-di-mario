@@ -1,34 +1,26 @@
-import {albumes as catalogo} from '@data/albumes'
+import catalogoJSON from '@data/albumes.json'
 import {escribirJSON, leerJSON} from '@utils/storage'
+
+const catalogo = catalogoJSON.map(album => ({album, imagen: `/albums/${album.imagen}`}))
 
 const CLAVES_STORAGE = {
     coleccion: 'miColeccion',
     filtros: 'filtros',
 }
 
-/**
- * Devuelve una copia del catálogo completo.
- * @returns {Promise<Array<{id:number,nombre:string,artista:string,imagen:string}>>}
- */
+
 export async function obtenerAlbumes() {
-    return catalogo.map(album => ({...album}))
+    return catalogo.map(album => ({album}))
 }
 
 /**
  * Obtiene la colección del usuario desde localStorage.
  */
 export function obtenerColeccion() {
-    return leerJSON(CLAVES_STORAGE.coleccion, []).map(item => ({
-        ...item,
-        resena: item.resena ?? null,
-    }))
+    return leerJSON(CLAVES_STORAGE.coleccion, []).map(item => ({item, resena: item.resena ?? null}))
 }
 
-/**
- * Agrega un álbum a la colección del usuario, evitando duplicados.
- * @param {{id:number,nombre:string,artista:string,imagen:string}} album - Álbum seleccionado.
- * @returns {Array} Colección actualizada.
- */
+
 export function agregarAColeccion(album) {
     const coleccionActual = obtenerColeccion()
     const existe = coleccionActual.some(item => item.id === album.id)

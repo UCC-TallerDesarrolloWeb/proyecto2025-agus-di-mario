@@ -2,7 +2,6 @@ import '@styles/Pie.scss'
 
 /**
  * Pie de página con créditos y año dinámico.
- * @returns {JSX.Element} Pie de la aplicación.
  */
 function Pie() {
     const anio = new Date().getFullYear()
