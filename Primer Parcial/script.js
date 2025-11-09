@@ -128,6 +128,11 @@ const albumes = [
 
 const RUTA_IMAGENES = "FRONTEND/src/assets/albums/";
 
+/**
+ * Obtiene la ruta completa de una imagen del catálogo.
+ * @param {string} nombreArchivo Nombre del archivo de imagen.
+ * @returns {string} Ruta absoluta dentro del proyecto.
+ */
 const obtenerRutaImagen = (nombreArchivo) => `${RUTA_IMAGENES}${nombreArchivo}`;
 
 const STORAGE_KEYS = {
@@ -139,6 +144,11 @@ const OPCIONES_PUNTAJE = Array.from({ length: 10 }, (_, index) => `<option value
 
 let coleccionActual = [];
 
+/**
+ * Persistente un valor serializado en localStorage.
+ * @param {string} clave Identificador único donde se guardarán los datos.
+ * @param {*} datos Información a almacenar.
+ */
 const guardarEnLocalStorage = (clave, datos) => {
   try {
     localStorage.setItem(clave, JSON.stringify(datos));
@@ -147,6 +157,12 @@ const guardarEnLocalStorage = (clave, datos) => {
   }
 };
 
+/**
+ * Recupera un valor desde localStorage.
+ * @param {string} clave Identificador a consultar.
+ * @param {*} [valorPorDefecto=null] Valor a devolver si no hay datos.
+ * @returns {*} Datos parseados o el valor por defecto.
+ */
 const cargarDesdeLocalStorage = (clave, valorPorDefecto = null) => {
   try {
     const datos = localStorage.getItem(clave);
@@ -157,17 +173,37 @@ const cargarDesdeLocalStorage = (clave, valorPorDefecto = null) => {
   }
 };
 
+/**
+ * Actualiza la colección en memoria desde localStorage.
+ */
 const cargarEstadoColeccion = () => {
   const datos = cargarDesdeLocalStorage(STORAGE_KEYS.COLECCION, []);
   coleccionActual = Array.isArray(datos) ? datos : [];
 };
 
+/**
+ * Obtiene los datos originales de un álbum por su índice.
+ * @param {number} id Índice dentro del arreglo `albumes`.
+ * @returns {{nombre: string, artista: string, imagen: string}|undefined} Registro encontrado.
+ */
 const obtenerAlbumPorId = (id) => albumes[id];
 
+/**
+ * Indica si un álbum ya se encuentra en la colección actual.
+ * @param {number} id Identificador del álbum.
+ * @returns {boolean} Verdadero si está guardado.
+ */
 const estaEnColeccion = (id) => coleccionActual.some(item => item.id === id);
 
+/**
+ * Persiste el estado actual de la colección en localStorage.
+ */
 const guardarColeccion = () => guardarEnLocalStorage(STORAGE_KEYS.COLECCION, coleccionActual);
 
+/**
+ * Agrega un álbum al arreglo en memoria si no estaba registrado.
+ * @param {number} id Identificador del álbum a añadir.
+ */
 const agregarAlbumAEstado = (id) => {
   if (!estaEnColeccion(id)) {
     coleccionActual.push({ id, resena: null });
@@ -175,6 +211,10 @@ const agregarAlbumAEstado = (id) => {
   }
 };
 
+/**
+ * Elimina un álbum del estado en memoria y guarda los cambios.
+ * @param {number} id Identificador del álbum a quitar.
+ */
 const quitarAlbumDeEstado = (id) => {
   const nuevaColeccion = coleccionActual.filter(item => item.id !== id);
   if (nuevaColeccion.length !== coleccionActual.length) {
@@ -183,6 +223,11 @@ const quitarAlbumDeEstado = (id) => {
   }
 };
 
+/**
+ * Actualiza la reseña de un álbum previamente agregado.
+ * @param {number} id Identificador del álbum.
+ * @param {{texto: string, puntaje: string}|null} resena Datos de reseña a almacenar.
+ */
 const actualizarResenaEnEstado = (id, resena) => {
   const entrada = coleccionActual.find(item => item.id === id);
   if (entrada) {
@@ -191,6 +236,13 @@ const actualizarResenaEnEstado = (id, resena) => {
   }
 };
 
+/**
+ * Construye el nodo HTML para un álbum dentro de la colección.
+ * @param {{nombre: string, artista: string, imagen: string}} album Datos base del álbum.
+ * @param {number} id Identificador del álbum.
+ * @param {{texto: string, puntaje: string}|null} resenaGuardada Reseña existente a mostrar.
+ * @returns {HTMLDivElement} Tarjeta generada.
+ */
 const crearTarjetaColeccion = (album, id, resenaGuardada) => {
   const tarjeta = document.createElement("div");
   tarjeta.className = "tarjeta-album";
@@ -245,6 +297,9 @@ const crearTarjetaColeccion = (album, id, resenaGuardada) => {
   return tarjeta;
 };
 
+/**
+ * Inserta todas las tarjetas de la colección en el DOM.
+ */
 const renderColeccion = () => {
   const contenedor = document.getElementById("lista-coleccion");
   if (!contenedor) {
@@ -263,6 +318,9 @@ const renderColeccion = () => {
   });
 };
 
+/**
+ * Actualiza la cifra visible de álbumes guardados.
+ */
 const actualizarContadorColeccion = () => {
   const contador = document.getElementById("contador");
   if (contador) {
@@ -270,11 +328,17 @@ const actualizarContadorColeccion = () => {
   }
 };
 
+/**
+ * Sincroniza la vista de la colección con el estado actual.
+ */
 const actualizarVistaColeccion = () => {
   renderColeccion();
   actualizarContadorColeccion();
 };
 
+/**
+ * Cambia la apariencia de las estrellas según si el álbum está guardado.
+ */
 const aplicarEstadoEstrellas = () => {
   document.querySelectorAll(".estrella").forEach(estrella => {
     const id = parseInt(estrella.getAttribute("data-id"), 10);
@@ -292,6 +356,10 @@ const aplicarEstadoEstrellas = () => {
   });
 };
 
+/**
+ * Dibuja el catálogo principal, opcionalmente filtrado.
+ * @param {Array<{nombre: string, artista: string, imagen: string}>} [lista=albumes] Lista personalizada.
+ */
 let mostrarCatalogo = (lista = albumes) => {
   const contenedor = document.getElementById("lista-albumes");
   if (!contenedor) {
@@ -322,6 +390,9 @@ let mostrarCatalogo = (lista = albumes) => {
   aplicarEstadoEstrellas();
 };
 
+/**
+ * Llena el select de artistas disponibles basándose en el catálogo.
+ */
 const cargarArtistas = () => {
   const filtro = document.getElementById("filtro-artista");
   if (!filtro) {
@@ -350,6 +421,9 @@ const cargarArtistas = () => {
   }
 };
 
+/**
+ * Guarda los valores actuales de búsqueda y filtro en localStorage.
+ */
 const guardarFiltros = () => {
   const input = document.getElementById("busqueda");
   const filtro = document.getElementById("filtro-artista");
@@ -366,6 +440,9 @@ const guardarFiltros = () => {
   guardarEnLocalStorage(STORAGE_KEYS.FILTROS, filtros);
 };
 
+/**
+ * Recupera los filtros guardados y aplica la vista correspondiente.
+ */
 const cargarFiltros = () => {
   const input = document.getElementById("busqueda");
   const filtro = document.getElementById("filtro-artista");
@@ -393,6 +470,9 @@ const cargarFiltros = () => {
   }
 };
 
+/**
+ * Ejecuta una búsqueda por texto libre sobre nombre y artista.
+ */
 const buscarAlbumes = () => {
   const input = document.getElementById("busqueda");
   if (!input) {
@@ -409,6 +489,9 @@ const buscarAlbumes = () => {
   guardarFiltros();
 };
 
+/**
+ * Aplica el filtro por artista seleccionado en el combo.
+ */
 const filtrarPorArtista = () => {
   const select = document.getElementById("filtro-artista");
   if (!select) {
@@ -422,6 +505,9 @@ const filtrarPorArtista = () => {
   guardarFiltros();
 };
 
+/**
+ * Registra listeners para guardar automáticamente los filtros.
+ */
 const registrarEventosDeFiltros = () => {
   const input = document.getElementById("busqueda");
   const select = document.getElementById("filtro-artista");
@@ -438,6 +524,10 @@ const registrarEventosDeFiltros = () => {
   }
 };
 
+/**
+ * Añade o quita un álbum de la colección a partir de la estrella clickeada.
+ * @param {HTMLElement} estrella Elemento que disparó el evento.
+ */
 const agregarAColeccion = (estrella) => {
   const idAlbum = parseInt(estrella.getAttribute("data-id"), 10);
   if (Number.isNaN(idAlbum)) {
@@ -458,6 +548,10 @@ const agregarAColeccion = (estrella) => {
   aplicarEstadoEstrellas();
 };
 
+/**
+ * Refresca el contador de caracteres de una reseña en edición.
+ * @param {HTMLInputElement} entrada Campo de texto observado.
+ */
 const actualizarContador = (entrada) => {
   const contador = entrada.parentElement.querySelector(".contador-caracteres");
   const longitud = entrada.value.length;
@@ -472,6 +566,10 @@ const actualizarContador = (entrada) => {
   }
 };
 
+/**
+ * Valida y guarda la reseña escrita para un álbum.
+ * @param {HTMLButtonElement} boton Botón que dispara el guardado.
+ */
 const guardarResena = (boton) => {
   const seccionResena = boton.closest(".seccion-resena");
   if (!seccionResena) {
@@ -526,6 +624,10 @@ const guardarResena = (boton) => {
   actualizarVistaColeccion();
 };
 
+/**
+ * Permite que la reseña guardada vuelva al modo edición.
+ * @param {HTMLButtonElement} boton Botón de edición utilizado.
+ */
 const editarResena = (boton) => {
   const seccionresena = boton.closest(".seccion-resena");
   if (!seccionresena) {
@@ -554,6 +656,9 @@ const editarResena = (boton) => {
   resenaGuardada.style.display = "none";
 };
 
+/**
+ * Borra la información persistida y vuelve la app a su estado inicial.
+ */
 const limpiarDatos = () => {
   if (!confirm("¿Estás seguro de que quieres limpiar todos los datos guardados? Esta acción no se puede deshacer.")) {
     return;
