@@ -1,4 +1,4 @@
-import './TarjetaAlbum.scss'
+import '@styles/TarjetaAlbum.scss'
 
 /**
  * Tarjeta visual para mostrar los datos de un álbum.

@@ -1,5 +1,5 @@
 import {Outlet} from 'react-router-dom'
-import './LayoutPrincipal.scss'
+import '@styles/LayoutPrincipal.scss'
 
 /**
  * Contenedor principal que delega el render de las rutas hijas mediante <Outlet/>.

@@ -1,13 +1,13 @@
-@use '../styles/variables' as *;
+@use './variables' as *;
 
-#coleccion {
+#catalogo {
   h2 {
-    text-align: center;
     margin-bottom: 10px;
+    text-align: center;
   }
 }
 
-.lista-coleccion {
+.lista-albumes {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -15,20 +15,14 @@
   margin: 0 auto;
 }
 
-.coleccion-vacia {
-  text-align: center;
-  color: $color-muted;
-  margin-top: 20px;
-}
-
 @media (max-width: 768px) {
-  .lista-coleccion {
+  .lista-albumes {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 480px) {
-  .lista-coleccion {
+  .lista-albumes {
     grid-template-columns: 1fr;
   }
 }

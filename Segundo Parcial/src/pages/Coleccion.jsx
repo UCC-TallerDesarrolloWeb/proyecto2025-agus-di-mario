@@ -4,7 +4,7 @@ import Pie from '@components/Pie'
 import TarjetaAlbum from '@components/TarjetaAlbum'
 import SeccionResena from '@components/SeccionResena'
 import {limpiarDatos, obtenerColeccion} from '@api/albumes'
-import './Coleccion.scss'
+import '@styles/Coleccion.scss'
 
 /**
  * Presenta la colección personal con las reseñas guardadas.

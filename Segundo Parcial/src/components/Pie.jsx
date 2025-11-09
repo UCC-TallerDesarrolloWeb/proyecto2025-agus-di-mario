@@ -1,4 +1,4 @@
-import './Pie.scss'
+import '@styles/Pie.scss'
 
 /**
  * Pie de página con créditos y año dinámico.

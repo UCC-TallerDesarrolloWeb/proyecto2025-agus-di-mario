@@ -2,7 +2,7 @@ import {Link, useLocation, useNavigate} from 'react-router-dom'
 import logo from '@assets/logo.png'
 import Boton from './Boton'
 import InterruptorTema from './InterruptorTema'
-import './Encabezado.scss'
+import '@styles/Encabezado.scss'
 
 /**
  * Encabezado principal con navegación y controles de búsqueda/filtrado.

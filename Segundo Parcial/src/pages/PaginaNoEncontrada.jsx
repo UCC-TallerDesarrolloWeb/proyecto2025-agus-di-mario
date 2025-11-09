@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 import Pie from '@components/Pie'
 import Boton from '@components/Boton'
-import './PaginaNoEncontrada.scss'
+import '@styles/PaginaNoEncontrada.scss'
 
 /**
  * Vista para rutas no existentes dentro del sitio.

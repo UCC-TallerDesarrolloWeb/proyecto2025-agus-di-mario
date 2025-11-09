@@ -1,6 +1,6 @@
 import {useMemo} from 'react'
 import {useTema} from '@context/TemaContext'
-import './InterruptorTema.scss'
+import '@styles/InterruptorTema.scss'
 
 const OPCIONES = [
     {

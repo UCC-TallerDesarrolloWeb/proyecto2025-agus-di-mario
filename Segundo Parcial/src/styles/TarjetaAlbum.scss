@@ -1,4 +1,4 @@
-@use '../styles/variables' as *;
+@use './variables' as *;
 
 .tarjeta-album {
   background-color: $color-card-bg;
@@ -65,5 +65,5 @@
 }
 
 .estrella:active {
-  transform: scale(0.95); //medio innecesaroi pero bueno
+  transform: scale(0.95);
 }

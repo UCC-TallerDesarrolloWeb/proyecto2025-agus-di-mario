@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import {guardarResena, obtenerResena} from '@api/albumes'
 import Boton from './Boton'
-import './SeccionResena.scss'
+import '@styles/SeccionResena.scss'
 
 const MAXIMO_CARACTERES = 100
 const OPCIONES_PUNTAJE = Array.from({length: 10}, (_, indice) => indice + 1)

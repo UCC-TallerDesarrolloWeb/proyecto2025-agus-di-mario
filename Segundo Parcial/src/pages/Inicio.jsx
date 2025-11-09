@@ -11,7 +11,7 @@ import {
     obtenerFiltros,
     quitarDeColeccion,
 } from '@api/albumes'
-import './Inicio.scss'
+import '@styles/Inicio.scss'
 
 /**
  * Página principal con el catálogo y controles de filtrado/búsqueda.

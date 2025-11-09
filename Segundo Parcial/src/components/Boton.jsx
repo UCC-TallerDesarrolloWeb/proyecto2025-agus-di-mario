@@ -1,4 +1,4 @@
-import './Boton.scss'
+import '@styles/Boton.scss'
 
 /**
  * Botón genérico reutilizable con variantes semánticas.
