@@ -126,11 +126,12 @@ const albumes = [
   }
 ];
 
-const RUTA_IMAGENES = "FRONTEND/src/assets/albums/";
+const RUTA_IMAGENES = "../Segundo Parcial/src/assets/albums/";
 
 /**
  * Obtiene la ruta completa de una imagen del catálogo.
  * @param {string} nombreArchivo Nombre del archivo de imagen.
+ * @param {string} RUTA_IMAGENES Ruta base de las imágenes.
  * @returns {string} Ruta absoluta dentro del proyecto.
  */
 const obtenerRutaImagen = (nombreArchivo) => `${RUTA_IMAGENES}${nombreArchivo}`;
