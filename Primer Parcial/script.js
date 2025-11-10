@@ -126,7 +126,7 @@ const albumes = [
     }
 ];
 
-const RUTA_IMAGENES = "../frontend/src/assets/albums/";
+const RUTA_IMAGENES = "../frontend/public/albums/";
 
 /**
  * Obtiene la ruta completa de una imagen del catálogo.
