@@ -1,5 +1,5 @@
 import catalogoJSON from '@data/albumes.json'
-import {escribirJSON, leerJSON} from '@utils/storage'
+import { escribirJSON, leerJSON } from '@utils/storage'
 
 function normalizarImagen(imagen) {
     if (!imagen || /^(https?:|data:)/.test(imagen)) {
@@ -14,7 +14,7 @@ function normalizarImagen(imagen) {
 
 function normalizarAlbum(album) {
     if (!album) return album
-    return {...album, imagen: normalizarImagen(album.imagen)}
+    return { ...album, imagen: normalizarImagen(album.imagen) }
 }
 
 const catalogo = catalogoJSON.map(normalizarAlbum)
@@ -45,7 +45,7 @@ export function agregarAColeccion(album) {
     const existe = coleccionActual.some(item => item.id === album.id)
     if (!existe) {
         const preparado = normalizarAlbum(album)
-        coleccionActual.push({...preparado, resena: null})
+        coleccionActual.push({ ...preparado, resena: null })
         escribirJSON(CLAVES_STORAGE.coleccion, coleccionActual)
     }
     return coleccionActual
@@ -75,9 +75,9 @@ export function guardarResena(albumId, resena) {
     if (posicion === -1) {
         return null
     }
-    coleccionActual[posicion] = {...coleccionActual[posicion], resena}
+    coleccionActual[posicion] = { ...coleccionActual[posicion], resena }
     escribirJSON(CLAVES_STORAGE.coleccion, coleccionActual)
-    return {id: albumId, resena: coleccionActual[posicion].resena}
+    return { id: albumId, resena: coleccionActual[posicion].resena }
 }
 
 /**
