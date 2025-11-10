@@ -191,6 +191,23 @@ main {
 		border-radius: 4px;
 		cursor: pointer;
 	}
+
+	.resena-guardada {
+		text-align: left;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.texto-resena-guardado {
+		margin: 0;
+		font-style: italic;
+	}
+
+	.puntaje-resena-guardado {
+		margin: 0;
+		font-weight: 600;
+	}
 }
 
 .app-footer {
