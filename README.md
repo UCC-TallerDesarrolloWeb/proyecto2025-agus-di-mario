@@ -13,7 +13,8 @@ todo es un poco más cómodo de mantener.
 
 ## React
 
-- routing en `App.jsx` usando `react-router-dom`, un `LayoutPrincipal` con `<Outlet />` y páginas para inicio y colección
+- routing en `App.jsx` usando `react-router-dom`, un `LayoutPrincipal` con `<Outlet />` y páginas para inicio y
+  colección
 - `Encabezado` arma la búsqueda por texto, el filtro por artista y muestra un botón para limpiar tanto filtros como
   datos persistidos.
 - `TarjetaAlbum` se usa en el catálogo y en la colección; adentro carga `SeccionResena`, y guarda puntajes/comentarios
@@ -24,7 +25,8 @@ todo es un poco más cómodo de mantener.
 ## Carpetas clave dentro de `frontend/src`
 
 - `api/`: funciones que hablan con la data local y el storage.
-- `components/`: `Boton`, `Encabezado`, `TarjetaAlbum`, `SeccionResena`, `Pie` y `LayoutPrincipal`, cada uno con su `.scss`.
+- `components/`: `Boton`, `Encabezado`, `TarjetaAlbum`, `SeccionResena`, `Pie` y `LayoutPrincipal`, cada uno con su
+  `.scss`.
 - `data/`: JSON del catálogo con URLs que apuntan a `public/albums`.
 - `pages/`: `Inicio` y `Coleccion` con sus estilos.
 - `styles/`: reset global, variables, mixins y `global.scss` que se importa una sola vez.

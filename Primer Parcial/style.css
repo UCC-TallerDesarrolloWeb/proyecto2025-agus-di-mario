@@ -267,24 +267,6 @@ h2 {
     margin: 8px 0;
 }
 
-.reseña-guardada {
-    padding: 8px;
-    background-color: #e9ecef;
-    border-radius: 3px;
-}
-
-.texto-reseña-guardado {
-    font-style: italic;
-    margin: 0 0 5px 0;
-    color: #333;
-}
-
-.puntaje-reseña-guardado {
-    font-weight: bold;
-    margin: 0 0 8px 0;
-    color: #007bff;
-}
-
 /* Footer */
 footer {
     background-color: #222;

@@ -8,7 +8,7 @@
 	<meta content="Música, Álbumes, Reseñas, Colección" name="keywords">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<title>Mi Colección de Álbumes</title>
-	<link href="../Segundo%20Parcial/public/favicon.png" rel="icon" type="image/png">
+	<link href="../frontend/public/favicon.png" rel="icon" type="image/png">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 	<link href="style.css" rel="stylesheet">
 </head>
@@ -17,19 +17,20 @@
 	<header>
 		<h1>Mi Colección de Álbumes</h1>
 		<div class="logo-estatico">
-			<img src="../frontend/src/assets/logo.png" alt="Logo estático de Mi Colección de Álbumes" width="96"
-				height="96" loading="lazy">
+			<img alt="Logo estático de Mi Colección de Álbumes" height="512" loading="lazy"
+				src="../frontend/src/assets/logo.png" width="512">
 		</div>
 		<nav>
 			<label for="busqueda">Buscar álbum o artista</label><input id="busqueda"
 				placeholder="Buscar álbum o artista" type="text">
-			<button id="boton-buscar" onclick="buscarAlbumes()">Buscar</button>
+			<button id="boton-buscar" onclick="buscarAlbumes()">Buscar
+			</button>
 			<label for="filtro-artista">Filtrar por artista</label><select id="filtro-artista"
 				onchange="filtrarPorArtista()">
 				<option value="">-- Filtrar por artista --</option>
 			</select>
-			<button id="boton-limpiar" onclick="limpiarDatos()"
-				title="Limpiar todos los datos guardados">Limpiar</button>
+			<button id="boton-limpiar" onclick="limpiarDatos()" title="Limpiar todos los datos guardados">Limpiar
+			</button>
 			<a class="nav-link" href="mi-coleccion.html">Mi colección</a>
 		</nav>
 	</header>
