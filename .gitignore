@@ -1,5 +1,6 @@
 .idea
 .vscode
+requisitos.md
 .cursor
-/node_modules
-/dist
+/FRONTEND/dist
+/FRONTEND/node_modules
