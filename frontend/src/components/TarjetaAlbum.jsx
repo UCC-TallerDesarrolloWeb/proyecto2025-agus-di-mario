@@ -1,8 +1,14 @@
 import '@styles/TarjetaAlbum.scss'
 
-function TarjetaAlbum({ album, variante = 'catalogo', esFavorito = false, alAlternarFavorito: onColeccionar, children: hijos }) {
-
-
+function TarjetaAlbum({
+	album,
+	variante = 'catalogo',
+	esFavorito = false,
+	onColeccionar,
+	alAlternarFavorito,
+	children: hijos,
+}) {
+	const alternarColeccion = onColeccionar ?? alAlternarFavorito
 	const mostrarFavorito = variante === 'catalogo'
 
 	return (
@@ -21,7 +27,7 @@ function TarjetaAlbum({ album, variante = 'catalogo', esFavorito = false, alAlte
 						className={`estrella${esFavorito ? ' activo' : ''}`}
 						aria-pressed={esFavorito}
 						aria-label={esFavorito ? 'Quitar de mi colección' : 'Agregar a mi colección'}
-						onClick={() => onColeccionar?.(album)}
+						onClick={() => alternarColeccion?.(album)}
 					>
 						{esFavorito ? '★' : '☆'}
 					</button>
