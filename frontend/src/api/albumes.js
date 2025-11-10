@@ -5,7 +5,6 @@ const catalogo = catalogoJSON
 
 const CLAVES_STORAGE = {
 	coleccion: 'miColeccion',
-	filtros: 'filtros',
 }
 
 
@@ -72,29 +71,9 @@ export const obtenerResena = (albumId) => {
 }
 
 /**
- * Devuelve los filtros persistidos en localStorage.
- * @returns {{busqueda:string,artista:string}|null} Valores guardados o null.
- */
-export const obtenerFiltros = () => leerJSON(CLAVES_STORAGE.filtros, null)
-
-/**
- * Persiste los filtros activos.
- * @param {{busqueda:string,artista:string}} filtros - Valores de búsqueda actuales.
- * @returns {void}
- */
-export const guardarFiltros = (filtros) => {
-	if (!filtros.busqueda && !filtros.artista) {
-		localStorage.removeItem(CLAVES_STORAGE.filtros)
-		return
-	}
-	escribirJSON(CLAVES_STORAGE.filtros, filtros)
-}
-
-/**
  * Limpia cualquier dato generado por la aplicación en localStorage.
  * @returns {void}
  */
 export const limpiarDatos = () => {
 	localStorage.removeItem(CLAVES_STORAGE.coleccion)
-	localStorage.removeItem(CLAVES_STORAGE.filtros)
 }

@@ -1,5 +1,3 @@
-import '@styles/Pie.scss'
-
 function Pie() {
 	const anio = new Date().getFullYear()
 	return (

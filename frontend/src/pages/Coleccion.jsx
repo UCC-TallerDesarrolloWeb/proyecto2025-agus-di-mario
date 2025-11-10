@@ -4,7 +4,6 @@ import Pie from '@components/Pie'
 import TarjetaAlbum from '@components/TarjetaAlbum'
 import SeccionResena from '@components/SeccionResena'
 import { limpiarDatos, obtenerColeccion } from '@api/albumes'
-import '@styles/Coleccion.scss'
 
 function Coleccion() {
 	const [elementos, setElementos] = useState([])
@@ -25,8 +24,7 @@ function Coleccion() {
 
 	return (
 		<>
-			<Encabezado tipo="coleccion"
-				onLimpiar={limpiar} />
+			<Encabezado onLimpiar={limpiar} />
 			<main>
 				<section id="coleccion">
 					<h2>

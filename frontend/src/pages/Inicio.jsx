@@ -9,7 +9,6 @@ import {
 	obtenerColeccion,
 	quitarDeColeccion,
 } from '@api/albumes'
-import '@styles/Inicio.scss'
 
 function Inicio() {
 	const [albumes, setAlbumes] = useState([])
@@ -42,7 +41,7 @@ function Inicio() {
 	}
 
 	/**
-	 * Limpia filtros y datos persistidos.
+	 * Limpia los datos persistidos.
 	 * @returns {void}
 	 */
 	function manejarLimpiar() {
@@ -53,9 +52,7 @@ function Inicio() {
 
 	return (
 		<>
-			<Encabezado
-				alLimpiar={manejarLimpiar}
-			/>
+			<Encabezado onLimpiar={manejarLimpiar} />
 			<main>
 				<section id="catalogo">
 					<h2>Álbumes disponibles</h2>

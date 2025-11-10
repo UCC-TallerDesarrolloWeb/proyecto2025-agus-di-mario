@@ -1,5 +1,3 @@
-import '@styles/TarjetaAlbum.scss'
-
 function TarjetaAlbum({
 	album,
 	variante = 'catalogo',

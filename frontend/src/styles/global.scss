@@ -1,32 +1,202 @@
-@use 'reset';
-@use 'variables' as *;
-@use 'mixins' as *;
+$font-base: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+$color-header: #222;
+$color-link-bg: #444;
+$color-link-hover: #555;
+$color-danger: #c0392b;
+$color-danger-hover: #a93226;
+$color-card-border: #ddd;
+$color-card-bg: #fff;
+$color-muted: #555;
+$grid-gap: 12px;
 
-:root {
-  font-family: $font-family-base;
-  color: $color-text;
+@mixin flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-html,
-body,
-#root {
-  min-height: 100%;
-  background-color: $color-body-bg;
+:root {
+	font-family: $font-base;
+	color: #111;
 }
 
 body {
-  color: $color-text;
-  transition: background-color 0.25s ease, color 0.25s ease;
+	min-height: 100vh;
+	margin: 0;
+	background: #f5f5f5;
+}
+
+.app-shell {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
 main {
-  padding: 20px;
+	padding: 16px;
 }
 
-h2 {
-  margin-bottom: 10px;
+.app-header {
+	background: $color-header;
+	color: #fff;
+	padding: 12px 16px;
+	text-align: center;
+
+	&__branding {
+		@include flex-center;
+		gap: 8px;
+	}
+
+	&__logo {
+		border-radius: 4px;
+	}
+
+	&__title {
+		font-weight: 600;
+		margin: 0;
+	}
+
+	&__nav {
+		margin-top: 8px;
+		@include flex-center;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+
+	.link {
+		color: #fff;
+		text-decoration: none;
+		background: $color-link-bg;
+		padding: 6px 10px;
+		border-radius: 4px;
+
+		&:hover {
+			background: $color-link-hover;
+		}
+	}
+
+	#boton-limpiar {
+		background: $color-danger;
+		border: 0;
+		padding: 6px 10px;
+		border-radius: 4px;
+		cursor: pointer;
+
+		&:hover {
+			background: $color-danger-hover;
+		}
+	}
 }
 
-.sr-only {
-  @include sr-only;
+.btn {
+	background: $color-danger;
+	color: #fff;
+	border: 0;
+	padding: 6px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+
+	&:hover {
+		background: $color-danger-hover;
+	}
+}
+
+.lista-albumes,
+.lista-coleccion {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: $grid-gap;
+	max-width: 1100px;
+	margin: 0 auto;
+
+	@media (max-width: 800px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media (max-width: 520px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.tarjeta-album {
+	border: 1px solid $color-card-border;
+	border-radius: 6px;
+	overflow: hidden;
+	background: $color-card-bg;
+	text-align: center;
+}
+
+.tarjeta-album__imagen {
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	object-fit: contain;
+	background: #eee;
+}
+
+.info-album {
+	padding: 8px;
+
+	h3 {
+		margin: 0 0 4px;
+		font-size: 1rem;
+	}
+
+	p {
+		margin: 0 0 6px;
+		color: $color-muted;
+		font-size: 0.9rem;
+	}
+}
+
+.estrella {
+	font-size: 20px;
+	background: none;
+	border: 0;
+	cursor: pointer;
+
+	&.activo {
+		color: goldenrod;
+	}
+}
+
+.seccion-resena {
+	margin-top: 8px;
+	padding: 8px;
+	border: 1px solid $color-card-border;
+	border-radius: 4px;
+	background: #fafafa;
+
+	.entradas-resena {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.texto-resena {
+		min-height: 60px;
+		resize: vertical;
+		padding: 6px;
+	}
+
+	.entrada-puntaje {
+		width: 140px;
+		padding: 4px;
+	}
+
+	.boton-accion {
+		align-self: flex-start;
+		padding: 6px 10px;
+		border: 1px solid #aaa;
+		background: #eee;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+}
+
+.app-footer {
+	margin-top: auto;
+	text-align: center;
+	padding: 16px;
+	color: #666;
+	font-size: 0.9rem;
 }

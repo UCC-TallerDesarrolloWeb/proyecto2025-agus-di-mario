@@ -1,122 +1,23 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import logo from '@assets/logo.png'
-import Boton from './Boton'
-import '@styles/Encabezado.scss'
 
-function Encabezado({
-	tipo = 'inicio',
-	alBuscar,
-	alLimpiar,
-	alCambiarFiltro,
-	artistas = [],
-	valorBusqueda = '',
-	valorArtista = ''
-}) {
-	const ubicacion = useLocation()
-	const navigate = useNavigate()
-	const esInicio = tipo === 'inicio' || ubicacion.pathname === '/'
-
-	/**
-	 * Solicita confirmación y dispara la limpieza de datos persistidos.
-	 * @returns {void}
-	 */
+function Encabezado({ onLimpiar }) {
 	const manejarLimpiar = () => {
-		if (!alLimpiar) return
-		const confirmado = window.confirm('¿Estás seguro de que quieres limpiar todos los datos guardados? Esta acción no se puede deshacer.')
-		if (confirmado) {
-			alLimpiar()
-		}
+		if (!onLimpiar) return
+		if (window.confirm('¿Limpiar todos los datos guardados?')) onLimpiar()
 	}
 
-	/**
-	 * Lanza la búsqueda manual usando el valor actual.
-	 * @returns {void}
-	 */
-	const manejarBuscar = () => {
-		alBuscar?.(valorBusqueda)
-	}
-
-	/**
-	 * Lleva a la página principal.
-	 * @returns {void}
-	 */
-	const irAlCatalogo = () => {
-		navigate('/')
-	}
-
-    return (
-        <header className="app-header">
+	return (
+		<header className="app-header">
 			<div className="app-header__branding">
-				<img
-					src={logo}
-					alt="Logo de Mi Colección de Álbumes"
-					className="app-header__logo"
-					width="48"
-					height="48"
-				/>
-				<div>
-					<p className="app-header__title">Mi Colección de Álbumes</p>
-					<span className="app-header__subtitle">Catálogo y reseñas personalizadas</span>
-				</div>
+				<img src={logo} alt="Logo" className="app-header__logo" width="40" height="40" />
+				<p className="app-header__title">Mi Colección de Álbumes</p>
 			</div>
-			<nav className="app-header__nav"
-				aria-label="Navegación principal">
-                {esInicio ? (
-                    <>
-                        {alBuscar && (
-                            <>
-                                <div className="app-header__field">
-                                    <label htmlFor="busqueda"
-                                        className="sr-only">Buscar álbum o artista</label>
-                                    <input
-                                        type="text"
-                                        id="busqueda"
-                                        placeholder="Buscar álbum o artista"
-                                        size={30}
-                                        maxLength={60}
-                                        value={valorBusqueda}
-                                        onChange={(evento) => alBuscar?.(evento.target.value)}
-                                    />
-                                </div>
-                                <Boton id="boton-buscar"
-                                    onClick={manejarBuscar}>Buscar</Boton>
-                            </>
-                        )}
-                        {alCambiarFiltro && artistas?.length > 0 && (
-                            <div className="app-header__field">
-                                <label htmlFor="filtro-artista"
-                                    className="sr-only">Filtrar por artista</label>
-                                <select id="filtro-artista"
-                                    value={valorArtista}
-                                    onChange={(evento) => alCambiarFiltro?.(evento.target.value)}>
-                                    <option value="">-- Filtrar por artista --</option>
-                                    {artistas.map(artista => (
-                                        <option key={artista}
-                                            value={artista}>{artista}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        )}
-                        {alLimpiar && (
-                            <Boton id="boton-limpiar"
-                                variante="peligro"
-                                onClick={manejarLimpiar}
-                                title="Limpiar todos los datos guardados">Limpiar</Boton>
-						)}
-						<Boton as={Link}
-							to="/mi-coleccion">Mi colección</Boton>
-					</>
-				) : (
-					<>
-						<Boton variante="secundario"
-							onClick={irAlCatalogo}>Volver al catálogo</Boton>
-						{alLimpiar && (
-							<Boton id="boton-limpiar"
-								variante="peligro"
-								onClick={manejarLimpiar}
-								title="Limpiar todos los datos guardados">Limpiar</Boton>
-						)}
-					</>
+			<nav className="app-header__nav">
+				<Link className="link" to="/">Inicio</Link>
+				<Link className="link" to="/mi-coleccion">Mi colección</Link>
+				{onLimpiar && (
+					<button className="btn" onClick={manejarLimpiar} id="boton-limpiar">Limpiar</button>
 				)}
 			</nav>
 		</header>
