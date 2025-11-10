@@ -247,6 +247,8 @@ const crearTarjetaColeccion = (album, id, resenaGuardada) => {
     const tarjeta = document.createElement("div");
     tarjeta.className = "tarjeta-album";
     tarjeta.setAttribute("data-id", id);
+    const idResena = `texto-resena-${id}`;
+    const idPuntaje = `puntaje-resena-${id}`;
 
     tarjeta.innerHTML = `
     <img src="${obtenerRutaImagen(album.imagen)}" alt="${album.nombre}">
@@ -260,15 +262,17 @@ const crearTarjetaColeccion = (album, id, resenaGuardada) => {
     seccionResena.className = "seccion-resena";
     seccionResena.innerHTML = `
     <div class="entradas-resena">
-      <input type="text" placeholder="Escribe tu reseña breve..." maxlength="100" class="texto-resena">
+      <label for="${idResena}" class="sr-only">Escribe tu reseña breve</label>
+      <input id="${idResena}" type="text" placeholder="Escribe tu reseña breve..." maxlength="100" class="texto-resena">
       <span class="contador-caracteres">0/100</span>
-      <select class="entrada-puntaje">
+      <label for="${idPuntaje}" class="sr-only">Selecciona un puntaje del 1 al 10</label>
+      <select id="${idPuntaje}" class="entrada-puntaje">
         <option value="">Selecciona puntaje</option>
         ${OPCIONES_PUNTAJE}
       </select>
       <button onclick="guardarResena(this)" class="boton-guardar">Guardar</button>
     </div>
-    <div class="resena-guardada" style="display: none;">
+    <div class="resena-guardada">
       <p class="texto-resena-guardado"></p>
       <p class="puntaje-resena-guardado"></p>
       <button onclick="editarResena(this)" class="boton-editar">Editar</button>
@@ -691,7 +695,10 @@ const limpiarDatos = () => {
     alert("Datos limpiados correctamente");
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+/**
+ * Configura la aplicación cuando el documento ya se cargó.
+ */
+const inicializarAplicacion = () => {
     cargarEstadoColeccion();
 
     if (document.getElementById("lista-albumes")) {
@@ -703,4 +710,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     actualizarVistaColeccion();
     aplicarEstadoEstrellas();
-});
+};
+
+document.addEventListener("DOMContentLoaded", inicializarAplicacion);

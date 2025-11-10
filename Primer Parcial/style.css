@@ -6,6 +6,19 @@ body {
     padding: 0;
 }
 
+/* Etiquetas solo visibles para lectores de pantalla */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* Header */
 header {
     background-color: #222;
@@ -17,6 +30,18 @@ header {
 header h1 {
     margin: 0;
     font-size: 24px;
+}
+
+.logo-estatico {
+    margin: 15px auto 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-estatico img {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
 }
 
 nav {
@@ -223,6 +248,7 @@ h2 {
 
 /* Estilos para la reseña guardada */
 .resena-guardada {
+    display: none;
     text-align: left;
 }
 

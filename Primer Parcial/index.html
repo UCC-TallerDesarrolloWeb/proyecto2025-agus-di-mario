@@ -14,10 +14,13 @@
 <body>
 <header>
     <h1>Mi Colección de Álbumes</h1>
+    <div class="logo-estatico">
+        <img src="../frontend/src/assets/logo.png" alt="Logo estático de Mi Colección de Álbumes" width="96" height="96" loading="lazy">
+    </div>
     <nav>
-        <label for="busqueda"></label><input id="busqueda" placeholder="Buscar álbum o artista" type="text">
+        <label for="busqueda">Buscar álbum o artista</label><input id="busqueda" placeholder="Buscar álbum o artista" type="text">
         <button id="boton-buscar" onclick="buscarAlbumes()">Buscar</button>
-        <label for="filtro-artista"></label><select id="filtro-artista" onchange="filtrarPorArtista()">
+        <label for="filtro-artista">Filtrar por artista</label><select id="filtro-artista" onchange="filtrarPorArtista()">
         <option value="">-- Filtrar por artista --</option>
     </select>
         <button id="boton-limpiar" onclick="limpiarDatos()" title="Limpiar todos los datos guardados">Limpiar</button>
