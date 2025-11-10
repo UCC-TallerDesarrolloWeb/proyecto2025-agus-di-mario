@@ -1,4 +1,4 @@
-# Mi Colección de Álbumes (repo 2025)
+# Mi Colección de Álbumes
 
 Este repo guarda las dos etapas del TP de Taller: la versión clásica en HTML/CSS/JS y la reescritura en React con Vite.
 El objetivo sigue siendo el mismo (mostrar un catálogo de 25 discos y guardar una colección con reseñas), solo que ahora

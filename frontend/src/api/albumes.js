@@ -1,7 +1,23 @@
 import catalogoJSON from '@data/albumes.json'
 import {escribirJSON, leerJSON} from '@utils/storage'
 
-const catalogo = catalogoJSON.map(album => ({album, imagen: `/albums/${album.imagen}`}))
+function normalizarImagen(imagen) {
+    if (!imagen || /^(https?:|data:)/.test(imagen)) {
+        return imagen ?? ''
+    }
+    let ruta = imagen.replace(/^\/+/, '')
+    ruta = ruta.replace(/^public\/+/, '')
+    ruta = ruta.replace(/\/+/g, '/')
+    ruta = ruta.replace(/^(albums\/)+/, '')
+    return ruta ? `/albums/${ruta}` : '/albums'
+}
+
+function normalizarAlbum(album) {
+    if (!album) return album
+    return {...album, imagen: normalizarImagen(album.imagen)}
+}
+
+const catalogo = catalogoJSON.map(normalizarAlbum)
 
 const CLAVES_STORAGE = {
     coleccion: 'miColeccion',
@@ -10,14 +26,17 @@ const CLAVES_STORAGE = {
 
 
 export async function obtenerAlbumes() {
-    return catalogo.map(album => ({album}))
+    return catalogo
 }
 
 /**
  * Obtiene la colección del usuario desde localStorage.
  */
 export function obtenerColeccion() {
-    return leerJSON(CLAVES_STORAGE.coleccion, []).map(item => ({item, resena: item.resena ?? null}))
+    return leerJSON(CLAVES_STORAGE.coleccion, []).map((item) => ({
+        ...normalizarAlbum(item),
+        resena: item?.resena ?? null,
+    }))
 }
 
 
@@ -25,7 +44,8 @@ export function agregarAColeccion(album) {
     const coleccionActual = obtenerColeccion()
     const existe = coleccionActual.some(item => item.id === album.id)
     if (!existe) {
-        coleccionActual.push({...album, resena: null})
+        const preparado = normalizarAlbum(album)
+        coleccionActual.push({...preparado, resena: null})
         escribirJSON(CLAVES_STORAGE.coleccion, coleccionActual)
     }
     return coleccionActual

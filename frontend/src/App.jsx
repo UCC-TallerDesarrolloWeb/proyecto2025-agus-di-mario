@@ -5,10 +5,6 @@ import Inicio from '@pages/Inicio'
 import Coleccion from '@pages/Coleccion'
 import LayoutPrincipal from '@components/LayoutPrincipal'
 
-/**
- * Define las rutas principales de la aplicación.
- * @returns {JSX.Element} Estructura de navegación.
- */
 function Aplicacion() {
     return (
         <div className="app-shell">
