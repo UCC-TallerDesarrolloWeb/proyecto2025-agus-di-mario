@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta content="Agustín Di Mario" name="author">
-    <meta content="Colección de álbumes musicales con reseñas" name="description">
-    <meta content="Música, Álbumes, Reseñas, Colección" name="keywords">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Mi Colección de Álbumes</title>
-    <link href="../Segundo%20Parcial/public/favicon.png" rel="icon" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta content="Agustín Di Mario" name="author">
+	<meta content="Colección de álbumes musicales con reseñas" name="description">
+	<meta content="Música, Álbumes, Reseñas, Colección" name="keywords">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>Mi Colección de Álbumes</title>
+	<link href="../Segundo%20Parcial/public/favicon.png" rel="icon" type="image/png">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
 </head>
+
 <body>
-<header>
-    <h1>Mi Colección de Álbumes</h1>
-    <div class="logo-estatico">
-        <img src="../frontend/src/assets/logo.png" alt="Logo estático de Mi Colección de Álbumes" width="96" height="96" loading="lazy">
-    </div>
-    <nav>
-        <label for="busqueda">Buscar álbum o artista</label><input id="busqueda" placeholder="Buscar álbum o artista" type="text">
-        <button id="boton-buscar" onclick="buscarAlbumes()">Buscar</button>
-        <label for="filtro-artista">Filtrar por artista</label><select id="filtro-artista" onchange="filtrarPorArtista()">
-        <option value="">-- Filtrar por artista --</option>
-    </select>
-        <button id="boton-limpiar" onclick="limpiarDatos()" title="Limpiar todos los datos guardados">Limpiar</button>
-        <a class="nav-link" href="mi-coleccion.html">Mi colección</a>
-    </nav>
-</header>
+	<header>
+		<h1>Mi Colección de Álbumes</h1>
+		<div class="logo-estatico">
+			<img src="../frontend/src/assets/logo.png" alt="Logo estático de Mi Colección de Álbumes" width="96"
+				height="96" loading="lazy">
+		</div>
+		<nav>
+			<label for="busqueda">Buscar álbum o artista</label><input id="busqueda"
+				placeholder="Buscar álbum o artista" type="text">
+			<button id="boton-buscar" onclick="buscarAlbumes()">Buscar</button>
+			<label for="filtro-artista">Filtrar por artista</label><select id="filtro-artista"
+				onchange="filtrarPorArtista()">
+				<option value="">-- Filtrar por artista --</option>
+			</select>
+			<button id="boton-limpiar" onclick="limpiarDatos()"
+				title="Limpiar todos los datos guardados">Limpiar</button>
+			<a class="nav-link" href="mi-coleccion.html">Mi colección</a>
+		</nav>
+	</header>
 
-<main>
-    <section id="catalogo">
-        <h2>Álbumes disponibles</h2>
-        <div class="lista-albumes" id="lista-albumes"></div>
-    </section>
-</main>
+	<main>
+		<section id="catalogo">
+			<h2>Álbumes disponibles</h2>
+			<div class="lista-albumes" id="lista-albumes"></div>
+		</section>
+	</main>
 
-<footer>
-    <p>© 2025 - Agustín Di Mario</p>
-</footer>
+	<footer>
+		<p>© 2025 - Agustín Di Mario</p>
+	</footer>
 
-<script src="script.js"></script>
+	<script src="script.js"></script>
 </body>
+
 </html>
