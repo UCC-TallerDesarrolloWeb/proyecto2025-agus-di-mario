@@ -217,3 +217,32 @@ main {
 	color: #666;
 	font-size: 0.9rem;
 }
+
+.mensaje-global {
+  text-align: center;
+  background: #d5e8d4;
+  color: #2d6a2d;
+  padding: 8px 16px;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.resena-label {
+  font-size: 0.85rem;
+  color: $color-muted;
+  text-align: left;
+}
+
+.mensaje-inline {
+  font-size: 0.85rem;
+  margin: 0;
+  padding: 2px 0;
+
+  &--error {
+    color: $color-danger;
+  }
+
+  &--exito {
+    color: #27ae60;
+  }
+}

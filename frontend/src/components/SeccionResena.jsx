@@ -1,39 +1,47 @@
-import { useEffect, useState } from 'react'
-import { guardarResena, obtenerResena } from '@api/albumes'
+import {useEffect, useState} from 'react'
+import {guardarResena, obtenerResena} from '@api/albumes'
 
 function SeccionResena({ album }) {
 	const [texto, setTexto] = useState('')
 	const [puntaje, setPuntaje] = useState('')
 	const [resenaGuardada, setResenaGuardada] = useState(null)
 	const [estaEditando, setEstaEditando] = useState(true)
+	const [mensajeError, setMensajeError] = useState('')
+	const [mensajeExito, setMensajeExito] = useState('')
 	const opcionesPuntaje = Array.from({ length: 10 }, (_, indice) => String(indice + 1))
+	const idTexto = `resena-texto-${album.id}`
+	const idPuntaje = `resena-puntaje-${album.id}`
 
 	useEffect(() => {
-		const almacenada = obtenerResena(album.id)
-		if (almacenada) {
-			setResenaGuardada(almacenada)
-			setTexto(almacenada.texto || '')
-			setPuntaje(String(almacenada.puntaje || ''))
-			setEstaEditando(false)
-		} else {
-			setResenaGuardada(null)
-			setTexto('')
-			setPuntaje('')
-			setEstaEditando(true)
-		}
+		;(async () => {
+			const almacenada = await obtenerResena(album.id)
+			if (almacenada) {
+				setResenaGuardada(almacenada)
+				setTexto(almacenada.texto || '')
+				setPuntaje(String(almacenada.puntaje || ''))
+				setEstaEditando(false)
+			} else {
+				setResenaGuardada(null)
+				setTexto('')
+				setPuntaje('')
+				setEstaEditando(true)
+			}
+		})()
 	}, [album])
 
-	function guardar() {
+	async function guardar() {
 		const textoLimpio = (texto || '').trim()
 		if (!textoLimpio || !puntaje) {
-			alert('Completá la reseña y elegí un puntaje.')
+			setMensajeError('Completá la reseña y elegí un puntaje.')
+			setMensajeExito('')
 			return
 		}
+		setMensajeError('')
 		const puntajeNumero = Number(puntaje) || 1
-		guardarResena(album.id, { texto: textoLimpio, puntaje: puntajeNumero })
+		await guardarResena(album.id, {texto: textoLimpio, puntaje: puntajeNumero})
 		setResenaGuardada({ texto: textoLimpio, puntaje: puntajeNumero })
 		setEstaEditando(false)
-		alert('Reseña guardada')
+		setMensajeExito('Reseña guardada.')
 	}
 
 	function editar() {
@@ -41,28 +49,46 @@ function SeccionResena({ album }) {
 		setTexto(resenaGuardada.texto || '')
 		setPuntaje(String(resenaGuardada.puntaje || ''))
 		setEstaEditando(true)
+		setMensajeError('')
+		setMensajeExito('')
 	}
 
 	return (
 		<div className="seccion-resena">
 			{estaEditando ? (
 				<div className="entradas-resena">
+					<label htmlFor={idTexto} className="resena-label">Reseña</label>
 					<textarea
+						id={idTexto}
 						className="texto-resena"
 						placeholder="Escribe tu reseña..."
 						value={texto}
-						onChange={(e) => setTexto(e.target.value)}
+						onChange={(e) => {
+							setTexto(e.target.value);
+							setMensajeError('')
+						}}
 					/>
+					<label htmlFor={idPuntaje} className="resena-label">Puntaje</label>
 					<select
+						id={idPuntaje}
 						className="entrada-puntaje"
 						value={puntaje}
-						onChange={(e) => setPuntaje(e.target.value)}
+						onChange={(e) => {
+							setPuntaje(e.target.value);
+							setMensajeError('')
+						}}
 					>
 						<option value="">Puntaje (1-10)</option>
 						{opcionesPuntaje.map((valor) => (
 							<option key={valor} value={valor}>{valor}</option>
 						))}
 					</select>
+					{mensajeError && (
+						<p role="alert" className="mensaje-inline mensaje-inline--error">{mensajeError}</p>
+					)}
+					{mensajeExito && (
+						<p role="status" className="mensaje-inline mensaje-inline--exito">{mensajeExito}</p>
+					)}
 					<button type="button" className="boton-accion" onClick={guardar}>Guardar</button>
 				</div>
 			) : (
