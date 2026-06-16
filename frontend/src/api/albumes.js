@@ -1,79 +1,85 @@
-import catalogoJSON from '@data/albumes.json'
-import { escribirJSON, leerJSON } from '@utils/storage'
-
-const catalogo = catalogoJSON
-
-const CLAVES_STORAGE = {
-	coleccion: 'miColeccion',
-}
-
-
-export const obtenerAlbumes = async () => catalogo
+const BASE_URL = 'http://localhost:3001'
 
 /**
- * Obtiene la colección del usuario desde localStorage.
+ * Obtiene el catálogo completo de álbumes desde el servidor.
+ * @returns {Promise<Array>} Lista de álbumes.
  */
-export const obtenerColeccion = () => leerJSON(CLAVES_STORAGE.coleccion, []).map((item) => ({
-	...item,
-	resena: item?.resena ?? null,
-}))
+export const obtenerAlbumes = async () => {
+	const r = await fetch(`${BASE_URL}/albumes`)
+	return r.json()
+}
 
+/**
+ * Obtiene la colección del usuario desde el servidor.
+ * @returns {Promise<Array>} Lista de álbumes en la colección.
+ */
+export const obtenerColeccion = async () => {
+	const r = await fetch(`${BASE_URL}/coleccion`)
+	return r.json()
+}
 
-export const agregarAColeccion = (album) => {
-	const coleccionActual = obtenerColeccion()
-	const existe = coleccionActual.some(item => item.id === album.id)
-	if (!existe) {
-		const preparado = { ...album }
-		coleccionActual.push({ ...preparado, resena: null })
-		escribirJSON(CLAVES_STORAGE.coleccion, coleccionActual)
+/**
+ * Agrega un álbum a la colección si no existe ya.
+ * @param {Object} album - Álbum a agregar.
+ * @returns {Promise<Array>} Colección actualizada.
+ */
+export const agregarAColeccion = async (album) => {
+	const actual = await obtenerColeccion()
+	if (!actual.some(i => i.id === album.id)) {
+		await fetch(`${BASE_URL}/coleccion`, {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify({...album, resena: null}),
+		})
 	}
-	return coleccionActual
+	return obtenerColeccion()
 }
 
 /**
- * Quita un álbum específico de la colección.
- * @param {number} albumId - Identificador del álbum a eliminar.
- * @returns {Array} Colección resultante.
+ * Quita un álbum de la colección.
+ * @param {number} albumId - ID del álbum a eliminar.
+ * @returns {Promise<Array>} Colección resultante.
  */
-export const quitarDeColeccion = (albumId) => {
-	const coleccionActual = obtenerColeccion()
-	const filtrada = coleccionActual.filter(item => item.id !== albumId)
-	escribirJSON(CLAVES_STORAGE.coleccion, filtrada)
-	return filtrada
+export const quitarDeColeccion = async (albumId) => {
+	await fetch(`${BASE_URL}/coleccion/${albumId}`, {method: 'DELETE'})
+	return obtenerColeccion()
 }
 
 /**
- * Guarda una reseña asociada a un álbum de la colección.
+ * Guarda o actualiza la reseña de un álbum en la colección.
  * @param {number} albumId - Álbum objetivo.
- * @param {{texto:string,puntaje:number}} resena - Datos de la reseña.
- * @returns {{id:number,resena:{texto:string,puntaje:number}}|null} Registro actualizado o null si no existe.
+ * @param {{texto: string, puntaje: number}} resena - Datos de la reseña.
+ * @returns {Promise<Object|null>} Registro actualizado o null si falla.
  */
-export const guardarResena = (albumId, resena) => {
-	const coleccionActual = obtenerColeccion()
-	const posicion = coleccionActual.findIndex(item => item.id === albumId)
-	if (posicion === -1) {
-		return null
-	}
-	coleccionActual[posicion] = { ...coleccionActual[posicion], resena }
-	escribirJSON(CLAVES_STORAGE.coleccion, coleccionActual)
-	return { id: albumId, resena: coleccionActual[posicion].resena }
+export const guardarResena = async (albumId, resena) => {
+	const r = await fetch(`${BASE_URL}/coleccion/${albumId}`, {
+		method: 'PATCH',
+		headers: {'Content-Type': 'application/json'},
+		body: JSON.stringify({resena}),
+	})
+	if (!r.ok) return null
+	return r.json()
 }
 
 /**
- * Recupera la reseña guardada para un álbum.
+ * Recupera la reseña guardada de un álbum.
  * @param {number} albumId - Álbum objetivo.
- * @returns {*|null} Datos guardados o null si no existe.
+ * @returns {Promise<Object|null>} Reseña o null si no existe.
  */
-export const obtenerResena = (albumId) => {
-	const coleccionActual = obtenerColeccion()
-	const registro = coleccionActual.find(item => item.id === albumId)
-	return registro?.resena ?? null
+export const obtenerResena = async (albumId) => {
+	const r = await fetch(`${BASE_URL}/coleccion/${albumId}`)
+	if (!r.ok) return null
+	const item = await r.json()
+	return item?.resena ?? null
 }
 
 /**
- * Limpia cualquier dato generado por la aplicación en localStorage.
- * @returns {void}
+ * Elimina todos los ítems de la colección del servidor.
+ * @returns {Promise<void>}
  */
-export const limpiarDatos = () => {
-	localStorage.removeItem(CLAVES_STORAGE.coleccion)
+export const limpiarDatos = async () => {
+	const coleccion = await obtenerColeccion()
+	await Promise.all(
+		coleccion.map(i => fetch(`${BASE_URL}/coleccion/${i.id}`, {method: 'DELETE'}))
+	)
 }
