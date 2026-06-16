@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import {useState} from 'react'
+import {Link} from 'react-router-dom'
 import logo from '@assets/logo.png'
 
-function Encabezado({ onLimpiar }) {
+function Encabezado({onLimpiar}) {
 	const [confirmando, setConfirmando] = useState(false)
 
 	const pedirConfirmacion = () => {
@@ -20,7 +20,7 @@ function Encabezado({ onLimpiar }) {
 	return (
 		<header className="app-header">
 			<div className="app-header__branding">
-				<img src={logo} alt="Logo" className="app-header__logo" width="40" height="40" />
+				<img src={logo} alt="Logo" className="app-header__logo" width="40" height="40"/>
 				<p className="app-header__title">Mi Colección de Álbumes</p>
 			</div>
 			<nav className="app-header__nav">

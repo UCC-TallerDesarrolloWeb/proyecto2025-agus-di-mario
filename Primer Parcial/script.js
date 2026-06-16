@@ -140,7 +140,7 @@ const STORAGE_KEYS = {
 	FILTROS: "filtrosBusqueda"
 };
 
-const OPCIONES_PUNTAJE = Array.from({ length: 10 }, (_, index) => `<option value="${index + 1}">${index + 1}</option>`).join("");
+const OPCIONES_PUNTAJE = Array.from({length: 10}, (_, index) => `<option value="${index + 1}">${index + 1}</option>`).join("");
 
 let coleccionActual = [];
 
@@ -206,7 +206,7 @@ const guardarColeccion = () => guardarEnLocalStorage(STORAGE_KEYS.COLECCION, col
  */
 const agregarAlbumAEstado = (id) => {
 	if (!estaEnColeccion(id)) {
-		coleccionActual.push({ id, resena: null });
+		coleccionActual.push({id, resena: null});
 		guardarColeccion();
 	}
 };
@@ -624,7 +624,7 @@ const guardarResena = (boton) => {
 		return;
 	}
 
-	actualizarResenaEnEstado(idAlbum, { texto: textoresena, puntaje });
+	actualizarResenaEnEstado(idAlbum, {texto: textoresena, puntaje});
 	actualizarVistaColeccion();
 };
 

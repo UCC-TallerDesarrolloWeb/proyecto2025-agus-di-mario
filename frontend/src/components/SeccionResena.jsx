@@ -1,14 +1,14 @@
 import {useEffect, useState} from 'react'
 import {guardarResena, obtenerResena} from '@api/albumes'
 
-function SeccionResena({ album }) {
+function SeccionResena({album}) {
 	const [texto, setTexto] = useState('')
 	const [puntaje, setPuntaje] = useState('')
 	const [resenaGuardada, setResenaGuardada] = useState(null)
 	const [estaEditando, setEstaEditando] = useState(true)
 	const [mensajeError, setMensajeError] = useState('')
 	const [mensajeExito, setMensajeExito] = useState('')
-	const opcionesPuntaje = Array.from({ length: 10 }, (_, indice) => String(indice + 1))
+	const opcionesPuntaje = Array.from({length: 10}, (_, indice) => String(indice + 1))
 	const idTexto = `resena-texto-${album.id}`
 	const idPuntaje = `resena-puntaje-${album.id}`
 
@@ -39,7 +39,7 @@ function SeccionResena({ album }) {
 		setMensajeError('')
 		const puntajeNumero = Number(puntaje) || 1
 		await guardarResena(album.id, {texto: textoLimpio, puntaje: puntajeNumero})
-		setResenaGuardada({ texto: textoLimpio, puntaje: puntajeNumero })
+		setResenaGuardada({texto: textoLimpio, puntaje: puntajeNumero})
 		setEstaEditando(false)
 		setMensajeExito('Reseña guardada.')
 	}

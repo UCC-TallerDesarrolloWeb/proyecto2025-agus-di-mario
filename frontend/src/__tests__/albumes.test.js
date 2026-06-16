@@ -1,4 +1,4 @@
-import {agregarAColeccion, quitarDeColeccion, guardarResena} from '@api/albumes'
+import {agregarAColeccion, guardarResena, quitarDeColeccion} from '@api/albumes'
 
 const BASE_URL = 'http://localhost:3001'
 

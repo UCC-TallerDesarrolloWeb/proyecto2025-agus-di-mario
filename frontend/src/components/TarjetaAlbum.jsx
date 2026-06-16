@@ -1,11 +1,11 @@
 function TarjetaAlbum({
-	album,
-	variante = 'catalogo',
-	esFavorito = false,
-	onColeccionar,
-	alAlternarFavorito,
-	children: hijos,
-}) {
+	                      album,
+	                      variante = 'catalogo',
+	                      esFavorito = false,
+	                      onColeccionar,
+	                      alAlternarFavorito,
+	                      children: hijos,
+                      }) {
 	const alternarColeccion = onColeccionar ?? alAlternarFavorito
 	const mostrarFavorito = variante === 'catalogo'
 
