@@ -1,11 +1,21 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '@assets/logo.png'
 
 function Encabezado({ onLimpiar }) {
-	const manejarLimpiar = () => {
+	const [confirmando, setConfirmando] = useState(false)
+
+	const pedirConfirmacion = () => {
 		if (!onLimpiar) return
-		if (window.confirm('¿Limpiar todos los datos guardados?')) onLimpiar()
+		setConfirmando(true)
 	}
+
+	const confirmar = () => {
+		setConfirmando(false)
+		onLimpiar()
+	}
+
+	const cancelar = () => setConfirmando(false)
 
 	return (
 		<header className="app-header">
@@ -16,8 +26,15 @@ function Encabezado({ onLimpiar }) {
 			<nav className="app-header__nav">
 				<Link className="link" to="/">Inicio</Link>
 				<Link className="link" to="/mi-coleccion">Mi colección</Link>
-				{onLimpiar && (
-					<button className="btn" onClick={manejarLimpiar} id="boton-limpiar">Limpiar</button>
+				{onLimpiar && !confirmando && (
+					<button className="btn" onClick={pedirConfirmacion} id="boton-limpiar">Limpiar</button>
+				)}
+				{confirmando && (
+					<span className="confirmacion-limpiar">
+						<span>¿Limpiar todo?</span>
+						<button className="btn" onClick={confirmar}>Sí</button>
+						<button className="btn btn--neutro" onClick={cancelar}>No</button>
+					</span>
 				)}
 			</nav>
 		</header>

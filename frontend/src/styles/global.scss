@@ -99,6 +99,22 @@ main {
 	&:hover {
 		background: $color-danger-hover;
 	}
+
+	&--neutro {
+		background: $color-link-bg;
+
+		&:hover {
+			background: $color-link-hover;
+		}
+	}
+}
+
+.confirmacion-limpiar {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	color: #fff;
+	font-size: 0.9rem;
 }
 
 .lista-albumes,
