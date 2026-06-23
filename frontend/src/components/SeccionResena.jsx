@@ -1,6 +1,12 @@
 import {useEffect, useState} from 'react'
 import {guardarResena, obtenerResena} from '@api/albumes'
 
+/**
+ * Sección de reseña para un álbum: permite crear, ver y editar reseñas.
+ * @param {Object} props
+ * @param {Object} props.album - Álbum al que pertenece la reseña.
+ * @returns {JSX.Element}
+ */
 function SeccionResena({album}) {
 	const [texto, setTexto] = useState('')
 	const [puntaje, setPuntaje] = useState('')
@@ -29,6 +35,10 @@ function SeccionResena({album}) {
 		})()
 	}, [album])
 
+	/**
+	 * Valida los campos y persiste la reseña en el servidor.
+	 * @returns {Promise<void>}
+	 */
 	async function guardar() {
 		const textoLimpio = (texto || '').trim()
 		if (!textoLimpio || !puntaje) {
@@ -44,6 +54,10 @@ function SeccionResena({album}) {
 		setMensajeExito('Reseña guardada.')
 	}
 
+	/**
+	 * Vuelve al modo edición precargando los valores de la reseña guardada.
+	 * @returns {void}
+	 */
 	function editar() {
 		if (!resenaGuardada) return
 		setTexto(resenaGuardada.texto || '')

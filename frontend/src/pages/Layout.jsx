@@ -4,6 +4,11 @@ import Encabezado from '@components/Encabezado'
 import Pie from '@components/Pie'
 import {limpiarDatos} from '@api/albumes'
 
+/**
+ * Layout raíz de la aplicación: renderiza encabezado, mensaje global,
+ * las rutas hijas vía Outlet y el pie de página.
+ * @returns {JSX.Element}
+ */
 function Layout() {
 	const navigate = useNavigate()
 	const location = useLocation()

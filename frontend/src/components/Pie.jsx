@@ -1,3 +1,7 @@
+/**
+ * Pie de página con copyright y año calculado dinámicamente.
+ * @returns {JSX.Element}
+ */
 function Pie() {
 	const anio = new Date().getFullYear()
 	return (

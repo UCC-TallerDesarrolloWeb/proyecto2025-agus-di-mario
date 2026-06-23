@@ -4,6 +4,10 @@ import Layout from '@pages/Layout'
 import Inicio from '@pages/Inicio'
 import Coleccion from '@pages/Coleccion'
 
+/**
+ * Componente raíz: define el árbol de rutas de la aplicación.
+ * @returns {JSX.Element}
+ */
 function Aplicacion() {
 	return (
 		<div className="app-shell">

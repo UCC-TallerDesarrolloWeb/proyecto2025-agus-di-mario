@@ -1,12 +1,20 @@
+/**
+ * Tarjeta visual de un álbum con acción de colección integrada.
+ * @param {Object} props
+ * @param {Object} props.album - Datos del álbum (id, nombre, artista, imagen).
+ * @param {'catalogo'|'coleccion'} props.variante - Modo de visualización.
+ * @param {boolean} props.esFavorito - Indica si el álbum está en la colección.
+ * @param {Function} props.onColeccionar - Callback que recibe el álbum al hacer clic.
+ * @param {React.ReactNode} props.children - Contenido extra (p.ej. SeccionResena).
+ * @returns {JSX.Element}
+ */
 function TarjetaAlbum({
 	                      album,
 	                      variante = 'catalogo',
 	                      esFavorito = false,
 	                      onColeccionar,
-	                      alAlternarFavorito,
 	                      children: hijos,
                       }) {
-	const alternarColeccion = onColeccionar ?? alAlternarFavorito
 
 	return (
 		<div className="tarjeta-album">
@@ -24,7 +32,7 @@ function TarjetaAlbum({
 						className={`estrella${esFavorito ? ' activo' : ''}`}
 						aria-pressed={esFavorito}
 						aria-label={esFavorito ? 'Quitar de mi colección' : 'Agregar a mi colección'}
-						onClick={() => alternarColeccion?.(album)}
+						onClick={() => onColeccionar?.(album)}
 					>
 						{esFavorito ? '★' : '☆'}
 					</button>
@@ -33,7 +41,7 @@ function TarjetaAlbum({
 					<button
 						type="button"
 						className="btn"
-						onClick={() => alternarColeccion?.(album)}
+						onClick={() => onColeccionar?.(album)}
 					>
 						Quitar
 					</button>

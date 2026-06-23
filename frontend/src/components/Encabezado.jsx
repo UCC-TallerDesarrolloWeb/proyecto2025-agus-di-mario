@@ -2,19 +2,28 @@ import {useState} from 'react'
 import {Link} from 'react-router-dom'
 import logo from '@assets/logo.png'
 
+/**
+ * Encabezado de la aplicación con navegación y botón de limpieza con confirmación inline.
+ * @param {Object} props
+ * @param {Function} [props.onLimpiar] - Callback invocado al confirmar la limpieza.
+ * @returns {JSX.Element}
+ */
 function Encabezado({onLimpiar}) {
 	const [confirmando, setConfirmando] = useState(false)
 
+	/** Muestra el diálogo de confirmación si hay callback de limpieza. @returns {void} */
 	const pedirConfirmacion = () => {
 		if (!onLimpiar) return
 		setConfirmando(true)
 	}
 
+	/** Confirma la limpieza e invoca el callback del padre. @returns {void} */
 	const confirmar = () => {
 		setConfirmando(false)
 		onLimpiar()
 	}
 
+	/** Cancela la confirmación sin realizar ninguna acción. @returns {void} */
 	const cancelar = () => setConfirmando(false)
 
 	return (
