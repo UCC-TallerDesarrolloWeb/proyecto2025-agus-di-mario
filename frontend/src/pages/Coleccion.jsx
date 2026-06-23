@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import TarjetaAlbum from '@components/TarjetaAlbum'
 import SeccionResena from '@components/SeccionResena'
-import {obtenerColeccion} from '@api/albumes'
+import {obtenerColeccion, quitarDeColeccion} from '@api/albumes'
 
 function Coleccion() {
 	const [elementos, setElementos] = useState([])
@@ -17,6 +17,11 @@ function Coleccion() {
 		}
 	}, [])
 
+	const manejarQuitar = async (album) => {
+		const actualizada = await quitarDeColeccion(album.id)
+		setElementos(actualizada)
+	}
+
 	return (
 		<main>
 			<section id="coleccion">
@@ -28,7 +33,7 @@ function Coleccion() {
 				) : (
 					<div className="lista-coleccion" id="lista-coleccion">
 						{elementos.map(album => (
-							<TarjetaAlbum key={album.id} album={album} variante="coleccion">
+							<TarjetaAlbum key={album.id} album={album} variante="coleccion" onColeccionar={manejarQuitar}>
 								<SeccionResena album={album}/>
 							</TarjetaAlbum>
 						))}

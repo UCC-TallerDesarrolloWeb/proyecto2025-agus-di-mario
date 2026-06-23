@@ -21,8 +21,8 @@ describe('Inicio', () => {
 	// Test 4 — Que datos provenientes de la API se rendericen en pantalla
 	test('renderiza los títulos de los álbumes obtenidos desde la API', async () => {
 		obtenerAlbumes.mockResolvedValue([
-			{id: '1', nombre: 'Thriller', artista: 'Michael Jackson', imagen: ''},
-			{id: '2', nombre: 'Abbey Road', artista: 'The Beatles', imagen: ''},
+			{id: '1', nombre: 'Thriller', artista: 'Michael Jackson', imagen: '/albums/thriller.jpg'},
+			{id: '2', nombre: 'Abbey Road', artista: 'The Beatles', imagen: '/albums/abbey-road.jpg'},
 		])
 		obtenerColeccion.mockResolvedValue([])
 

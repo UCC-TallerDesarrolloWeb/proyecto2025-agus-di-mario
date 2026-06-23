@@ -7,7 +7,6 @@ function TarjetaAlbum({
 	                      children: hijos,
                       }) {
 	const alternarColeccion = onColeccionar ?? alAlternarFavorito
-	const mostrarFavorito = variante === 'catalogo'
 
 	return (
 		<div className="tarjeta-album">
@@ -19,7 +18,7 @@ function TarjetaAlbum({
 			<div className="info-album">
 				<h3>{album.nombre}</h3>
 				<p>{album.artista}</p>
-				{mostrarFavorito && (
+				{variante === 'catalogo' && (
 					<button
 						type="button"
 						className={`estrella${esFavorito ? ' activo' : ''}`}
@@ -28,6 +27,15 @@ function TarjetaAlbum({
 						onClick={() => alternarColeccion?.(album)}
 					>
 						{esFavorito ? '★' : '☆'}
+					</button>
+				)}
+				{variante === 'coleccion' && (
+					<button
+						type="button"
+						className="btn"
+						onClick={() => alternarColeccion?.(album)}
+					>
+						Quitar
 					</button>
 				)}
 				{hijos}
