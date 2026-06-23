@@ -5,8 +5,8 @@ const BASE_URL = 'http://localhost:3001'
  * @returns {Promise<Array>} Lista de álbumes.
  */
 export const obtenerAlbumes = async () => {
-	const r = await fetch(`${BASE_URL}/albumes`)
-	return r.json()
+	const respuesta = await fetch(`${BASE_URL}/albumes`)
+	return respuesta.json()
 }
 
 /**
@@ -14,8 +14,8 @@ export const obtenerAlbumes = async () => {
  * @returns {Promise<Array>} Lista de álbumes en la colección.
  */
 export const obtenerColeccion = async () => {
-	const r = await fetch(`${BASE_URL}/coleccion`)
-	return r.json()
+	const respuesta = await fetch(`${BASE_URL}/coleccion`)
+	return respuesta.json()
 }
 
 /**
@@ -52,13 +52,13 @@ export const quitarDeColeccion = async (albumId) => {
  * @returns {Promise<Object|null>} Registro actualizado o null si falla.
  */
 export const guardarResena = async (albumId, resena) => {
-	const r = await fetch(`${BASE_URL}/coleccion/${albumId}`, {
+	const respuesta = await fetch(`${BASE_URL}/coleccion/${albumId}`, {
 		method: 'PATCH',
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify({resena}),
 	})
-	if (!r.ok) return null
-	return r.json()
+	if (!respuesta.ok) return null
+	return respuesta.json()
 }
 
 /**
@@ -67,9 +67,9 @@ export const guardarResena = async (albumId, resena) => {
  * @returns {Promise<Object|null>} Reseña o null si no existe.
  */
 export const obtenerResena = async (albumId) => {
-	const r = await fetch(`${BASE_URL}/coleccion/${albumId}`)
-	if (!r.ok) return null
-	const item = await r.json()
+	const respuesta = await fetch(`${BASE_URL}/coleccion/${albumId}`)
+	if (!respuesta.ok) return null
+	const item = await respuesta.json()
 	return item?.resena ?? null
 }
 
