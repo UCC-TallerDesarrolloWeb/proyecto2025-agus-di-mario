@@ -28,17 +28,16 @@ Aplicación web que permite explorar un catálogo de 25 álbumes musicales, arma
     - [Encabezado.jsx](#encabezadojsx)
     - [Pie.jsx](#piejsx)
     - [SeccionResena.jsx](#seccionresenajsx)
-12. [Utilidad storage.js](#12-utilidad-storagejs)
-13. [Estilos — global.scss](#13-estilos--globalscss)
-14. [Configuración de herramientas](#14-configuración-de-herramientas)
+12. [Estilos — global.scss](#12-estilos--globalscss)
+13. [Configuración de herramientas](#13-configuración-de-herramientas)
     - [vite.config.js](#viteconfigjs)
     - [jest.config.cjs](#jestconfigcjs)
     - [babel.config.cjs](#babelconfigcjs)
     - [eslint.config.js](#eslintconfigjs)
-15. [Testing](#15-testing)
-16. [Accesibilidad](#16-accesibilidad)
-17. [Decisiones de diseño clave](#17-decisiones-de-diseño-clave)
-18. [Primer Parcial — versión vanilla](#18-primer-parcial--versión-vanilla)
+14. [Testing](#14-testing)
+15. [Accesibilidad](#15-accesibilidad)
+16. [Decisiones de diseño clave](#16-decisiones-de-diseño-clave)
+17. [Primer Parcial — versión vanilla](#17-primer-parcial--versión-vanilla)
 
 ---
 
@@ -107,17 +106,12 @@ proyecto2025-agus-di-mario/
     │   ├── styles/
     │   │   └── global.scss       # Todos los estilos de la app
     │   │
-    │   ├── utils/
-    │   │   └── storage.js        # Helpers para leer/escribir JSON en localStorage
-    │   │
     │   └── __tests__/            # Tests unitarios con Jest
     │       ├── TarjetaAlbum.test.jsx
     │       ├── SeccionResena.test.jsx
     │       ├── albumes.test.js
-    │       └── Inicio.test.jsx
-    │
-    ├── __mocks__/
-    │   └── fileMock.cjs          # Stub para imports de imágenes en Jest
+    │       ├── Inicio.test.jsx
+    │       └── Coleccion.test.jsx
     │
     ├── index.html                # HTML raíz; Vite lo usa como plantilla
     ├── db.json                   # Base de datos de json-server (álbumes + colección)
@@ -395,16 +389,13 @@ La URL base se define una sola vez. Si el puerto cambia, se actualiza en un solo
 
 ```js
 export const obtenerAlbumes = async () => {
-  const r = await fetch(`${BASE_URL}/albumes`)
-  return r.json()
+  const respuesta = await fetch(`${BASE_URL}/albumes`)
+  return respuesta.json()
 }
 ```
 
-- Hace `GET /albumes`.
-- `fetch` retorna una `Promise<Response>`. El `await` espera a que la respuesta HTTP llegue.
-- `.json()` también es async (lee el body del stream HTTP); retorna la Promise directamente para que el llamador la reciba resuelta.
-- Retorna el array completo de álbumes.
-- No maneja errores porque el catálogo es estático y siempre disponible mientras json-server corra.
+- Hace `GET /albumes` y retorna el array completo de álbumes.
+- La variable se llama `respuesta` (no `r`) para mayor claridad.
 
 ---
 
@@ -691,32 +682,22 @@ function Layout() {
 `src/pages/Inicio.jsx` — la página `/`. Muestra el catálogo completo.
 
 ```jsx
-import { useEffect, useState } from 'react'
-import { useOutletContext } from 'react-router-dom'
+import {useEffect, useState} from 'react'
+import {useOutletContext} from 'react-router-dom'
 import TarjetaAlbum from '@components/TarjetaAlbum'
-import { agregarAColeccion, obtenerAlbumes, obtenerColeccion, quitarDeColeccion } from '@api/albumes'
+import {agregarAColeccion, obtenerAlbumes, obtenerColeccion, quitarDeColeccion} from '@api/albumes'
 
 function Inicio() {
+  const {limpiadoEn} = useOutletContext()
   const [albumes, setAlbumes] = useState([])
   const [coleccion, setColeccion] = useState([])
-  const { limpiadoEn } = useOutletContext()
 
   useEffect(() => {
-    let montado = true
-    ;(async () => {
-      const datos = await obtenerAlbumes()
-      if (montado) setAlbumes(datos)
-    })()
-    return () => { montado = false }
+    obtenerAlbumes().then(setAlbumes)
   }, [])
 
   useEffect(() => {
-    let montado = true
-    ;(async () => {
-      const datos = await obtenerColeccion()
-      if (montado) setColeccion(datos)
-    })()
-    return () => { montado = false }
+    obtenerColeccion().then(setColeccion)
   }, [limpiadoEn])
 
   const conjuntoColeccion = new Set(coleccion.map(item => item.id))
@@ -751,16 +732,10 @@ function Inicio() {
 
 **`useOutletContext()`:** Recibe el contexto que Layout pasó via `<Outlet context={...}>`. Destructura `limpiadoEn`.
 
-**Effect 1 (`deps=[]`):**
-- Se ejecuta **solo una vez**, al montar el componente. El array de dependencias vacío `[]` significa "no hay dependencias externas; solo corre al montar".
-- Carga el catálogo de álbumes. El catálogo es estático, nunca cambia, así que cargarlo una sola vez es suficiente.
-- **Patrón `montado`:** La variable `let montado = true` se declara antes del fetch. Si el componente se desmonta antes de que el fetch termine (porque el usuario navegó a otra página), la cleanup function (`return () => { montado = false }`) pone `montado` en `false`. El `if (montado) setAlbumes(datos)` evita llamar `setState` en un componente desmontado, lo que causaría un warning (y potencialmente un memory leak en versiones anteriores de React).
-- **IIFE async:** `(async () => { ... })()` es una función async invocada inmediatamente. Se necesita porque `useEffect` no puede recibir una función async directamente — si lo hace, retorna una Promise en vez de una función de cleanup.
-
-**Effect 2 (`deps=[limpiadoEn]`):**
-- Se ejecuta al montar Y cada vez que `limpiadoEn` cambia.
-- Recarga la colección del usuario. Cuando Layout limpia todos los datos, actualiza `limpiadoEn` a un nuevo timestamp, lo que dispara este effect y hace que Inicio vea la colección vacía.
-- Mismo patrón `montado` que el anterior.
+**Estado y efectos:**
+- `useState([])` inicializa `albumes` y `coleccion` como arrays vacíos.
+- El primer `useEffect` (deps `[]`) carga el catálogo completo una sola vez al montar.
+- El segundo `useEffect` (deps `[limpiadoEn]`) recarga la colección cada vez que `limpiadoEn` cambia — es decir, cada vez que Layout limpia todos los datos.
 
 **`conjuntoColeccion`:**
 ```js
@@ -786,21 +761,16 @@ const conjuntoColeccion = new Set(coleccion.map(item => item.id))
 `src/pages/Coleccion.jsx` — la página `/mi-coleccion`.
 
 ```jsx
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 import TarjetaAlbum from '@components/TarjetaAlbum'
 import SeccionResena from '@components/SeccionResena'
-import { obtenerColeccion, quitarDeColeccion } from '@api/albumes'
+import {obtenerColeccion, quitarDeColeccion} from '@api/albumes'
 
 function Coleccion() {
   const [elementos, setElementos] = useState([])
 
   useEffect(() => {
-    let montado = true
-    ;(async () => {
-      const datos = await obtenerColeccion()
-      if (montado) setElementos(datos)
-    })()
-    return () => { montado = false }
+    obtenerColeccion().then(setElementos)
   }, [])
 
   const manejarQuitar = async (album) => {
@@ -862,11 +832,8 @@ function TarjetaAlbum({
   variante = 'catalogo',
   esFavorito = false,
   onColeccionar,
-  alAlternarFavorito,
   children: hijos,
 }) {
-  const alternarColeccion = onColeccionar ?? alAlternarFavorito
-
   return (
     <div className="tarjeta-album">
       <img
@@ -883,7 +850,7 @@ function TarjetaAlbum({
             className={`estrella${esFavorito ? ' activo' : ''}`}
             aria-pressed={esFavorito}
             aria-label={esFavorito ? 'Quitar de mi colección' : 'Agregar a mi colección'}
-            onClick={() => alternarColeccion?.(album)}
+            onClick={() => onColeccionar?.(album)}
           >
             {esFavorito ? '★' : '☆'}
           </button>
@@ -892,7 +859,7 @@ function TarjetaAlbum({
           <button
             type="button"
             className="btn"
-            onClick={() => alternarColeccion?.(album)}
+            onClick={() => onColeccionar?.(album)}
           >
             Quitar
           </button>
@@ -911,10 +878,8 @@ function TarjetaAlbum({
 | `variante` | string | `'catalogo'` | Controla qué botón se muestra. |
 | `esFavorito` | boolean | `false` | Si `true`, la estrella aparece llena (★) y con clase `activo`. |
 | `onColeccionar` | función | — | Callback llamado al hacer click en el botón. Recibe el objeto `album`. |
-| `alAlternarFavorito` | función | — | Alias de `onColeccionar` para compatibilidad. |
 | `children` | nodo React | — | Se destructura como `hijos` y se renderiza al final del div. |
 
-- `onColeccionar ?? alAlternarFavorito` — el operador `??` retorna el operando derecho solo si el izquierdo es `null` o `undefined`. Permite que el componente acepte el callback con dos nombres distintos.
 - `alt={album.nombre + " - " + album.artista}` — alt text descriptivo requerido por accesibilidad.
 - `className={estrella${esFavorito ? ' activo' : ''}}` — agrega la clase `activo` condicionalmente. En SCSS, `.estrella.activo` tiene `color: goldenrod`.
 - `aria-pressed={esFavorito}` — atributo ARIA para botones toggle. Un lector de pantalla anunciará "Agregar a mi colección, presionado: falso".
@@ -1133,38 +1098,7 @@ Array.from({ length: 10 }, (_, indice) => String(indice + 1))
 
 ---
 
-## 12. Utilidad storage.js
-
-`src/utils/storage.js` — helpers para leer y escribir JSON en localStorage.
-
-```js
-export function leerJSON(clave, valorPorDefecto, storage = window.localStorage) {
-  try {
-    const texto = storage.getItem(clave)
-    return texto ? JSON.parse(texto) : valorPorDefecto
-  } catch (error) {
-    console.error(`Error al leer ${clave} desde localStorage`, error)
-    return valorPorDefecto
-  }
-}
-
-export function escribirJSON(clave, valor, storage = window.localStorage) {
-  try {
-    storage.setItem(clave, JSON.stringify(valor))
-  } catch (error) {
-    console.error(`Error al guardar ${clave} en localStorage`, error)
-  }
-}
-```
-
-- `leerJSON` — lee y parsea JSON. Si no existe la clave, retorna `valorPorDefecto`. El try/catch captura JSON malformado o localStorage no disponible.
-- `escribirJSON` — serializa a JSON y guarda. El try/catch captura cuota llena o acceso denegado.
-- El parámetro `storage = window.localStorage` tiene default, pero puede recibir otro storage (inyección de dependencia para tests).
-- **Estado actual:** este módulo no se usa en el proyecto. Toda la persistencia está en json-server. Permanece como utilidad genérica disponible.
-
----
-
-## 13. Estilos — `global.scss`
+## 12. Estilos — `global.scss`
 
 `src/styles/global.scss` es el único archivo de estilos. Se importa una vez en `App.jsx` y aplica a toda la app.
 
@@ -1241,7 +1175,7 @@ Las clases del header siguen BEM (Block Element Modifier):
 
 ---
 
-## 14. Configuración de herramientas
+## 13. Configuración de herramientas
 
 ### vite.config.js
 
@@ -1284,7 +1218,6 @@ module.exports = {
   transform: { '^.+\\.[jt]sx?$': 'babel-jest' },
   moduleNameMapper: {
     '\\.(scss|css)$': 'identity-obj-proxy',
-    '\\.(png|jpg|jpeg|gif|svg|webp|ico)$': '<rootDir>/__mocks__/fileMock.cjs',
     '^@components/(.*)$': '<rootDir>/src/components/$1',
     '^@pages/(.*)$':      '<rootDir>/src/pages/$1',
     '^@styles/(.*)$':     '<rootDir>/src/styles/$1',
@@ -1351,9 +1284,9 @@ export default defineConfig([
 
 ---
 
-## 15. Testing
+## 14. Testing
 
-La filosofía: **probar comportamiento, no implementación**. Los tests simulan lo que haría un usuario real.
+La filosofía: **probar comportamiento, no implementación**. Los tests simulan lo que haría un usuario real. Hay 5 archivos de tests en `src/__tests__/`.
 
 ---
 
@@ -1442,7 +1375,23 @@ expect(await screen.findByText('Thriller')).toBeInTheDocument()
 
 ---
 
-## 16. Accesibilidad
+### `Coleccion.test.jsx` — 2 tests
+
+```js
+jest.mock('@api/albumes', () => ({ obtenerColeccion: jest.fn(), quitarDeColeccion: jest.fn() }))
+jest.mock('@components/SeccionResena', () => ({ __esModule: true, default: () => <div/> }))
+
+obtenerColeccion.mockResolvedValue([{ id: '1', nombre: 'Thriller', ... }])
+render(<Coleccion/>)
+expect(await screen.findByText('Thriller')).toBeInTheDocument()
+```
+- Mockea `SeccionResena` para aislar el test de la lógica de reseñas.
+- **Test 1** — verifica que los álbumes de la API se renderizan en pantalla.
+- **Test 2** — verifica que aparece el mensaje vacío cuando la colección no tiene ítems.
+
+---
+
+## 15. Accesibilidad
 
 | Elemento | Técnica implementada |
 |---|---|
@@ -1460,7 +1409,7 @@ expect(await screen.findByText('Thriller')).toBeInTheDocument()
 
 ---
 
-## 17. Decisiones de diseño clave
+## 16. Decisiones de diseño clave
 
 ### IDs como strings en db.json
 json-server v1 normaliza todos los IDs a strings. Si en `db.json` el ID fuera el número `5`, la API retornaría `id: "5"` (string) pero el código podría comparar `Set.has(5)` (número), fallando porque `"5" !== 5`. Al declarar los IDs como strings desde el principio, la consistencia está garantizada.
@@ -1470,9 +1419,6 @@ Borrar de a uno (con `for...of` y `await`) haría las peticiones en serie. Con `
 
 ### `limpiadoEn` como timestamp en lugar de booleano
 Un booleano `fueReiniciado` tendría el problema de que si el usuario limpia dos veces seguidas, la segunda limpieza no cambia el valor (ya era `true`) y el `useEffect` no se dispara. Un timestamp siempre cambia, así que siempre dispara el effect.
-
-### Patrón `montado` para effects async
-Si el usuario navega rápidamente entre páginas, el componente puede desmontarse antes de que el fetch termine. Sin este patrón, React mostraría el warning "Can't perform a React state update on an unmounted component". Con `montado`, el `setState` se omite si el componente ya no existe.
 
 ### Un solo componente TarjetaAlbum para dos variantes
 Tanto en el catálogo como en la colección, la estructura HTML de la tarjeta es idéntica. Separar en dos componentes duplicaría código. El prop `variante` es suficiente para cambiar el botón que se muestra.
@@ -1492,7 +1438,7 @@ Si se mueve un archivo a otra carpeta, el import con alias sigue funcionando sin
 
 ---
 
-## 18. Primer Parcial — versión vanilla
+## 17. Primer Parcial — versión vanilla
 
 La carpeta `Primer Parcial/` contiene la primera etapa del trabajo práctico.
 
