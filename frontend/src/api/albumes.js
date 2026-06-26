@@ -25,7 +25,7 @@ export const obtenerColeccion = async () => {
  */
 export const agregarAColeccion = async (album) => {
 	const actual = await obtenerColeccion()
-	if (!actual.some(i => i.id === album.id)) {
+	if (!actual.some(i => i.id === album.id)) { //agrega el album a la coleccion solo si no está ya en la coleccion
 		await fetch(`${BASE_URL}/coleccion`, {
 			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
@@ -41,7 +41,9 @@ export const agregarAColeccion = async (album) => {
  * @returns {Promise<Array>} Colección resultante.
  */
 export const quitarDeColeccion = async (albumId) => {
-	await fetch(`${BASE_URL}/coleccion/${albumId}`, {method: 'DELETE'})
+	await fetch(`${BASE_URL}/coleccion/${albumId}`, {
+		method: 'DELETE'
+	})
 	return obtenerColeccion()
 }
 
@@ -53,9 +55,7 @@ export const quitarDeColeccion = async (albumId) => {
  */
 export const guardarResena = async (albumId, resena) => {
 	const respuesta = await fetch(`${BASE_URL}/coleccion/${albumId}`, {
-		method: 'PATCH',
-		headers: {'Content-Type': 'application/json'},
-		body: JSON.stringify({resena}),
+		method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({resena}),
 	})
 	if (!respuesta.ok) return null
 	return respuesta.json()
@@ -79,7 +79,5 @@ export const obtenerResena = async (albumId) => {
  */
 export const limpiarDatos = async () => {
 	const coleccion = await obtenerColeccion()
-	await Promise.all(
-		coleccion.map(i => fetch(`${BASE_URL}/coleccion/${i.id}`, {method: 'DELETE'}))
-	)
+	await Promise.all(coleccion.map(i => fetch(`${BASE_URL}/coleccion/${i.id}`, {method: 'DELETE'})))
 }

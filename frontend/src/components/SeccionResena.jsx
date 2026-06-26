@@ -67,53 +67,43 @@ function SeccionResena({album}) {
 		setMensajeExito('')
 	}
 
-	return (
-		<div className="seccion-resena">
-			{estaEditando ? (
-				<div className="entradas-resena">
-					<label htmlFor={idTexto} className="resena-label">Reseña</label>
-					<textarea
-						id={idTexto}
-						className="texto-resena"
-						placeholder="Escribe tu reseña..."
-						value={texto}
-						onChange={(e) => {
-							setTexto(e.target.value)
-							setMensajeError('')
-						}}
-					/>
-					<label htmlFor={idPuntaje} className="resena-label">Puntaje</label>
-					<select
-						id={idPuntaje}
-						className="entrada-puntaje"
-						value={puntaje}
-						onChange={(e) => {
-							setPuntaje(e.target.value)
-							setMensajeError('')
-						}}
-					>
-						<option value="">Puntaje (1-10)</option>
-						{opcionesPuntaje.map((valor) => (
-							<option key={valor} value={valor}>{valor}</option>
-						))}
-					</select>
-					{mensajeError && (
-						<p role="alert" className="mensaje-inline mensaje-inline--error">{mensajeError}</p>
-					)}
-					{mensajeExito && (
-						<p role="status" className="mensaje-inline mensaje-inline--exito">{mensajeExito}</p>
-					)}
-					<button type="button" className="boton-accion" onClick={guardar}>Guardar</button>
-				</div>
-			) : (
-				<div className="resena-guardada">
-					<p className="texto-resena-guardado">{`"${resenaGuardada?.texto}"`}</p>
-					<p className="puntaje-resena-guardado">{`Puntaje: ${resenaGuardada?.puntaje}/10`}</p>
-					<button type="button" className="boton-accion" onClick={editar}>Editar</button>
-				</div>
-			)}
-		</div>
-	)
+	return (<div className="seccion-resena">
+		{estaEditando ? (<div className="entradas-resena">
+			<label htmlFor={idTexto} className="resena-label">Reseña</label>
+			<textarea
+				id={idTexto}
+				className="texto-resena"
+				placeholder="Escribe tu reseña..."
+				value={texto}
+				onChange={(e) => {
+					setTexto(e.target.value)
+					setMensajeError('')
+				}}
+			/>
+			<label htmlFor={idPuntaje} className="resena-label">Puntaje</label>
+			<select
+				id={idPuntaje}
+				className="entrada-puntaje"
+				value={puntaje}
+				onChange={(e) => {
+					setPuntaje(e.target.value)
+					setMensajeError('')
+				}}
+			>
+				<option value="">Puntaje (1-10)</option>
+				{opcionesPuntaje.map((valor) => (<option key={valor} value={valor}>{valor}</option>))}
+			</select>
+			{mensajeError && (
+				<p role="alert" className="mensaje-inline mensaje-inline--error">{mensajeError}</p>)}
+			{mensajeExito && (
+				<p role="status" className="mensaje-inline mensaje-inline--exito">{mensajeExito}</p>)}
+			<button type="button" className="boton-accion" onClick={guardar}>Guardar</button>
+		</div>) : (<div className="resena-guardada">
+			<p className="texto-resena-guardado">{`"${resenaGuardada?.texto}"`}</p>
+			<p className="puntaje-resena-guardado">{`Puntaje: ${resenaGuardada?.puntaje}/10`}</p>
+			<button type="button" className="boton-accion" onClick={editar}>Editar</button>
+		</div>)}
+	</div>)
 }
 
 export default SeccionResena

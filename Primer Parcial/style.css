@@ -291,17 +291,6 @@ footer {
     nav input,
     nav select,
     nav button {
-        nav a {
-            color: #fff;
-            font-weight: 600;
-            margin: 5px;
-            text-decoration: none;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
         font-size: 12px;
         padding: 4px;
     }

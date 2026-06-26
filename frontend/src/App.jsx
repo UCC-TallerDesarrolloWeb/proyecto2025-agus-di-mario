@@ -9,16 +9,14 @@ import Coleccion from '@pages/Coleccion'
  * @returns {JSX.Element}
  */
 function Aplicacion() {
-	return (
-		<div className="app-shell">
-			<Routes>
-				<Route element={<Layout/>}>
-					<Route path="/" element={<Inicio/>}/>
-					<Route path="/mi-coleccion" element={<Coleccion/>}/>
-				</Route>
-			</Routes>
-		</div>
-	)
+	return (<div className="app-shell">
+		<Routes>
+			<Route element={<Layout/>}>
+				<Route path="/" element={<Inicio/>}/>
+				<Route path="/mi-coleccion" element={<Coleccion/>}/>
+			</Route>
+		</Routes>
+	</div>)
 }
 
 export default Aplicacion
