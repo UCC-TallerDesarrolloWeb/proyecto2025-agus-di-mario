@@ -9,12 +9,12 @@
  * @returns {JSX.Element}
  */
 function TarjetaAlbum({
-	                      album,
-	                      variante = 'catalogo',
-	                      esFavorito = false,
-	                      onColeccionar,
-	                      children: hijos,
-                      }) {
+	album,
+	variante = 'catalogo',
+	esFavorito = false,
+	onColeccionar,
+	children: hijos,
+}) {
 
 	return (
 		<div className="tarjeta-album">

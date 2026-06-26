@@ -1,7 +1,7 @@
+import {useEffect, useState} from 'react'
 import {useOutletContext} from 'react-router-dom'
 import TarjetaAlbum from '@components/TarjetaAlbum'
 import {agregarAColeccion, obtenerAlbumes, obtenerColeccion, quitarDeColeccion,} from '@api/albumes'
-import {useAsync} from '@utils/useAsync'
 
 /**
  * Página de inicio: muestra el catálogo completo y permite agregar o
@@ -10,8 +10,16 @@ import {useAsync} from '@utils/useAsync'
  */
 function Inicio() {
 	const {limpiadoEn} = useOutletContext()
-	const [albumes] = useAsync(obtenerAlbumes, [])
-	const [coleccion, setColeccion] = useAsync(obtenerColeccion, [limpiadoEn])
+	const [albumes, setAlbumes] = useState([])
+	const [coleccion, setColeccion] = useState([])
+
+	useEffect(() => {
+		obtenerAlbumes().then(setAlbumes)
+	}, [])
+
+	useEffect(() => {
+		obtenerColeccion().then(setColeccion)
+	}, [limpiadoEn])
 
 	const conjuntoColeccion = new Set(coleccion.map(item => item.id))
 

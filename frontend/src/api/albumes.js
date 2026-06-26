@@ -1,7 +1,7 @@
 const BASE_URL = 'http://localhost:3001'
 
 /**
- * Obtiene el catálogo completo de álbumes desde el servidor.
+ * Obtiene el catálogo completo de álbumes.
  * @returns {Promise<Array>} Lista de álbumes.
  */
 export const obtenerAlbumes = async () => {

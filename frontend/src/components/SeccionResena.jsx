@@ -78,7 +78,7 @@ function SeccionResena({album}) {
 						placeholder="Escribe tu reseña..."
 						value={texto}
 						onChange={(e) => {
-							setTexto(e.target.value);
+							setTexto(e.target.value)
 							setMensajeError('')
 						}}
 					/>
@@ -88,7 +88,7 @@ function SeccionResena({album}) {
 						className="entrada-puntaje"
 						value={puntaje}
 						onChange={(e) => {
-							setPuntaje(e.target.value);
+							setPuntaje(e.target.value)
 							setMensajeError('')
 						}}
 					>

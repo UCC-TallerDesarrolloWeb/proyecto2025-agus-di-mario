@@ -7,7 +7,6 @@ module.exports = {
 	moduleNameMapper: {
 		// SCSS primero — antes que los alias @styles
 		'\\.(scss|css)$': 'identity-obj-proxy',
-		'\\.(png|jpg|jpeg|gif|svg|webp|ico)$': '<rootDir>/__mocks__/fileMock.cjs',
 		// Alias de Vite
 		'^@components/(.*)$': '<rootDir>/src/components/$1',
 		'^@pages/(.*)$': '<rootDir>/src/pages/$1',

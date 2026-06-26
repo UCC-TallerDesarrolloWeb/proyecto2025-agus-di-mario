@@ -1,7 +1,7 @@
+import {useEffect, useState} from 'react'
 import TarjetaAlbum from '@components/TarjetaAlbum'
 import SeccionResena from '@components/SeccionResena'
 import {obtenerColeccion, quitarDeColeccion} from '@api/albumes'
-import {useAsync} from '@utils/useAsync'
 
 /**
  * Página Mi Colección: lista los álbumes guardados y permite
@@ -9,7 +9,11 @@ import {useAsync} from '@utils/useAsync'
  * @returns {JSX.Element}
  */
 function Coleccion() {
-	const [elementos, setElementos] = useAsync(obtenerColeccion, [])
+	const [elementos, setElementos] = useState([])
+
+	useEffect(() => {
+		obtenerColeccion().then(setElementos)
+	}, [])
 
 	/**
 	 * Quita un álbum de la colección y actualiza la lista.

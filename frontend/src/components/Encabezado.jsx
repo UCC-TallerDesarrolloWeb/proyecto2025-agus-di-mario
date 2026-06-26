@@ -11,19 +11,16 @@ import logo from '@assets/logo.png'
 function Encabezado({onLimpiar}) {
 	const [confirmando, setConfirmando] = useState(false)
 
-	/** Muestra el diálogo de confirmación si hay callback de limpieza. @returns {void} */
 	const pedirConfirmacion = () => {
 		if (!onLimpiar) return
 		setConfirmando(true)
 	}
 
-	/** Confirma la limpieza e invoca el callback del padre. @returns {void} */
 	const confirmar = () => {
 		setConfirmando(false)
 		onLimpiar()
 	}
 
-	/** Cancela la confirmación sin realizar ninguna acción. @returns {void} */
 	const cancelar = () => setConfirmando(false)
 
 	return (
