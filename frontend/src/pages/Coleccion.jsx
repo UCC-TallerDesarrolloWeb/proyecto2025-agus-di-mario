@@ -10,9 +10,17 @@ import {obtenerColeccion, quitarDeColeccion} from '@api/albumes'
  */
 function Coleccion() {
 	const [elementos, setElementos] = useState([])
+	const [error, setError] = useState('')
 
 	useEffect(() => {
-		obtenerColeccion().then(setElementos)
+		async function cargarColeccion() {
+			try {
+				setElementos(await obtenerColeccion())
+			} catch {
+				setError('No se pudo cargar tu colección. Verificá que el servidor esté disponible e intentá de nuevo.')
+			}
+		}
+		cargarColeccion()
 	}, [])
 
 	/**
@@ -21,8 +29,13 @@ function Coleccion() {
 	 * @returns {Promise<void>}
 	 */
 	const manejarQuitar = async (album) => {
-		const actualizada = await quitarDeColeccion(album.id)
-		setElementos(actualizada)
+		try {
+			const actualizada = await quitarDeColeccion(album.id)
+			setElementos(actualizada)
+			setError('')
+		} catch {
+			setError('No se pudo quitar el álbum de tu colección. Intentá de nuevo.')
+		}
 	}
 
 	return (
@@ -31,6 +44,9 @@ function Coleccion() {
 				<h2>
 					Mi colección (<span id="contador">{elementos.length}</span>)
 				</h2>
+				{error && (
+					<p role="alert" className="mensaje-error">{error}</p>
+				)}
 				{elementos.length === 0 ? (
 					<p className="coleccion-vacia">Todavía no agregaste álbumes a tu colección.</p>
 				) : (

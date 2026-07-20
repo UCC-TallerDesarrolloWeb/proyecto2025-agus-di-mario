@@ -12,13 +12,28 @@ function Inicio() {
 	const {limpiadoEn} = useOutletContext()
 	const [albumes, setAlbumes] = useState([])
 	const [coleccion, setColeccion] = useState([])
+	const [error, setError] = useState('')
 
 	useEffect(() => {
-		obtenerAlbumes().then(setAlbumes)
+		async function cargarCatalogo() {
+			try {
+				setAlbumes(await obtenerAlbumes())
+			} catch {
+				setError('No se pudo cargar el catálogo. Verificá que el servidor esté disponible e intentá de nuevo.')
+			}
+		}
+		cargarCatalogo()
 	}, [])
 
 	useEffect(() => {
-		obtenerColeccion().then(setColeccion)
+		async function cargarColeccion() {
+			try {
+				setColeccion(await obtenerColeccion())
+			} catch {
+				setError('No se pudo cargar tu colección. Verificá que el servidor esté disponible e intentá de nuevo.')
+			}
+		}
+		cargarColeccion()
 	}, [limpiadoEn])
 
 	const conjuntoColeccion = new Set(coleccion.map(item => item.id))
@@ -28,16 +43,24 @@ function Inicio() {
 	 * @param {Object} album - Álbum a alternar.
 	 */
 	async function setColeccionado(album) {
-		const actualizada = conjuntoColeccion.has(album.id)
-			? await quitarDeColeccion(album.id)
-			: await agregarAColeccion(album)
-		setColeccion(actualizada)
+		try {
+			const actualizada = conjuntoColeccion.has(album.id)
+				? await quitarDeColeccion(album.id)
+				: await agregarAColeccion(album)
+			setColeccion(actualizada)
+			setError('')
+		} catch {
+			setError('No se pudo actualizar tu colección. Intentá de nuevo.')
+		}
 	}
 
 	return (
 		<main>
 			<section id="catalogo">
 				<h2>Álbumes disponibles</h2>
+				{error && (
+					<p role="alert" className="mensaje-error">{error}</p>
+				)}
 				<div className="lista-albumes" id="lista-albumes">
 					{albumes.map(album => (
 						<TarjetaAlbum
