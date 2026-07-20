@@ -37,7 +37,7 @@ function Coleccion() {
 					<div className="lista-coleccion" id="lista-coleccion">
 						{elementos.map(album => (
 							<TarjetaAlbum key={album.id} album={album} variante="coleccion"
-							              onColeccionar={manejarQuitar}>
+								onColeccionar={manejarQuitar}>
 								<SeccionResena album={album}/>
 							</TarjetaAlbum>
 						))}

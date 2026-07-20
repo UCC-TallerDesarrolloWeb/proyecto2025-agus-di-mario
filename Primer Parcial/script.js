@@ -251,33 +251,33 @@ const crearTarjetaColeccion = (album, id, resenaGuardada) => {
 	const idPuntaje = `puntaje-resena-${id}`;
 
 	tarjeta.innerHTML = `
-    <img src="${obtenerRutaImagen(album.imagen)}" alt="${album.nombre}">
-    <div class="info-album">
-      <h3>${album.nombre}</h3>
-      <p>${album.artista}</p>
-    </div>
-  `;
+		<img src="${obtenerRutaImagen(album.imagen)}" alt="${album.nombre}">
+		<div class="info-album">
+			<h3>${album.nombre}</h3>
+			<p>${album.artista}</p>
+		</div>
+	`;
 
 	const seccionResena = document.createElement("div");
 	seccionResena.className = "seccion-resena";
 	seccionResena.innerHTML = `
-    <div class="entradas-resena">
-      <label for="${idResena}" class="sr-only">Escribe tu reseña breve</label>
-      <input id="${idResena}" type="text" placeholder="Escribe tu reseña breve..." maxlength="100" class="texto-resena">
-      <span class="contador-caracteres">0/100</span>
-      <label for="${idPuntaje}" class="sr-only">Selecciona un puntaje del 1 al 10</label>
-      <select id="${idPuntaje}" class="entrada-puntaje">
-        <option value="">Selecciona puntaje</option>
-        ${OPCIONES_PUNTAJE}
-      </select>
-      <button onclick="guardarResena(this)" class="boton-guardar">Guardar</button>
-    </div>
-    <div class="resena-guardada">
-      <p class="texto-resena-guardado"></p>
-      <p class="puntaje-resena-guardado"></p>
-      <button onclick="editarResena(this)" class="boton-editar">Editar</button>
-    </div>
-  `;
+		<div class="entradas-resena">
+			<label for="${idResena}" class="sr-only">Escribe tu reseña breve</label>
+			<input id="${idResena}" type="text" placeholder="Escribe tu reseña breve..." maxlength="100" class="texto-resena">
+			<span class="contador-caracteres">0/100</span>
+			<label for="${idPuntaje}" class="sr-only">Selecciona un puntaje del 1 al 10</label>
+			<select id="${idPuntaje}" class="entrada-puntaje">
+				<option value="">Selecciona puntaje</option>
+				${OPCIONES_PUNTAJE}
+			</select>
+			<button onclick="guardarResena(this)" class="boton-guardar">Guardar</button>
+		</div>
+		<div class="resena-guardada">
+			<p class="texto-resena-guardado"></p>
+			<p class="puntaje-resena-guardado"></p>
+			<button onclick="editarResena(this)" class="boton-editar">Editar</button>
+		</div>
+	`;
 
 	tarjeta.appendChild(seccionResena);
 
@@ -379,15 +379,15 @@ let mostrarCatalogo = (lista = albumes) => {
 		}
 
 		contenido += `
-      <div class="tarjeta-album" data-id="${albumId}">
-        <img src="${obtenerRutaImagen(album.imagen)}" alt="${album.nombre}">
-        <div class="info-album">
-          <h3>${album.nombre}</h3>
-          <p>${album.artista}</p>
-          <span class="estrella" onclick="agregarAColeccion(this)" data-id="${albumId}">\u2606</span>
-        </div>
-      </div>
-    `;
+			<div class="tarjeta-album" data-id="${albumId}">
+				<img src="${obtenerRutaImagen(album.imagen)}" alt="${album.nombre}">
+				<div class="info-album">
+					<h3>${album.nombre}</h3>
+					<p>${album.artista}</p>
+					<span class="estrella" onclick="agregarAColeccion(this)" data-id="${albumId}">\u2606</span>
+				</div>
+			</div>
+		`;
 	});
 
 	contenedor.innerHTML = contenido;
