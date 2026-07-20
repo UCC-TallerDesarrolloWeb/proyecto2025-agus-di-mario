@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import {useOutletContext} from 'react-router-dom'
 import TarjetaAlbum from '@components/TarjetaAlbum'
 import SeccionResena from '@components/SeccionResena'
 import {obtenerColeccion, quitarDeColeccion} from '@api/albumes'
@@ -9,10 +10,15 @@ import {obtenerColeccion, quitarDeColeccion} from '@api/albumes'
  * @returns {JSX.Element}
  */
 function Coleccion() {
+	const {actualizarConteoColeccion} = useOutletContext()
 	const [elementos, setElementos] = useState([])
 
 	useEffect(() => {
-		obtenerColeccion().then(setElementos)
+		obtenerColeccion().then(data => {
+			setElementos(data)
+			actualizarConteoColeccion?.(data.length)
+		})
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- solo debe ejecutarse al montar
 	}, [])
 
 	/**
@@ -23,6 +29,7 @@ function Coleccion() {
 	const manejarQuitar = async (album) => {
 		const actualizada = await quitarDeColeccion(album.id)
 		setElementos(actualizada)
+		actualizarConteoColeccion?.(actualizada.length)
 	}
 
 	return (

@@ -7,6 +7,10 @@ jest.mock('@api/albumes', () => ({
 	quitarDeColeccion: jest.fn(),
 }))
 
+jest.mock('react-router-dom', () => ({
+	useOutletContext: jest.fn(() => ({actualizarConteoColeccion: jest.fn()})),
+}))
+
 jest.mock('@components/SeccionResena', () => ({
 	__esModule: true,
 	default: () => <div data-testid="seccion-resena"/>,

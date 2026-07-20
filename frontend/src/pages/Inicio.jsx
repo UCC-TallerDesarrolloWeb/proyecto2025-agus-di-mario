@@ -9,7 +9,7 @@ import {agregarAColeccion, obtenerAlbumes, obtenerColeccion, quitarDeColeccion,}
  * @returns {JSX.Element}
  */
 function Inicio() {
-	const {limpiadoEn} = useOutletContext()
+	const {limpiadoEn, actualizarConteoColeccion} = useOutletContext()
 	const [albumes, setAlbumes] = useState([])
 	const [coleccion, setColeccion] = useState([])
 
@@ -18,7 +18,11 @@ function Inicio() {
 	}, [])
 
 	useEffect(() => {
-		obtenerColeccion().then(setColeccion)
+		obtenerColeccion().then(data => {
+			setColeccion(data)
+			actualizarConteoColeccion?.(data.length)
+		})
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- solo debe reaccionar a limpiadoEn
 	}, [limpiadoEn])
 
 	const conjuntoColeccion = new Set(coleccion.map(item => item.id))
@@ -32,6 +36,7 @@ function Inicio() {
 			? await quitarDeColeccion(album.id)
 			: await agregarAColeccion(album)
 		setColeccion(actualizada)
+		actualizarConteoColeccion?.(actualizada.length)
 	}
 
 	return (
