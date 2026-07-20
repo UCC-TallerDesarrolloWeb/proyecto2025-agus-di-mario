@@ -2,7 +2,9 @@
 
 Proyecto final de **Taller de Desarrollo Web 2025** — Universidad Católica de Córdoba.
 
-Aplicación web que permite explorar un catálogo de 25 álbumes musicales, armar una colección personal y escribir reseñas con puntaje para cada disco guardado. El repositorio contiene dos etapas de desarrollo: el prototipo en HTML/CSS/JS vanilla (Primer Parcial) y la versión final en React con Vite (entrega final).
+Aplicación web que permite explorar un catálogo de 25 álbumes musicales, armar una colección personal y escribir reseñas
+con puntaje para cada disco guardado. El repositorio contiene dos etapas de desarrollo: el prototipo en HTML/CSS/JS
+vanilla (Primer Parcial) y la versión final en React con Vite (entrega final).
 
 **Autor:** Agustín Di Mario
 
@@ -45,19 +47,21 @@ Aplicación web que permite explorar un catálogo de 25 álbumes musicales, arma
 
 La app tiene dos páginas (rutas):
 
-| Ruta | Qué muestra |
-|---|---|
-| `/` | Catálogo completo de 25 álbumes. Cada uno tiene un botón estrella para agregarlo a la colección o quitarlo. |
+| Ruta            | Qué muestra                                                                                                                                |
+|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| `/`             | Catálogo completo de 25 álbumes. Cada uno tiene un botón estrella para agregarlo a la colección o quitarlo.                                |
 | `/mi-coleccion` | Los álbumes que el usuario guardó. Muestra un contador, un botón para quitar cada álbum y un formulario de reseña con puntaje del 1 al 10. |
 
 Funcionalidades principales:
+
 - **Agregar/quitar álbumes** de la colección con un solo clic en la estrella.
 - **Escribir, guardar y editar reseñas** con un campo de texto y un puntaje (1–10).
 - **Limpiar la colección completa** con botón en el encabezado y confirmación inline.
 - **Feedback visual** para cada acción: mensajes de éxito/error en el DOM, sin `alert()`.
 - **Diseño responsive**: la grilla de álbumes pasa de 3 columnas (escritorio) a 2 (tablet) a 1 (móvil).
 
-Los datos persisten en **json-server**, una API REST que lee y escribe en `db.json`. Al recargar la página, la colección y las reseñas se conservan.
+Los datos persisten en **json-server**, una API REST que lee y escribe en `db.json`. Al recargar la página, la colección
+y las reseñas se conservan.
 
 ---
 
@@ -128,19 +132,26 @@ proyecto2025-agus-di-mario/
 
 ### React 19
 
-**Qué es:** Librería de JavaScript para construir interfaces de usuario declarativas. La UI se describe como un árbol de **componentes** — funciones que reciben `props` y retornan JSX. Cuando el estado cambia, React recalcula qué partes del árbol virtual cambiaron y actualiza solo esas partes en el DOM real (reconciliación).
+**Qué es:** Librería de JavaScript para construir interfaces de usuario declarativas. La UI se describe como un árbol de
+**componentes** — funciones que reciben `props` y retornan JSX. Cuando el estado cambia, React recalcula qué partes del
+árbol virtual cambiaron y actualiza solo esas partes en el DOM real (reconciliación).
 
-**Para qué se usa aquí:** Toda la interfaz está construida con componentes React. El estado local (`useState`) almacena los datos en memoria mientras la página está abierta; los efectos (`useEffect`) sincronizan ese estado con la API cuando corresponde.
+**Para qué se usa aquí:** Toda la interfaz está construida con componentes React. El estado local (`useState`) almacena
+los datos en memoria mientras la página está abierta; los efectos (`useEffect`) sincronizan ese estado con la API cuando
+corresponde.
 
-**Por qué React 19:** Es la versión estable más reciente al momento del proyecto. En este proyecto se usa la API clásica de hooks (sin las Server Components de React 19), así que la versión específica no impacta en el código.
+**Por qué React 19:** Es la versión estable más reciente al momento del proyecto. En este proyecto se usa la API clásica
+de hooks (sin las Server Components de React 19), así que la versión específica no impacta en el código.
 
 ---
 
 ### React Router DOM v7
 
-**Qué es:** Librería de enrutamiento para aplicaciones React de página única (SPA). En lugar de cargar un HTML diferente para cada URL, React Router intercepta la navegación y renderiza el componente correcto sin recargar la página.
+**Qué es:** Librería de enrutamiento para aplicaciones React de página única (SPA). En lugar de cargar un HTML diferente
+para cada URL, React Router intercepta la navegación y renderiza el componente correcto sin recargar la página.
 
 **Componentes/hooks utilizados:**
+
 - `<BrowserRouter>` — habilita el routing usando la **History API** del navegador (URLs limpias, sin `#`).
 - `<Routes>` — contenedor que evalúa qué `<Route>` coincide con la URL actual.
 - `<Route path="..." element={...}>` — mapea una URL a un componente.
@@ -154,32 +165,36 @@ proyecto2025-agus-di-mario/
 
 ### Vite 7
 
-**Qué es:** Herramienta de build y servidor de desarrollo. A diferencia de Webpack (que empaqueta todo antes de servir), Vite sirve cada módulo individualmente con ESM nativo durante el desarrollo, lo que hace que el arranque sea casi instantáneo. Para producción, usa Rollup internamente y genera un bundle optimizado en `dist/`.
+**Qué es:** Herramienta de build y servidor de desarrollo. A diferencia de Webpack (que empaqueta todo antes de servir),
+Vite sirve cada módulo individualmente con ESM nativo durante el desarrollo, lo que hace que el arranque sea casi
+instantáneo. Para producción, usa Rollup internamente y genera un bundle optimizado en `dist/`.
 
 **Para qué se usa aquí:**
-- `npm run dev` — levanta el servidor de desarrollo con **Hot Module Replacement (HMR)**: los cambios en el código se reflejan en el navegador sin recargar la página.
+
+- `npm run dev` — levanta el servidor de desarrollo con **Hot Module Replacement (HMR)**: los cambios en el código se
+  reflejan en el navegador sin recargar la página.
 - `npm run build` — genera los archivos de producción en `frontend/dist/`.
 - `npm run preview` — sirve el build de producción localmente para verificarlo antes de entregar.
-- **Alias de imports** — configurados en `vite.config.js` para importar módulos con rutas cortas (`@components/...` en lugar de `../../components/...`).
-- **Archivos estáticos** — todo lo que está en `public/` se sirve tal cual en la raíz. Por eso las imágenes en `public/albums/` son accesibles desde `/albums/nombre.jpg`.
+- **Alias de imports** — configurados en `vite.config.js` para importar módulos con rutas cortas (`@components/...` en
+  lugar de `../../components/...`).
+- **Archivos estáticos** — todo lo que está en `public/` se sirve tal cual en la raíz. Por eso las imágenes en
+  `public/albums/` son accesibles desde `/albums/nombre.jpg`.
 
 ---
 
 ### json-server
 
-**Qué es:** Paquete de Node.js que convierte un archivo JSON en una API REST completa, sin escribir ningún código de servidor. Lee el archivo `db.json` y expone endpoints CRUD automáticamente para cada clave del objeto.
+**Qué es:** Paquete de Node.js que convierte un archivo JSON en una API REST completa, sin escribir ningún código de
+servidor. Lee el archivo `db.json` y expone endpoints CRUD automáticamente para cada clave del objeto.
 
-**Para qué se usa aquí:** Simula el backend. Permite usar `fetch` real contra endpoints reales (`/albumes`, `/coleccion`) sin necesitar un servidor real.
+**Para qué se usa aquí:** Simula el backend. Permite usar `fetch` real contra endpoints reales (`/albumes`,
+`/coleccion`) sin necesitar un servidor real.
 
 **Endpoints que genera a partir de `db.json`:**
-| Método | URL | Acción |
-|---|---|---|
-| `GET` | `/albumes` | Retorna todos los álbumes |
-| `GET` | `/coleccion` | Retorna todos los items de la colección |
-| `GET` | `/coleccion/:id` | Retorna un item específico |
-| `POST` | `/coleccion` | Agrega un nuevo item |
-| `PATCH` | `/coleccion/:id` | Actualiza parcialmente un item |
-| `DELETE` | `/coleccion/:id` | Elimina un item |
+| Método | URL | Acción | |---|---|---| | `GET` | `/albumes` | Retorna todos los álbumes | | `GET` | `/coleccion` |
+Retorna todos los items de la colección | | `GET` | `/coleccion/:id` | Retorna un item específico | | `POST` |
+`/coleccion` | Agrega un nuevo item | | `PATCH` | `/coleccion/:id` | Actualiza parcialmente un item | | `DELETE` |
+`/coleccion/:id` | Elimina un item |
 
 Se ejecuta con `npm run server` y escucha en `http://localhost:3001`.
 
@@ -187,25 +202,32 @@ Se ejecuta con `npm run server` y escucha en `http://localhost:3001`.
 
 ### SCSS / Sass
 
-**Qué es:** Preprocesador de CSS. Permite escribir CSS con superpoderes: variables, mixins (bloques de estilos reutilizables), anidamiento de selectores y más. El archivo `.scss` se compila a CSS plano que entiende el navegador.
+**Qué es:** Preprocesador de CSS. Permite escribir CSS con superpoderes: variables, mixins (bloques de estilos
+reutilizables), anidamiento de selectores y más. El archivo `.scss` se compila a CSS plano que entiende el navegador.
 
-**Para qué se usa aquí:** El archivo `src/styles/global.scss` contiene todos los estilos de la app. Se importa una sola vez en `App.jsx` con `import '@styles/global.scss'`. Vite detecta la extensión `.scss` y usa el paquete `sass` para compilarlo.
+**Para qué se usa aquí:** El archivo `src/styles/global.scss` contiene todos los estilos de la app. Se importa una sola
+vez en `App.jsx` con `import '@styles/global.scss'`. Vite detecta la extensión `.scss` y usa el paquete `sass` para
+compilarlo.
 
 ---
 
 ### Jest 30
 
-**Qué es:** Framework de testing para JavaScript. Provee: `describe` (agrupa tests), `test` (define un caso), `expect` + matchers (`toBe`, `toEqual`, etc.), `jest.fn()` (funciones mock), y soporte para código asíncrono.
+**Qué es:** Framework de testing para JavaScript. Provee: `describe` (agrupa tests), `test` (define un caso), `expect` +
+matchers (`toBe`, `toEqual`, etc.), `jest.fn()` (funciones mock), y soporte para código asíncrono.
 
-**Para qué se usa aquí:** Corre la suite de tests con `npm test`. Los 4 archivos en `src/__tests__/` prueban componentes y funciones de API de forma aislada.
+**Para qué se usa aquí:** Corre la suite de tests con `npm test`. Los 4 archivos en `src/__tests__/` prueban componentes
+y funciones de API de forma aislada.
 
 ---
 
 ### React Testing Library
 
-**Qué es:** Librería que facilita testear componentes React de la misma manera en que un usuario los usaría: buscando elementos por su texto visible, su rol ARIA o su etiqueta, en lugar de por selectores CSS o nombres de clase internos.
+**Qué es:** Librería que facilita testear componentes React de la misma manera en que un usuario los usaría: buscando
+elementos por su texto visible, su rol ARIA o su etiqueta, en lugar de por selectores CSS o nombres de clase internos.
 
 **Funciones clave usadas:**
+
 - `render(<Componente/>)` — monta el componente en un DOM virtual (jsdom).
 - `screen.getByText(texto)` — encuentra un elemento por su texto visible.
 - `screen.getByRole(rol, {name})` — encuentra por rol ARIA (button, heading, alert…).
@@ -217,31 +239,39 @@ Se ejecuta con `npm run server` y escucha en `http://localhost:3001`.
 
 ### Babel
 
-**Qué es:** Transpilador de JavaScript. Convierte código moderno (JSX, ES6+, async/await) a JavaScript que puede entender un entorno específico.
+**Qué es:** Transpilador de JavaScript. Convierte código moderno (JSX, ES6+, async/await) a JavaScript que puede
+entender un entorno específico.
 
-**Por qué se necesita aquí:** Jest corre en Node.js, que no entiende JSX ni los alias de Vite. Babel transforma los archivos de test antes de que Jest los ejecute.
+**Por qué se necesita aquí:** Jest corre en Node.js, que no entiende JSX ni los alias de Vite. Babel transforma los
+archivos de test antes de que Jest los ejecute.
 
 ---
 
 ### ESLint
 
-**Qué es:** Herramienta de análisis estático de código. Detecta problemas potenciales (variables no usadas, violaciones de reglas de hooks de React) sin ejecutar el código.
+**Qué es:** Herramienta de análisis estático de código. Detecta problemas potenciales (variables no usadas, violaciones
+de reglas de hooks de React) sin ejecutar el código.
 
-**Para qué se usa aquí:** `npm run lint` analiza todos los archivos `.js` y `.jsx` y reporta errores. El CI o la entrega debe pasar sin errores de lint.
+**Para qué se usa aquí:** `npm run lint` analiza todos los archivos `.js` y `.jsx` y reporta errores. El CI o la entrega
+debe pasar sin errores de lint.
 
 ---
 
 ### identity-obj-proxy
 
-**Qué es:** Módulo que actúa como proxy para importaciones de CSS/SCSS en Jest. Cuando un componente importa un archivo `.scss`, Jest no sabe qué hacer con él (no es JavaScript). Este proxy retorna el nombre de la clase como string, así el componente puede renderizarse sin errores.
+**Qué es:** Módulo que actúa como proxy para importaciones de CSS/SCSS en Jest. Cuando un componente importa un archivo
+`.scss`, Jest no sabe qué hacer con él (no es JavaScript). Este proxy retorna el nombre de la clase como string, así el
+componente puede renderizarse sin errores.
 
-**Ejemplo:** `styles.miClase` retorna `"miClase"` — el test puede verificar que el elemento tiene esa clase sin necesitar compilar SCSS.
+**Ejemplo:** `styles.miClase` retorna `"miClase"` — el test puede verificar que el elemento tiene esa clase sin
+necesitar compilar SCSS.
 
 ---
 
 ## 4. Instalación y puesta en marcha
 
 ### Requisitos previos
+
 - Node.js 18 o superior
 - npm 9 o superior
 
@@ -262,18 +292,23 @@ npm install
 La app necesita **dos terminales abiertas simultáneamente**, ambas desde la carpeta `frontend/`:
 
 **Terminal 1 — API mock:**
+
 ```bash
 npm run server
 ```
+
 Levanta json-server en `http://localhost:3001`. Sirve los datos de `db.json` como API REST.
 
 **Terminal 2 — App React:**
+
 ```bash
 npm run dev
 ```
+
 Levanta Vite en `http://localhost:5173`. Sirve la aplicación React con recarga en caliente.
 
-**Por qué dos terminales:** La app React corre en el puerto 5173 y hace peticiones `fetch` al puerto 3001. Son dos procesos independientes. Sin json-server corriendo, la app renderiza pero no puede cargar ni guardar datos.
+**Por qué dos terminales:** La app React corre en el puerto 5173 y hace peticiones `fetch` al puerto 3001. Son dos
+procesos independientes. Sin json-server corriendo, la app renderiza pero no puede cargar ni guardar datos.
 
 Abrir el navegador en `http://localhost:5173`.
 
@@ -283,18 +318,20 @@ Abrir el navegador en `http://localhost:5173`.
 
 Todos los comandos se corren desde la carpeta `frontend/`.
 
-| Script | Comando real | Qué hace |
-|---|---|---|
-| `npm run dev` | `vite` | Inicia el servidor de desarrollo Vite con HMR en `localhost:5173` |
-| `npm run server` | `json-server db.json --port 3001` | Inicia la API mock en `localhost:3001` |
-| `npm run build` | `vite build` | Compila la app para producción y genera `dist/` |
-| `npm run lint` | `eslint .` | Analiza todos los archivos JS/JSX con ESLint |
-| `npm run preview` | `vite preview` | Sirve el contenido de `dist/` localmente |
-| `npm test` | `jest` | Corre todos los tests de `src/__tests__/` |
+| Script            | Comando real                      | Qué hace                                                          |
+|-------------------|-----------------------------------|-------------------------------------------------------------------|
+| `npm run dev`     | `vite`                            | Inicia el servidor de desarrollo Vite con HMR en `localhost:5173` |
+| `npm run server`  | `json-server db.json --port 3001` | Inicia la API mock en `localhost:3001`                            |
+| `npm run build`   | `vite build`                      | Compila la app para producción y genera `dist/`                   |
+| `npm run lint`    | `eslint .`                        | Analiza todos los archivos JS/JSX con ESLint                      |
+| `npm run preview` | `vite preview`                    | Sirve el contenido de `dist/` localmente                          |
+| `npm test`        | `jest`                            | Corre todos los tests de `src/__tests__/`                         |
 
 **Notas importantes:**
+
 - `npm run build` debe completarse sin errores antes de entregar.
-- `npm run preview` sirve el build estático; en este modo **no** hay conexión a json-server (es solo para verificar que el bundle se construyó bien).
+- `npm run preview` sirve el build estático; en este modo **no** hay conexión a json-server (es solo para verificar que
+  el bundle se construyó bien).
 - `npm test -- --testPathPattern=NombreArchivo` corre solo los tests que coincidan.
 - `npm test -- --watch` activa el modo watch: re-corre los tests afectados cuando se guarda un archivo.
 
@@ -304,9 +341,11 @@ Todos los comandos se corren desde la carpeta `frontend/`.
 
 ### Qué es json-server y cómo funciona
 
-json-server lee el archivo `db.json` y expone automáticamente un endpoint REST por cada clave del objeto raíz. No requiere escribir ni una línea de código de servidor.
+json-server lee el archivo `db.json` y expone automáticamente un endpoint REST por cada clave del objeto raíz. No
+requiere escribir ni una línea de código de servidor.
 
-Cuando el usuario agrega un álbum, json-server agrega un objeto al array `coleccion` dentro de `db.json` y lo persiste en disco. Al recargar la página, los datos siguen ahí.
+Cuando el usuario agrega un álbum, json-server agrega un objeto al array `coleccion` dentro de `db.json` y lo persiste
+en disco. Al recargar la página, los datos siguen ahí.
 
 ### Estructura del archivo
 
@@ -318,6 +357,7 @@ Cuando el usuario agrega un álbum, json-server agrega un objeto al array `colec
 ```
 
 **Recurso `albumes` — catálogo fijo (solo lectura en la práctica):**
+
 ```json
 {
   "id": "1",
@@ -327,14 +367,15 @@ Cuando el usuario agrega un álbum, json-server agrega un objeto al array `colec
 }
 ```
 
-| Campo | Tipo | Descripción |
-|---|---|---|
-| `id` | string | Identificador único. **String**, no número (ver nota abajo). |
-| `nombre` | string | Título del álbum. |
-| `artista` | string | Nombre del artista o banda. |
-| `imagen` | string | Ruta absoluta a la imagen en `public/albums/`. |
+| Campo     | Tipo   | Descripción                                                  |
+|-----------|--------|--------------------------------------------------------------|
+| `id`      | string | Identificador único. **String**, no número (ver nota abajo). |
+| `nombre`  | string | Título del álbum.                                            |
+| `artista` | string | Nombre del artista o banda.                                  |
+| `imagen`  | string | Ruta absoluta a la imagen en `public/albums/`.               |
 
 **Recurso `coleccion` — colección del usuario (lectura y escritura):**
+
 ```json
 {
   "id": "5",
@@ -346,6 +387,7 @@ Cuando el usuario agrega un álbum, json-server agrega un objeto al array `colec
 ```
 
 El campo extra `resena` es `null` cuando el usuario aún no escribió una reseña, y un objeto cuando sí:
+
 ```json
 {
   "resena": {
@@ -357,23 +399,32 @@ El campo extra `resena` es `null` cuando el usuario aún no escribió una reseñ
 
 ### Por qué los IDs son strings
 
-json-server v1 normaliza los IDs de los recursos a string internamente. Al hacer `GET /coleccion/5`, la URL usa el string `"5"`. Si los IDs en `db.json` fueran números, habría inconsistencias entre lo que viene de la API y lo que se compara con `Set.has(album.id)`. Al dejarlos como strings desde el principio, las comparaciones son siempre consistentes.
+json-server v1 normaliza los IDs de los recursos a string internamente. Al hacer `GET /coleccion/5`, la URL usa el
+string `"5"`. Si los IDs en `db.json` fueran números, habría inconsistencias entre lo que viene de la API y lo que se
+compara con `Set.has(album.id)`. Al dejarlos como strings desde el principio, las comparaciones son siempre
+consistentes.
 
 ### Dónde viven las imágenes
 
-Las portadas están en `frontend/public/albums/`. Vite sirve todo lo que está dentro de `public/` como archivos estáticos desde la raíz del servidor, sin procesarlos. Por eso las rutas en `db.json` son absolutas: `/albums/nombre.jpg`. En el navegador, esa URL resuelve directamente al archivo.
+Las portadas están en `frontend/public/albums/`. Vite sirve todo lo que está dentro de `public/` como archivos estáticos
+desde la raíz del servidor, sin procesarlos. Por eso las rutas en `db.json` son absolutas: `/albums/nombre.jpg`. En el
+navegador, esa URL resuelve directamente al archivo.
 
-**Importante:** Las imágenes **no se importan con `import`** en el código React. Se usan directamente como strings en el atributo `src`. Importarlas sería incorrecto porque Vite las optimizaría y cambiaría el nombre del archivo, rompiendo la consistencia con `db.json`.
+**Importante:** Las imágenes **no se importan con `import`** en el código React. Se usan directamente como strings en el
+atributo `src`. Importarlas sería incorrecto porque Vite las optimizaría y cambiaría el nombre del archivo, rompiendo la
+consistencia con `db.json`.
 
 ### Los 25 álbumes del catálogo
 
-El catálogo incluye discos de artistas como blink-182, Pierce The Veil, Green Day, Foo Fighters, Nirvana, Bring Me The Horizon, Sum 41, PVRIS, Knuckle Puck, The Story So Far, Citizen y Man Overboard, entre otros.
+El catálogo incluye discos de artistas como blink-182, Pierce The Veil, Green Day, Foo Fighters, Nirvana, Bring Me The
+Horizon, Sum 41, PVRIS, Knuckle Puck, The Story So Far, Citizen y Man Overboard, entre otros.
 
 ---
 
 ## 7. Capa de API — `src/api/albumes.js`
 
-Este archivo concentra **todas las comunicaciones con json-server**. Ningún componente ni página hace `fetch` directamente — siempre llaman a una de estas funciones.
+Este archivo concentra **todas las comunicaciones con json-server**. Ningún componente ni página hace `fetch`
+directamente — siempre llaman a una de estas funciones.
 
 Todas las funciones son `async` y usan `await`. No hay `.then()` ni `.catch()` en el proyecto.
 
@@ -431,11 +482,14 @@ export const agregarAColeccion = async (album) => {
 ```
 
 - **Paso 1:** Obtiene la colección actual para verificar si el álbum ya existe.
-- **Paso 2:** `.some(i => i.id === album.id)` devuelve `true` si algún item tiene el mismo ID. Si ya existe, se omite el POST (evita duplicados).
+- **Paso 2:** `.some(i => i.id === album.id)` devuelve `true` si algún item tiene el mismo ID. Si ya existe, se omite el
+  POST (evita duplicados).
 - **Paso 3 (si no existe):** Hace `POST /coleccion` con el álbum completo más `resena: null`.
-  - `method: 'POST'` — indica que es una creación.
-  - `headers: {'Content-Type': 'application/json'}` — le dice al servidor que el body es JSON. Sin este header, json-server no parsea el body.
-  - `body: JSON.stringify({...album, resena: null})` — serializa el objeto JavaScript a string JSON. El spread `...album` copia todas las propiedades del álbum; `resena: null` agrega el campo extra.
+    - `method: 'POST'` — indica que es una creación.
+    - `headers: {'Content-Type': 'application/json'}` — le dice al servidor que el body es JSON. Sin este header,
+      json-server no parsea el body.
+    - `body: JSON.stringify({...album, resena: null})` — serializa el objeto JavaScript a string JSON. El spread
+      `...album` copia todas las propiedades del álbum; `resena: null` agrega el campo extra.
 - **Paso 4:** Retorna la colección actualizada (nueva consulta al servidor).
 
 ---
@@ -469,7 +523,8 @@ export const guardarResena = async (albumId, resena) => {
 ```
 
 - Hace `PATCH /coleccion/:id` con `{ resena: { texto, puntaje } }` en el body.
-- **`PATCH` vs `PUT`:** `PATCH` actualiza **solo los campos enviados**, manteniendo el resto. `PUT` reemplaza el objeto completo. Aquí se usa `PATCH` porque solo se quiere actualizar el campo `resena`, sin tocar `nombre`, `artista`, etc.
+- **`PATCH` vs `PUT`:** `PATCH` actualiza **solo los campos enviados**, manteniendo el resto. `PUT` reemplaza el objeto
+  completo. Aquí se usa `PATCH` porque solo se quiere actualizar el campo `resena`, sin tocar `nombre`, `artista`, etc.
 - `r.ok` es `true` si el status HTTP es 200–299. Si falla, retorna `null` en lugar de explotar.
 - Si la respuesta es exitosa, retorna el objeto actualizado.
 
@@ -488,7 +543,8 @@ export const obtenerResena = async (albumId) => {
 
 - Hace `GET /coleccion/:id`.
 - Si el álbum no está en la colección, el servidor retorna 404 y `r.ok` es `false`. Retorna `null`.
-- Si existe, accede a `item.resena`. El operador `?.` (optional chaining) evita un error si `item` fuera `null`. El operador `??` (nullish coalescing) retorna `null` si `item.resena` es `undefined` o `null`.
+- Si existe, accede a `item.resena`. El operador `?.` (optional chaining) evita un error si `item` fuera `null`. El
+  operador `??` (nullish coalescing) retorna `null` si `item.resena` es `undefined` o `null`.
 
 ---
 
@@ -505,7 +561,8 @@ export const limpiarDatos = async () => {
 
 - Obtiene todos los items de la colección.
 - `coleccion.map(i => fetch(...DELETE...))` crea un array de Promises, una por cada DELETE.
-- `Promise.all(...)` lanza **todos los DELETE en paralelo** y espera a que todos terminen. Es más rápido que borrar de a uno en secuencia (que requeriría `for...of` con `await`).
+- `Promise.all(...)` lanza **todos los DELETE en paralelo** y espera a que todos terminen. Es más rápido que borrar de a
+  uno en secuencia (que requeriría `for...of` con `await`).
 - No retorna nada. El componente que la llama (Layout) se encarga de navegar a `/` y recargar estado.
 
 ---
@@ -535,15 +592,19 @@ export const limpiarDatos = async () => {
 ```
 
 Línea por línea:
-- `<!doctype html>` — declara que el documento es HTML5. Sin esto algunos navegadores entran en "modo quirks" y renderizan distinto.
+
+- `<!doctype html>` — declara que el documento es HTML5. Sin esto algunos navegadores entran en "modo quirks" y
+  renderizan distinto.
 - `lang="es"` — indica el idioma del contenido. Lo usan lectores de pantalla y motores de búsqueda.
 - `charset="UTF-8"` — codificación de caracteres. Permite tildes, ñ y cualquier carácter Unicode.
 - `rel="icon"` — favicon (ícono de la pestaña).
-- `viewport` — hace que la página sea responsive. `width=device-width` usa el ancho real del dispositivo; `initial-scale=1.0` no hace zoom al cargar.
+- `viewport` — hace que la página sea responsive. `width=device-width` usa el ancho real del dispositivo;
+  `initial-scale=1.0` no hace zoom al cargar.
 - `author`, `description`, `keywords` — metadatos para SEO y buenas prácticas.
 - Google Fonts `Inter` — tipografía del proyecto, en pesos 400 (normal), 600 (semibold) y 700 (bold).
 - `<div id="root">` — el único elemento HTML que React necesita. Toda la UI se inyecta aquí.
-- `<script type="module">` — carga `main.jsx` como módulo ES. Vite intercepta esta carga y sirve el módulo procesado. En producción, Vite reemplaza este script por el bundle compilado.
+- `<script type="module">` — carga `main.jsx` como módulo ES. Vite intercepta esta carga y sirve el módulo procesado. En
+  producción, Vite reemplaza este script por el bundle compilado.
 
 ---
 
@@ -564,10 +625,14 @@ createRoot(document.getElementById('root')).render(
 )
 ```
 
-- `createRoot(document.getElementById('root'))` — crea un "root" de React conectado al `<div id="root">` del HTML. Esto es la API de React 18/19 (la anterior era `ReactDOM.render`).
+- `createRoot(document.getElementById('root'))` — crea un "root" de React conectado al `<div id="root">` del HTML. Esto
+  es la API de React 18/19 (la anterior era `ReactDOM.render`).
 - `.render(...)` — renderiza el árbol de componentes dentro de ese root.
-- `<StrictMode>` — modo de desarrollo que ayuda a detectar problemas. En modo estricto, React ejecuta cada efecto y cada renderizado **dos veces** (solo en desarrollo) para detectar side effects no declarados o estados que cambian sin ser controlados. No afecta el comportamiento en producción.
-- `<BrowserRouter>` — activa el routing. Escucha cambios en la URL (usando la History API del navegador) y hace que los hooks `useNavigate`, `useLocation`, y los componentes `<Routes>` funcionen. Debe envolver toda la app.
+- `<StrictMode>` — modo de desarrollo que ayuda a detectar problemas. En modo estricto, React ejecuta cada efecto y cada
+  renderizado **dos veces** (solo en desarrollo) para detectar side effects no declarados o estados que cambian sin ser
+  controlados. No afecta el comportamiento en producción.
+- `<BrowserRouter>` — activa el routing. Escucha cambios en la URL (usando la History API del navegador) y hace que los
+  hooks `useNavigate`, `useLocation`, y los componentes `<Routes>` funcionen. Debe envolver toda la app.
 - `<Aplicacion/>` — el componente raíz definido en `App.jsx`.
 
 ---
@@ -597,14 +662,20 @@ function Aplicacion() {
 export default Aplicacion
 ```
 
-- `import '@styles/global.scss'` — importa los estilos globales **una sola vez** aquí. Al ser el componente raíz, los estilos se aplican a toda la app.
-- `<div className="app-shell">` — el div raíz. En SCSS tiene `display: flex; flex-direction: column; min-height: 100vh`, lo que permite que el footer quede pegado al fondo aunque la página tenga poco contenido.
+- `import '@styles/global.scss'` — importa los estilos globales **una sola vez** aquí. Al ser el componente raíz, los
+  estilos se aplican a toda la app.
+- `<div className="app-shell">` — el div raíz. En SCSS tiene `display: flex; flex-direction: column; min-height: 100vh`,
+  lo que permite que el footer quede pegado al fondo aunque la página tenga poco contenido.
 - `<Routes>` — evalúa cada `<Route>` y renderiza solo la que coincide con la URL actual.
-- `<Route element={<Layout/>}>` — ruta **padre sin `path`**. Al no tener `path`, siempre coincide. Layout se renderiza para todas las rutas hijas. Es el patrón **Nested Routes** de React Router.
-- `<Route path="/" element={<Inicio/>}/>` — cuando la URL es exactamente `/`, renderiza `<Inicio>` dentro del `<Outlet>` de Layout.
+- `<Route element={<Layout/>}>` — ruta **padre sin `path`**. Al no tener `path`, siempre coincide. Layout se renderiza
+  para todas las rutas hijas. Es el patrón **Nested Routes** de React Router.
+- `<Route path="/" element={<Inicio/>}/>` — cuando la URL es exactamente `/`, renderiza `<Inicio>` dentro del `<Outlet>`
+  de Layout.
 - `<Route path="/mi-coleccion" element={<Coleccion/>}/>` — lo mismo para `/mi-coleccion`.
 
-**Por qué el patrón Layout + Outlet:** Sin este patrón, habría que repetir `<Encabezado>` y `<Pie>` en cada página. Con Outlet, esos componentes se renderizan una sola vez en Layout y **nunca se desmontan** al navegar, lo que es más eficiente y evita parpadeos.
+**Por qué el patrón Layout + Outlet:** Sin este patrón, habría que repetir `<Encabezado>` y `<Pie>` en cada página. Con
+Outlet, esos componentes se renderizan una sola vez en Layout y **nunca se desmontan** al navegar, lo que es más
+eficiente y evita parpadeos.
 
 ---
 
@@ -658,22 +729,33 @@ function Layout() {
 ```
 
 **Estado:**
-- `limpiadoEn` — número (timestamp Unix en ms). Se actualiza con `Date.now()` cada vez que se limpia la colección. Las páginas hijas lo reciben como contexto y lo usan como dependencia de sus `useEffect` para recargar datos.
+
+- `limpiadoEn` — número (timestamp Unix en ms). Se actualiza con `Date.now()` cada vez que se limpia la colección. Las
+  páginas hijas lo reciben como contexto y lo usan como dependencia de sus `useEffect` para recargar datos.
 - `mensajeGlobal` — string con el mensaje de confirmación. Vacío significa "no mostrar nada".
 
 **Efectos:**
-- El primer `useEffect` depende de `mensajeGlobal`. Cada vez que el mensaje cambia a un string no vacío, programa un `setTimeout` de 3 segundos para borrarlo. La función de cleanup (`return () => clearTimeout(t)`) cancela el timer si el mensaje cambia nuevamente antes de que se cumplan los 3 segundos, evitando múltiples timers simultáneos.
-- El segundo `useEffect` depende de `location.pathname`. Borra el mensaje cuando el usuario navega a otra página (para que no quede flotando al cambiar de ruta).
+
+- El primer `useEffect` depende de `mensajeGlobal`. Cada vez que el mensaje cambia a un string no vacío, programa un
+  `setTimeout` de 3 segundos para borrarlo. La función de cleanup (`return () => clearTimeout(t)`) cancela el timer si
+  el mensaje cambia nuevamente antes de que se cumplan los 3 segundos, evitando múltiples timers simultáneos.
+- El segundo `useEffect` depende de `location.pathname`. Borra el mensaje cuando el usuario navega a otra página (para
+  que no quede flotando al cambiar de ruta).
 
 **`manejarLimpiar()`:**
+
 1. Llama a `limpiarDatos()` (DELETE de todos los items).
 2. Pone el mensaje de confirmación.
-3. Actualiza `limpiadoEn` con el timestamp actual. Cualquier número distinto de `null` disparará el effect de recarga en `Inicio.jsx`.
+3. Actualiza `limpiadoEn` con el timestamp actual. Cualquier número distinto de `null` disparará el effect de recarga en
+   `Inicio.jsx`.
 4. Navega a `/` programáticamente con `navigate('/')`.
 
-**`<Outlet context={{limpiadoEn}}>`:** El prop `context` de `<Outlet>` es el mecanismo oficial de React Router para que el padre (Layout) le pase datos a sus hijos (Inicio, Coleccion) sin usar Context de React ni prop drilling. Los hijos lo reciben con `useOutletContext()`.
+**`<Outlet context={{limpiadoEn}}>`:** El prop `context` de `<Outlet>` es el mecanismo oficial de React Router para que
+el padre (Layout) le pase datos a sus hijos (Inicio, Coleccion) sin usar Context de React ni prop drilling. Los hijos lo
+reciben con `useOutletContext()`.
 
-**`<p role="status">`:** `role="status"` es un rol ARIA que indica a los lectores de pantalla que anuncien el contenido de este elemento cuando cambie, de forma no disruptiva.
+**`<p role="status">`:** `role="status"` es un rol ARIA que indica a los lectores de pantalla que anuncien el contenido
+de este elemento cuando cambie, de forma no disruptiva.
 
 ---
 
@@ -688,71 +770,80 @@ import TarjetaAlbum from '@components/TarjetaAlbum'
 import {agregarAColeccion, obtenerAlbumes, obtenerColeccion, quitarDeColeccion} from '@api/albumes'
 
 function Inicio() {
-  const {limpiadoEn} = useOutletContext()
-  const [albumes, setAlbumes] = useState([])
-  const [coleccion, setColeccion] = useState([])
+	const {limpiadoEn} = useOutletContext()
+	const [albumes, setAlbumes] = useState([])
+	const [coleccion, setColeccion] = useState([])
 
-  useEffect(() => {
-    obtenerAlbumes().then(setAlbumes)
-  }, [])
+	useEffect(() => {
+		obtenerAlbumes().then(setAlbumes)
+	}, [])
 
-  useEffect(() => {
-    obtenerColeccion().then(setColeccion)
-  }, [limpiadoEn])
+	useEffect(() => {
+		obtenerColeccion().then(setColeccion)
+	}, [limpiadoEn])
 
-  const conjuntoColeccion = new Set(coleccion.map(item => item.id))
+	const conjuntoColeccion = new Set(coleccion.map(item => item.id))
 
-  async function setColeccionado(album) {
-    const actualizada = conjuntoColeccion.has(album.id)
-      ? await quitarDeColeccion(album.id)
-      : await agregarAColeccion(album)
-    setColeccion(actualizada)
-  }
+	async function setColeccionado(album) {
+		const actualizada = conjuntoColeccion.has(album.id)
+			? await quitarDeColeccion(album.id)
+			: await agregarAColeccion(album)
+		setColeccion(actualizada)
+	}
 
-  return (
-    <main>
-      <section id="catalogo">
-        <h2>Álbumes disponibles</h2>
-        <div className="lista-albumes" id="lista-albumes">
-          {albumes.map(album => (
-            <TarjetaAlbum
-              key={album.id}
-              album={album}
-              variante="catalogo"
-              esFavorito={conjuntoColeccion.has(album.id)}
-              onColeccionar={setColeccionado}
-            />
-          ))}
-        </div>
-      </section>
-    </main>
-  )
+	return (
+		<main>
+			<section id="catalogo">
+				<h2>Álbumes disponibles</h2>
+				<div className="lista-albumes" id="lista-albumes">
+					{albumes.map(album => (
+						<TarjetaAlbum
+							key={album.id}
+							album={album}
+							variante="catalogo"
+							esFavorito={conjuntoColeccion.has(album.id)}
+							onColeccionar={setColeccionado}
+						/>
+					))}
+				</div>
+			</section>
+		</main>
+	)
 }
 ```
 
 **`useOutletContext()`:** Recibe el contexto que Layout pasó via `<Outlet context={...}>`. Destructura `limpiadoEn`.
 
 **Estado y efectos:**
+
 - `useState([])` inicializa `albumes` y `coleccion` como arrays vacíos.
 - El primer `useEffect` (deps `[]`) carga el catálogo completo una sola vez al montar.
-- El segundo `useEffect` (deps `[limpiadoEn]`) recarga la colección cada vez que `limpiadoEn` cambia — es decir, cada vez que Layout limpia todos los datos.
+- El segundo `useEffect` (deps `[limpiadoEn]`) recarga la colección cada vez que `limpiadoEn` cambia — es decir, cada
+  vez que Layout limpia todos los datos.
 
 **`conjuntoColeccion`:**
+
 ```js
 const conjuntoColeccion = new Set(coleccion.map(item => item.id))
 ```
+
 - Crea un `Set` con los IDs de todos los álbumes en la colección.
 - Se recalcula en cada render (cuando `coleccion` cambia).
-- **Por qué Set y no `.includes()`:** `Set.has(id)` es O(1) — tiempo constante. `Array.includes(id)` es O(n) — recorre el array entero. Para 25 álbumes la diferencia es imperceptible, pero es la práctica correcta.
+- **Por qué Set y no `.includes()`:** `Set.has(id)` es O (1) — tiempo constante. `Array.includes(id)` es O (n) — recorre
+  el array entero. Para 25 álbumes la diferencia es imperceptible, pero es la práctica correcta.
 - `conjuntoColeccion.has(album.id)` retorna `true` si el álbum está en la colección → la estrella se pinta llena.
 
 **`setColeccionado(album)`:**
+
 - Función async que actúa como toggle.
 - Si el álbum ya está en la colección (su ID está en el Set) → quitar.
 - Si no está → agregar.
-- En ambos casos, las funciones de API retornan la colección actualizada, que se almacena en el estado con `setColeccion`.
+- En ambos casos, las funciones de API retornan la colección actualizada, que se almacena en el estado con
+  `setColeccion`.
 
-**`key={album.id}`:** El prop `key` es obligatorio en listas de React. Le indica al algoritmo de reconciliación qué elemento corresponde a qué posición entre renders. Sin `key` (o con `key={index}`), React podría reusar el estado de un elemento borrado en el siguiente, causando bugs.
+**`key={album.id}`:** El prop `key` es obligatorio en listas de React. Le indica al algoritmo de reconciliación qué
+elemento corresponde a qué posición entre renders. Sin `key` (o con `key={index}`), React podría reusar el estado de un
+elemento borrado en el siguiente, causando bugs.
 
 ---
 
@@ -767,56 +858,64 @@ import SeccionResena from '@components/SeccionResena'
 import {obtenerColeccion, quitarDeColeccion} from '@api/albumes'
 
 function Coleccion() {
-  const [elementos, setElementos] = useState([])
+	const [elementos, setElementos] = useState([])
 
-  useEffect(() => {
-    obtenerColeccion().then(setElementos)
-  }, [])
+	useEffect(() => {
+		obtenerColeccion().then(setElementos)
+	}, [])
 
-  const manejarQuitar = async (album) => {
-    const actualizada = await quitarDeColeccion(album.id)
-    setElementos(actualizada)
-  }
+	const manejarQuitar = async (album) => {
+		const actualizada = await quitarDeColeccion(album.id)
+		setElementos(actualizada)
+	}
 
-  return (
-    <main>
-      <section id="coleccion">
-        <h2>
-          Mi colección (<span id="contador">{elementos.length}</span>)
-        </h2>
-        {elementos.length === 0 ? (
-          <p className="coleccion-vacia">Todavía no agregaste álbumes a tu colección.</p>
-        ) : (
-          <div className="lista-coleccion" id="lista-coleccion">
-            {elementos.map(album => (
-              <TarjetaAlbum key={album.id} album={album} variante="coleccion" onColeccionar={manejarQuitar}>
-                <SeccionResena album={album}/>
-              </TarjetaAlbum>
-            ))}
-          </div>
-        )}
-      </section>
-    </main>
-  )
+	return (
+		<main>
+			<section id="coleccion">
+				<h2>
+					Mi colección (<span id="contador">{elementos.length}</span>)
+				</h2>
+				{elementos.length === 0 ? (
+					<p className="coleccion-vacia">Todavía no agregaste álbumes a tu colección.</p>
+				) : (
+					<div className="lista-coleccion" id="lista-coleccion">
+						{elementos.map(album => (
+							<TarjetaAlbum key={album.id} album={album} variante="coleccion"
+							              onColeccionar={manejarQuitar}>
+								<SeccionResena album={album}/>
+							</TarjetaAlbum>
+						))}
+					</div>
+				)}
+			</section>
+		</main>
+	)
 }
 ```
 
 **Diferencias con Inicio:**
+
 - Solo carga la colección (no el catálogo completo).
 - No recibe `limpiadoEn` porque cuando el usuario limpia, Layout navega a `/`, y esta página se desmonta.
 - La grilla usa `variante="coleccion"` en TarjetaAlbum.
 
-**Contador dinámico:** `{elementos.length}` se actualiza automáticamente cada vez que el estado cambia. El `<span id="contador">` es un buen ejemplo de cómo React evita manipular el DOM manualmente.
+**Contador dinámico:** `{elementos.length}` se actualiza automáticamente cada vez que el estado cambia. El
+`<span id="contador">` es un buen ejemplo de cómo React evita manipular el DOM manualmente.
 
-**Renderizado condicional:** `{condicion ? elementoA : elementoB}` es el operador ternario de JavaScript. Si `elementos.length === 0`, muestra el mensaje vacío; si no, muestra la lista. React evalúa esta expresión en cada render.
+**Renderizado condicional:** `{condicion ? elementoA : elementoB}` es el operador ternario de JavaScript. Si
+`elementos.length === 0`, muestra el mensaje vacío; si no, muestra la lista. React evalúa esta expresión en cada render.
 
 **Composición con children:**
+
 ```jsx
 <TarjetaAlbum ...>
   <SeccionResena album={album}/>
 </TarjetaAlbum>
 ```
-`<SeccionResena>` se pasa como `children` (hijos) de `TarjetaAlbum`. Este es el patrón de composición de React: un componente puede renderizar sus hijos sin saber qué son. `SeccionResena` solo aparece en la colección, no en el catálogo.
+
+`<SeccionResena>` se pasa como `children` (hijos) de `TarjetaAlbum`. Este es el patrón de composición de React: un
+componente puede renderizar sus hijos sin saber qué son. `SeccionResena` solo aparece en la colección, no en el
+catálogo.
 
 ---
 
@@ -828,64 +927,66 @@ function Coleccion() {
 
 ```jsx
 function TarjetaAlbum({
-  album,
-  variante = 'catalogo',
-  esFavorito = false,
-  onColeccionar,
-  children: hijos,
-}) {
-  return (
-    <div className="tarjeta-album">
-      <img
-        src={album.imagen}
-        alt={`${album.nombre} - ${album.artista}`}
-        className="tarjeta-album__imagen"
-      />
-      <div className="info-album">
-        <h3>{album.nombre}</h3>
-        <p>{album.artista}</p>
-        {variante === 'catalogo' && (
-          <button
-            type="button"
-            className={`estrella${esFavorito ? ' activo' : ''}`}
-            aria-pressed={esFavorito}
-            aria-label={esFavorito ? 'Quitar de mi colección' : 'Agregar a mi colección'}
-            onClick={() => onColeccionar?.(album)}
-          >
-            {esFavorito ? '★' : '☆'}
-          </button>
-        )}
-        {variante === 'coleccion' && (
-          <button
-            type="button"
-            className="btn"
-            onClick={() => onColeccionar?.(album)}
-          >
-            Quitar
-          </button>
-        )}
-        {hijos}
-      </div>
-    </div>
-  )
+	                      album,
+	                      variante = 'catalogo',
+	                      esFavorito = false,
+	                      onColeccionar,
+	                      children: hijos,
+                      }) {
+	return (
+		<div className="tarjeta-album">
+			<img
+				src={album.imagen}
+				alt={`${album.nombre} - ${album.artista}`}
+				className="tarjeta-album__imagen"
+			/>
+			<div className="info-album">
+				<h3>{album.nombre}</h3>
+				<p>{album.artista}</p>
+				{variante === 'catalogo' && (
+					<button
+						type="button"
+						className={`estrella${esFavorito ? ' activo' : ''}`}
+						aria-pressed={esFavorito}
+						aria-label={esFavorito ? 'Quitar de mi colección' : 'Agregar a mi colección'}
+						onClick={() => onColeccionar?.(album)}
+					>
+						{esFavorito ? '★' : '☆'}
+					</button>
+				)}
+				{variante === 'coleccion' && (
+					<button
+						type="button"
+						className="btn"
+						onClick={() => onColeccionar?.(album)}
+					>
+						Quitar
+					</button>
+				)}
+				{hijos}
+			</div>
+		</div>
+	)
 }
 ```
 
 **Props:**
-| Prop | Tipo | Default | Descripción |
-|---|---|---|---|
-| `album` | objeto | — | Datos del álbum (id, nombre, artista, imagen). |
-| `variante` | string | `'catalogo'` | Controla qué botón se muestra. |
-| `esFavorito` | boolean | `false` | Si `true`, la estrella aparece llena (★) y con clase `activo`. |
-| `onColeccionar` | función | — | Callback llamado al hacer click en el botón. Recibe el objeto `album`. |
-| `children` | nodo React | — | Se destructura como `hijos` y se renderiza al final del div. |
+| Prop | Tipo | Default | Descripción | |---|---|---|---| | `album` | objeto | — | Datos del álbum (id, nombre, artista,
+imagen). | | `variante` | string | `'catalogo'` | Controla qué botón se muestra. | | `esFavorito` | boolean | `false` |
+Si `true`, la estrella aparece llena (★) y con clase `activo`. | | `onColeccionar` | función | — | Callback llamado al
+hacer click en el botón. Recibe el objeto `album`. | | `children` | nodo React | — | Se destructura como `hijos` y se
+renderiza al final del div. |
 
 - `alt={album.nombre + " - " + album.artista}` — alt text descriptivo requerido por accesibilidad.
-- `className={estrella${esFavorito ? ' activo' : ''}}` — agrega la clase `activo` condicionalmente. En SCSS, `.estrella.activo` tiene `color: goldenrod`.
-- `aria-pressed={esFavorito}` — atributo ARIA para botones toggle. Un lector de pantalla anunciará "Agregar a mi colección, presionado: falso".
+- `className={estrella${esFavorito ? ' activo' : ''}}` — agrega la clase `activo` condicionalmente. En SCSS,
+  `.estrella.activo` tiene `color: goldenrod`.
+- `aria-pressed={esFavorito}` — atributo ARIA para botones toggle. Un lector de pantalla anunciará "Agregar a mi
+  colección, presionado: falso".
 - `aria-label` dinámico — cambia según el estado.
-- `alternarColeccion?.(album)` — optional chaining para llamadas de función. Si `alternarColeccion` es `undefined`, no hace nada en vez de explotar con "is not a function".
-- `{hijos}` — renderiza los children recibidos. En la variante "coleccion", aquí aparece `<SeccionResena>`. En "catalogo", `hijos` es `undefined` y React no renderiza nada.
+- `alternarColeccion?.(album)` — optional chaining para llamadas de función. Si `alternarColeccion` es `undefined`, no
+  hace nada en vez de explotar con "is not a function".
+- `{hijos}` — renderiza los children recibidos. En la variante "coleccion", aquí aparece `<SeccionResena>`. En
+  "catalogo", `hijos` es `undefined` y React no renderiza nada.
 
 ---
 
@@ -938,19 +1039,25 @@ function Encabezado({ onLimpiar }) {
 }
 ```
 
-**Por qué sin `window.confirm()`:** `window.confirm` abre un diálogo nativo del navegador que bloquea el hilo de JavaScript y no se puede estilizar. La confirmación inline con estado local es completamente parte del DOM, se puede estilizar con CSS y no bloquea nada.
+**Por qué sin `window.confirm()`:** `window.confirm` abre un diálogo nativo del navegador que bloquea el hilo de
+JavaScript y no se puede estilizar. La confirmación inline con estado local es completamente parte del DOM, se puede
+estilizar con CSS y no bloquea nada.
 
 **Flujo de confirmación:**
+
 1. Click en "Limpiar" → `pedirConfirmacion()` → `confirmando = true`.
 2. Se oculta el botón "Limpiar" y aparece "¿Limpiar todo? Sí / No".
 3. Click en "Sí" → `confirmar()` → llama `onLimpiar()` (definido en Layout) y resetea `confirmando`.
 4. Click en "No" → `cancelar()` → resetea `confirmando` sin hacer nada.
 
-**`{onLimpiar && !confirmando && <button>}`:** Doble short-circuit. El botón solo se muestra si `onLimpiar` existe (tiene valor truthy) Y no estamos en modo confirmación.
+**`{onLimpiar && !confirmando && <button>}`:** Doble short-circuit. El botón solo se muestra si `onLimpiar` existe
+(tiene valor truthy) Y no estamos en modo confirmación.
 
-**`<Link to="/">` vs `<a href="/">`:** `<Link>` intercepta el click, evita la recarga completa y actualiza solo la URL en el historial. `<a>` haría una recarga completa, perdiendo el estado de React.
+**`<Link to="/">` vs `<a href="/">`:** `<Link>` intercepta el click, evita la recarga completa y actualiza solo la URL
+en el historial. `<a>` haría una recarga completa, perdiendo el estado de React.
 
-**`import logo from '@assets/logo.png'`:** Vite procesa este import, copia la imagen al output y retorna la URL final. Es la forma correcta de importar assets que están en `src/`.
+**`import logo from '@assets/logo.png'`:** Vite procesa este import, copia la imagen al output y retorna la URL final.
+Es la forma correcta de importar assets que están en `src/`.
 
 ---
 
@@ -969,9 +1076,11 @@ function Pie() {
 }
 ```
 
-- `new Date().getFullYear()` — retorna el año actual como número. Al calcularlo dinámicamente no hace falta actualizarlo manualmente cada año.
+- `new Date().getFullYear()` — retorna el año actual como número. Al calcularlo dinámicamente no hace falta actualizarlo
+  manualmente cada año.
 - `&copy;` — entidad HTML para el símbolo de copyright ©.
-- En SCSS, `.app-footer` tiene `margin-top: auto`. En un contenedor flex-column, `margin-top: auto` empuja el elemento hasta el fondo del contenedor, logrando el efecto de "footer sticky" sin `position: fixed`.
+- En SCSS, `.app-footer` tiene `margin-top: auto`. En un contenedor flex-column, `margin-top: auto` empuja el elemento
+  hasta el fondo del contenedor, logrando el efecto de "footer sticky" sin `position: fixed`.
 
 ---
 
@@ -1070,31 +1179,37 @@ function SeccionResena({ album }) {
 ```
 
 **Estado — 6 variables:**
-| Estado | Tipo | Descripción |
-|---|---|---|
-| `texto` | string | Contenido del textarea (input controlado). |
-| `puntaje` | string | Valor del select (string porque los values del select son strings). |
-| `resenaGuardada` | objeto \| null | Copia de la reseña en el servidor. Null si no existe. |
-| `estaEditando` | boolean | `true` = mostrar formulario; `false` = mostrar lectura. |
-| `mensajeError` | string | Mensaje de error de validación. Vacío = no mostrar. |
-| `mensajeExito` | string | Mensaje de éxito tras guardar. Vacío = no mostrar. |
+| Estado | Tipo | Descripción | |---|---|---| | `texto` | string | Contenido del textarea (input controlado). | |
+`puntaje` | string | Valor del select (string porque los values del select son strings). | | `resenaGuardada` |
+objeto \| null | Copia de la reseña en el servidor. Null si no existe. | | `estaEditando` | boolean | `true` = mostrar
+formulario; `false` = mostrar lectura. | | `mensajeError` | string | Mensaje de error de validación. Vacío = no
+mostrar. | | `mensajeExito` | string | Mensaje de éxito tras guardar. Vacío = no mostrar. |
 
 **`opcionesPuntaje`:**
+
 ```js
-Array.from({ length: 10 }, (_, indice) => String(indice + 1))
+Array.from({length: 10}, (_, indice) => String(indice + 1))
 // → ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 ```
-`Array.from` con una función de mapeo genera el array dinámicamente. El `_` ignora el primer parámetro (el elemento, que no existe). `indice` va de 0 a 9; `indice + 1` da 1 a 10; `String(...)` lo convierte a string.
 
-**IDs únicos por álbum:** En la página de colección puede haber múltiples instancias de `SeccionResena`. Al incluir el ID del álbum en el `id` del input (`resena-texto-${album.id}`), cada par label/input es único, lo que es requerido por accesibilidad.
+`Array.from` con una función de mapeo genera el array dinámicamente. El `_` ignora el primer parámetro (el elemento, que
+no existe). `indice` va de 0 a 9; `indice + 1` da 1 a 10; `String(...)` lo convierte a string.
 
-**Effect `[album]`:** Se ejecuta al montar Y cada vez que el prop `album` cambia. Carga la reseña existente o resetea el formulario según corresponda.
+**IDs únicos por álbum:** En la página de colección puede haber múltiples instancias de `SeccionResena`. Al incluir el
+ID del álbum en el `id` del input (`resena-texto-${album.id}`), cada par label/input es único, lo que es requerido por
+accesibilidad.
 
-**`guardar()`:** Valida que ambos campos estén completos, sanitiza el texto con `.trim()`, convierte el puntaje a número con `Number()` y llama a `guardarResena`. Si la respuesta llega bien, pasa a modo lectura.
+**Effect `[album]`:** Se ejecuta al montar Y cada vez que el prop `album` cambia. Carga la reseña existente o resetea el
+formulario según corresponda.
 
-**Inputs controlados:** El `value` del textarea y el select siempre viene del estado. El `onChange` actualiza el estado. React es la única fuente de verdad del valor del input.
+**`guardar()`:** Valida que ambos campos estén completos, sanitiza el texto con `.trim()`, convierte el puntaje a número
+con `Number()` y llama a `guardarResena`. Si la respuesta llega bien, pasa a modo lectura.
 
-**`role="alert"` vs `role="status"`:** `alert` interrumpe al lector de pantalla inmediatamente (para errores). `status` anuncia el mensaje de forma más suave (para confirmaciones de éxito).
+**Inputs controlados:** El `value` del textarea y el select siempre viene del estado. El `onChange` actualiza el estado.
+React es la única fuente de verdad del valor del input.
+
+**`role="alert"` vs `role="status"`:** `alert` interrumpe al lector de pantalla inmediatamente (para errores). `status`
+anuncia el mensaje de forma más suave (para confirmaciones de éxito).
 
 ---
 
@@ -1105,19 +1220,20 @@ Array.from({ length: 10 }, (_, indice) => String(indice + 1))
 ### Variables
 
 ```scss
-$font-base:          'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-$color-header:       #222;
-$color-link-bg:      #444;
-$color-link-hover:   #555;
-$color-danger:       #c0392b;
+$font-base: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+$color-header: #222;
+$color-link-bg: #444;
+$color-link-hover: #555;
+$color-danger: #c0392b;
 $color-danger-hover: #a93226;
-$color-card-border:  #ddd;
-$color-card-bg:      #fff;
-$color-muted:        #555;
-$grid-gap:           12px;
+$color-card-border: #ddd;
+$color-card-bg: #fff;
+$color-muted: #555;
+$grid-gap: 12px;
 ```
 
-Las variables SCSS se declaran con `$`. Si se necesita cambiar el color del botón Limpiar, se cambia solo `$color-danger`.
+Las variables SCSS se declaran con `$`. Si se necesita cambiar el color del botón Limpiar, se cambia solo
+`$color-danger`.
 
 ### Mixin
 
@@ -1129,7 +1245,8 @@ Las variables SCSS se declaran con `$`. Si se necesita cambiar el color del bot�
 }
 ```
 
-Un mixin es como una función que retorna un bloque de CSS. Se usa con `@include flex-center`. Evita repetir las 3 propiedades cada vez que se necesita centrar con flexbox.
+Un mixin es como una función que retorna un bloque de CSS. Se usa con `@include flex-center`. Evita repetir las 3
+propiedades cada vez que se necesita centrar con flexbox.
 
 ### Layout global
 
@@ -1141,7 +1258,8 @@ Un mixin es como una función que retorna un bloque de CSS. Se usa con `@include
 }
 ```
 
-`min-height: 100vh` garantiza que el contenedor ocupe al menos toda la altura de la ventana. Con `flex-direction: column` apilando hijos verticalmente, `margin-top: auto` en el footer lo empuja al fondo.
+`min-height: 100vh` garantiza que el contenedor ocupe al menos toda la altura de la ventana. Con
+`flex-direction: column` apilando hijos verticalmente, `margin-top: auto` en el footer lo empuja al fondo.
 
 ### Grilla responsive
 
@@ -1169,6 +1287,7 @@ Un mixin es como una función que retorna un bloque de CSS. Se usa con `@include
 ### Nomenclatura BEM
 
 Las clases del header siguen BEM (Block Element Modifier):
+
 - `.app-header` — bloque
 - `.app-header__branding` — elemento dentro del bloque
 - `.btn--neutro` — modificador del bloque `.btn`
@@ -1205,7 +1324,8 @@ export default defineConfig({
 
 - `fileURLToPath(import.meta.url)` — en ES Modules, `__dirname` no existe. Esta combinación lo reemplaza.
 - `plugins: [react()]` — transforma JSX y habilita React Fast Refresh (HMR específico de React).
-- `resolve.alias` — Vite reemplaza `@components/X` por la ruta absoluta al compilar. Mismos alias configurados en Jest para consistencia.
+- `resolve.alias` — Vite reemplaza `@components/X` por la ruta absoluta al compilar. Mismos alias configurados en Jest
+  para consistencia.
 
 ---
 
@@ -1229,10 +1349,12 @@ module.exports = {
 }
 ```
 
-- **Por qué `.cjs`:** El proyecto tiene `"type": "module"` en `package.json`, lo que hace que `.js` sean ES Modules. Jest necesita CommonJS (`module.exports`). La extensión `.cjs` fuerza CommonJS.
+- **Por qué `.cjs`:** El proyecto tiene `"type": "module"` en `package.json`, lo que hace que `.js` sean ES Modules.
+  Jest necesita CommonJS (`module.exports`). La extensión `.cjs` fuerza CommonJS.
 - `testEnvironment: 'jsdom'` — simula `document`, `window`, etc. en Node.js.
 - `setupFilesAfterEnv` — carga jest-dom antes de cada test (agrega `toBeInTheDocument`, etc.).
-- `moduleNameMapper` — SCSS → `identity-obj-proxy`; imágenes → stub; alias → rutas reales. El orden importa: SCSS debe ir antes que el alias `@styles`.
+- `moduleNameMapper` — SCSS → `identity-obj-proxy`; imágenes → stub; alias → rutas reales. El orden importa: SCSS debe
+  ir antes que el alias `@styles`.
 
 ---
 
@@ -1248,7 +1370,8 @@ module.exports = {
 ```
 
 - `@babel/preset-env` con `targets: {node: 'current'}` — transpila solo lo que la versión de Node actual no entiende.
-- `@babel/preset-react` con `runtime: 'automatic'` — transpila JSX sin necesitar `import React from 'react'` en cada archivo.
+- `@babel/preset-react` con `runtime: 'automatic'` — transpila JSX sin necesitar `import React from 'react'` en cada
+  archivo.
 
 ---
 
@@ -1280,37 +1403,45 @@ export default defineConfig([
 - **Flat config** — formato de ESLint v9 (array de objetos en lugar de `.eslintrc`).
 - `reactHooks` — detecta violaciones de las reglas de hooks (solo en el nivel superior, deps completas).
 - `no-unused-vars` con `varsIgnorePattern: '^[A-Z_]'` — permite variables que empiezan con mayúscula o `_`.
-- Segunda configuración para `__tests__/` — agrega globals de Jest (`describe`, `test`, `expect`, `jest`, etc.) para que ESLint no los marque como "no definidos".
+- Segunda configuración para `__tests__/` — agrega globals de Jest (`describe`, `test`, `expect`, `jest`, etc.) para que
+  ESLint no los marque como "no definidos".
 
 ---
 
 ## 14. Testing
 
-La filosofía: **probar comportamiento, no implementación**. Los tests simulan lo que haría un usuario real. Hay 5 archivos de tests en `src/__tests__/`.
+La filosofía: **probar comportamiento, no implementación**. Los tests simulan lo que haría un usuario real. Hay 5
+archivos de tests en `src/__tests__/`.
 
 ---
 
 ### `TarjetaAlbum.test.jsx` — 2 tests
 
 **Test 1 — renderizado:**
+
 ```js
 render(<TarjetaAlbum album={albumMock} variante="coleccion"/>)
-expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent('Dark Side of the Moon')
+expect(screen.getByRole('heading', {level: 3})).toHaveTextContent('Dark Side of the Moon')
 expect(screen.getByText('Pink Floyd')).toBeInTheDocument()
 ```
-- `getByRole('heading', {level: 3})` busca el `<h3>` por su rol semántico, verificando al mismo tiempo que la semántica sea correcta.
+
+- `getByRole('heading', {level: 3})` busca el `<h3>` por su rol semántico, verificando al mismo tiempo que la semántica
+  sea correcta.
 - `toHaveTextContent` verifica el texto del elemento.
 
 **Test 2 — interacción:**
+
 ```js
 const onColeccionar = jest.fn()
 render(<TarjetaAlbum ... onColeccionar={onColeccionar}/>)
-fireEvent.click(screen.getByRole('button', { name: 'Agregar a mi colección' }))
+fireEvent.click(screen.getByRole('button', {name: 'Agregar a mi colección'}))
 expect(onColeccionar).toHaveBeenCalledTimes(1)
 expect(onColeccionar).toHaveBeenCalledWith(albumMock)
 ```
+
 - `jest.fn()` — función mock que registra sus llamadas.
-- `getByRole('button', {name: '...'})` — busca el botón por su `aria-label`. Verifica tanto que existe como que el aria-label es correcto.
+- `getByRole('button', {name: '...'})` — busca el botón por su `aria-label`. Verifica tanto que existe como que el
+  aria-label es correcto.
 - `toHaveBeenCalledWith(albumMock)` — verifica que el callback recibió el objeto completo.
 
 ---
@@ -1328,7 +1459,9 @@ await waitFor(() => {
 fireEvent.click(screen.getByRole('button', { name: /guardar/i }))
 expect(screen.getByRole('alert')).toHaveTextContent('Completá la reseña y elegí un puntaje.')
 ```
-- `jest.mock(...)` — reemplaza el módulo real por mocks. El componente llama a `obtenerResena` al montar; si no se mockea, intentaría hacer un fetch real que falla en el entorno de test.
+
+- `jest.mock(...)` — reemplaza el módulo real por mocks. El componente llama a `obtenerResena` al montar; si no se
+  mockea, intentaría hacer un fetch real que falla en el entorno de test.
 - `mockResolvedValue(null)` — hace que la función mock retorne `Promise.resolve(null)`.
 - `waitFor(...)` — espera a que el `useEffect` async termine antes de interactuar.
 - `getByRole('alert')` — verifica que el mensaje de error tiene el rol ARIA correcto.
@@ -1342,18 +1475,20 @@ fetchMock = jest.fn()
 global.fetch = fetchMock
 
 fetchMock
-  .mockResolvedValueOnce({ ok: true, json: async () => [] })        // GET /coleccion
-  .mockResolvedValueOnce({ ok: true, json: async () => ({...}) })   // POST /coleccion
-  .mockResolvedValueOnce({ ok: true, json: async () => [{...}] })   // GET /coleccion (retorno)
+	.mockResolvedValueOnce({ok: true, json: async () => []})        // GET /coleccion
+	.mockResolvedValueOnce({ok: true, json: async () => ({...})})   // POST /coleccion
+	.mockResolvedValueOnce({ok: true, json: async () => [{...}]})   // GET /coleccion (retorno)
 
 await agregarAColeccion(albumMock)
 
 expect(fetchMock).toHaveBeenNthCalledWith(2, `${BASE_URL}/coleccion`,
-  expect.objectContaining({ method: 'POST', ... })
+	expect.objectContaining({method: 'POST', ...})
 )
 ```
+
 - `global.fetch = fetchMock` — inyecta el mock como el `fetch` global de Node.
-- `mockResolvedValueOnce` (tres veces) — programa las respuestas en orden: `agregarAColeccion` hace 3 fetches (GET para verificar duplicados, POST para crear, GET para retornar el estado final).
+- `mockResolvedValueOnce` (tres veces) — programa las respuestas en orden: `agregarAColeccion` hace 3 fetches (GET para
+  verificar duplicados, POST para crear, GET para retornar el estado final).
 - `toHaveBeenNthCalledWith(2, ...)` — verifica los argumentos de la 2ª llamada específicamente.
 - `expect.objectContaining({...})` — matcher parcial, verifica que el objeto tenga al menos esas propiedades.
 
@@ -1370,21 +1505,25 @@ obtenerAlbumes.mockResolvedValue([{ id: '1', nombre: 'Thriller', ... }])
 render(<Inicio/>)
 expect(await screen.findByText('Thriller')).toBeInTheDocument()
 ```
-- `jest.mock('react-router-dom', ...)` — mockea `useOutletContext` para que no sea necesario envolver el componente en un `<Layout>`.
-- `screen.findByText('Thriller')` — `findBy` es async: espera hasta que el elemento aparezca en el DOM. Necesario porque los datos llegan después de que el `useEffect` async resuelve.
+
+- `jest.mock('react-router-dom', ...)` — mockea `useOutletContext` para que no sea necesario envolver el componente en
+  un `<Layout>`.
+- `screen.findByText('Thriller')` — `findBy` es async: espera hasta que el elemento aparezca en el DOM. Necesario porque
+  los datos llegan después de que el `useEffect` async resuelve.
 
 ---
 
 ### `Coleccion.test.jsx` — 2 tests
 
 ```js
-jest.mock('@api/albumes', () => ({ obtenerColeccion: jest.fn(), quitarDeColeccion: jest.fn() }))
-jest.mock('@components/SeccionResena', () => ({ __esModule: true, default: () => <div/> }))
+jest.mock('@api/albumes', () => ({obtenerColeccion: jest.fn(), quitarDeColeccion: jest.fn()}))
+jest.mock('@components/SeccionResena', () => ({__esModule: true, default: () => <div/>}))
 
-obtenerColeccion.mockResolvedValue([{ id: '1', nombre: 'Thriller', ... }])
+obtenerColeccion.mockResolvedValue([{id: '1', nombre: 'Thriller', ...}])
 render(<Coleccion/>)
 expect(await screen.findByText('Thriller')).toBeInTheDocument()
 ```
+
 - Mockea `SeccionResena` para aislar el test de la lógica de reseñas.
 - **Test 1** — verifica que los álbumes de la API se renderizan en pantalla.
 - **Test 2** — verifica que aparece el mensaje vacío cuando la colección no tiene ítems.
@@ -1393,40 +1532,55 @@ expect(await screen.findByText('Thriller')).toBeInTheDocument()
 
 ## 15. Accesibilidad
 
-| Elemento | Técnica implementada |
-|---|---|
-| Todas las `<img>` | `alt` descriptivo: `"${nombre} - ${artista}"` o `"Logo"` |
-| Botón estrella | `aria-pressed={esFavorito}` — indica estado on/off al lector de pantalla |
-| Botón estrella | `aria-label` dinámico — describe la acción que realizará el click |
-| Textarea | `<label htmlFor={idUnico}>` — enlaza la etiqueta con el input |
-| Select de puntaje | `<label htmlFor={idUnico}>` — enlaza la etiqueta con el select |
+| Elemento          | Técnica implementada                                                     |
+|-------------------|--------------------------------------------------------------------------|
+| Todas las `<img>` | `alt` descriptivo: `"${nombre} - ${artista}"` o `"Logo"`                 |
+| Botón estrella    | `aria-pressed={esFavorito}` — indica estado on/off al lector de pantalla |
+| Botón estrella    | `aria-label` dinámico — describe la acción que realizará el click        |
+| Textarea          | `<label htmlFor={idUnico}>` — enlaza la etiqueta con el input            |
+| Select de puntaje | `<label htmlFor={idUnico}>` — enlaza la etiqueta con el select           |
 | Mensajes de error | `role="alert"` — interrumpe al lector de pantalla para anunciar el error |
-| Mensajes de éxito | `role="status"` — anuncia de forma no disruptiva |
-| Todos los botones | `type="button"` — evita que actúen como submit dentro de forms |
-| HTML raíz | `lang="es"` — idioma para lectores de pantalla y SEO |
+| Mensajes de éxito | `role="status"` — anuncia de forma no disruptiva                         |
+| Todos los botones | `type="button"` — evita que actúen como submit dentro de forms           |
+| HTML raíz         | `lang="es"` — idioma para lectores de pantalla y SEO                     |
 
-**Por qué `htmlFor` en labels:** El atributo `htmlFor` (equivalente a `for` en HTML) enlaza el `<label>` con el input que tiene el mismo `id`. Esto hace que el click en la etiqueta enfoque el input (mejor UX) y que el lector de pantalla anuncie "Reseña, cuadro de texto" al entrar al campo.
+**Por qué `htmlFor` en labels:** El atributo `htmlFor` (equivalente a `for` en HTML) enlaza el `<label>` con el input
+que tiene el mismo `id`. Esto hace que el click en la etiqueta enfoque el input (mejor UX) y que el lector de pantalla
+anuncie "Reseña, cuadro de texto" al entrar al campo.
 
 ---
 
 ## 16. Decisiones de diseño clave
 
 ### IDs como strings en db.json
-json-server v1 normaliza todos los IDs a strings. Si en `db.json` el ID fuera el número `5`, la API retornaría `id: "5"` (string) pero el código podría comparar `Set.has(5)` (número), fallando porque `"5" !== 5`. Al declarar los IDs como strings desde el principio, la consistencia está garantizada.
+
+json-server v1 normaliza todos los IDs a strings. Si en `db.json` el ID fuera el número `5`, la API retornaría `id: "5"`
+(string) pero el código podría comparar `Set.has(5)` (número), fallando porque `"5" !== 5`. Al declarar los IDs como
+strings desde el principio, la consistencia está garantizada.
 
 ### `Promise.all` para limpiar datos
-Borrar de a uno (con `for...of` y `await`) haría las peticiones en serie. Con `Promise.all`, todos los DELETE se lanzan al mismo tiempo. Con 10 álbumes en la colección, esto puede ser 5–10x más rápido.
+
+Borrar de a uno (con `for...of` y `await`) haría las peticiones en serie. Con `Promise.all`, todos los DELETE se lanzan
+al mismo tiempo. Con 10 álbumes en la colección, esto puede ser 5–10x más rápido.
 
 ### `limpiadoEn` como timestamp en lugar de booleano
-Un booleano `fueReiniciado` tendría el problema de que si el usuario limpia dos veces seguidas, la segunda limpieza no cambia el valor (ya era `true`) y el `useEffect` no se dispara. Un timestamp siempre cambia, así que siempre dispara el effect.
+
+Un booleano `fueReiniciado` tendría el problema de que si el usuario limpia dos veces seguidas, la segunda limpieza no
+cambia el valor (ya era `true`) y el `useEffect` no se dispara. Un timestamp siempre cambia, así que siempre dispara el
+effect.
 
 ### Un solo componente TarjetaAlbum para dos variantes
-Tanto en el catálogo como en la colección, la estructura HTML de la tarjeta es idéntica. Separar en dos componentes duplicaría código. El prop `variante` es suficiente para cambiar el botón que se muestra.
+
+Tanto en el catálogo como en la colección, la estructura HTML de la tarjeta es idéntica. Separar en dos componentes
+duplicaría código. El prop `variante` es suficiente para cambiar el botón que se muestra.
 
 ### Confirmación inline en Encabezado
-`window.confirm()` bloquea el hilo de JavaScript y abre un diálogo del sistema operativo que no se puede estilizar. La confirmación inline con estado local es parte del DOM, estilizable con CSS y no bloquea nada.
+
+`window.confirm()` bloquea el hilo de JavaScript y abre un diálogo del sistema operativo que no se puede estilizar. La
+confirmación inline con estado local es parte del DOM, estilizable con CSS y no bloquea nada.
 
 ### Alias de imports
+
 ```js
 // Sin alias (frágil, depende de la ubicación relativa del archivo)
 import TarjetaAlbum from '../../components/TarjetaAlbum'
@@ -1434,6 +1588,7 @@ import TarjetaAlbum from '../../components/TarjetaAlbum'
 // Con alias (siempre igual, independientemente de dónde esté el archivo)
 import TarjetaAlbum from '@components/TarjetaAlbum'
 ```
+
 Si se mueve un archivo a otra carpeta, el import con alias sigue funcionando sin cambios.
 
 ---
@@ -1444,25 +1599,26 @@ La carpeta `Primer Parcial/` contiene la primera etapa del trabajo práctico.
 
 ### Qué hay
 
-| Archivo | Descripción |
-|---|---|
-| `index.html` | Página del catálogo completo |
-| `mi-coleccion.html` | Página de colección personal |
-| `script.js` | Toda la lógica en JavaScript vanilla |
-| `style.css` | Estilos CSS planos |
-| `Mockup/figma.png` | Mockup de diseño realizado en Figma |
-| `Sketch/sketch.jpg` | Boceto inicial en papel |
+| Archivo             | Descripción                          |
+|---------------------|--------------------------------------|
+| `index.html`        | Página del catálogo completo         |
+| `mi-coleccion.html` | Página de colección personal         |
+| `script.js`         | Toda la lógica en JavaScript vanilla |
+| `style.css`         | Estilos CSS planos                   |
+| `Mockup/figma.png`  | Mockup de diseño realizado en Figma  |
+| `Sketch/sketch.jpg` | Boceto inicial en papel              |
 
 ### Diferencias con la versión React
 
-| Aspecto | Primer Parcial (vanilla) | Frontend (React) |
-|---|---|---|
-| Persistencia | `localStorage` | json-server (API REST) |
-| Navegación | Dos archivos HTML separados | SPA con React Router |
-| Componentes | Ninguno — HTML repetido | Reutilizables (TarjetaAlbum, etc.) |
-| Estado | Variables globales en JS | `useState`, `useEffect` |
-| Estilos | CSS plano | SCSS con variables y mixins |
-| Testing | Sin tests | Jest + React Testing Library |
-| Build | No necesario | Vite (genera `dist/`) |
+| Aspecto      | Primer Parcial (vanilla)    | Frontend (React)                   |
+|--------------|-----------------------------|------------------------------------|
+| Persistencia | `localStorage`              | json-server (API REST)             |
+| Navegación   | Dos archivos HTML separados | SPA con React Router               |
+| Componentes  | Ninguno — HTML repetido     | Reutilizables (TarjetaAlbum, etc.) |
+| Estado       | Variables globales en JS    | `useState`, `useEffect`            |
+| Estilos      | CSS plano                   | SCSS con variables y mixins        |
+| Testing      | Sin tests                   | Jest + React Testing Library       |
+| Build        | No necesario                | Vite (genera `dist/`)              |
 
-La versión vanilla demuestra el mismo dominio conceptual (catálogo, colección, reseñas) con las tecnologías básicas de la web. La versión React muestra el mismo producto con las herramientas de desarrollo profesional moderno.
+La versión vanilla demuestra el mismo dominio conceptual (catálogo, colección, reseñas) con las tecnologías básicas de
+la web. La versión React muestra el mismo producto con las herramientas de desarrollo profesional moderno.
