@@ -49,4 +49,12 @@ describe('Coleccion', () => {
 
 		expect(await screen.findByText(/Todavía no agregaste/)).toBeInTheDocument()
 	})
+
+	test('muestra mensaje de error si falla la carga de la colección', async () => {
+		obtenerColeccion.mockRejectedValue(new Error('Error de conexión'))
+
+		render(<Coleccion/>)
+
+		expect(await screen.findByRole('alert')).toHaveTextContent(/No se pudo cargar tu colección/)
+	})
 })

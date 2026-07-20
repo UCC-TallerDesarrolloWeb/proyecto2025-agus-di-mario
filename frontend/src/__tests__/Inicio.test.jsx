@@ -41,4 +41,13 @@ describe('Inicio', () => {
 		expect(await screen.findByText('Abbey Road')).toBeInTheDocument()
 		expect(obtenerAlbumes).toHaveBeenCalledTimes(1)
 	})
+
+	test('muestra mensaje de error si falla la carga del catálogo', async () => {
+		obtenerAlbumes.mockRejectedValue(new Error('Error de conexión'))
+		obtenerColeccion.mockResolvedValue([])
+
+		render(<Inicio/>)
+
+		expect(await screen.findByRole('alert')).toHaveTextContent(/No se pudo cargar el catálogo/)
+	})
 })
