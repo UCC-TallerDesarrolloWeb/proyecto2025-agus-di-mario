@@ -48,10 +48,18 @@ function SeccionResena({album}) {
 		}
 		setMensajeError('')
 		const puntajeNumero = Number(puntaje) || 1
-		await guardarResena(album.id, {texto: textoLimpio, puntaje: puntajeNumero})
-		setResenaGuardada({texto: textoLimpio, puntaje: puntajeNumero})
-		setEstaEditando(false)
-		setMensajeExito('Reseña guardada.')
+		try {
+			const resultado = await guardarResena(album.id, {texto: textoLimpio, puntaje: puntajeNumero})
+			if (!resultado) {
+				setMensajeError('No se pudo guardar la reseña. Intentá de nuevo.')
+				return
+			}
+			setResenaGuardada({texto: textoLimpio, puntaje: puntajeNumero})
+			setEstaEditando(false)
+			setMensajeExito('Reseña guardada.')
+		} catch {
+			setMensajeError('No se pudo guardar la reseña. Intentá de nuevo.')
+		}
 	}
 
 	/**

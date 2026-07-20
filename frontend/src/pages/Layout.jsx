@@ -30,10 +30,14 @@ function Layout() {
 	 * inline y navega a la página de inicio.
 	 */
 	async function manejarLimpiar() {
-		await limpiarDatos()
-		setMensajeGlobal('Datos limpiados correctamente.')
-		setLimpiadoEn(Date.now())
-		navigate('/')
+		try {
+			await limpiarDatos()
+			setMensajeGlobal('Datos limpiados correctamente.')
+			setLimpiadoEn(Date.now())
+			navigate('/')
+		} catch {
+			setMensajeGlobal('No se pudieron limpiar los datos de la colección. Verificá que el servidor esté disponible.')
+		}
 	}
 
 	return (
