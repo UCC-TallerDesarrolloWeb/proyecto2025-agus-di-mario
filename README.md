@@ -332,7 +332,8 @@ Todos los comandos se corren desde la carpeta `frontend/`.
 - `npm run build` debe completarse sin errores antes de entregar.
 - `npm run preview` sirve el build estático; en este modo **no** hay conexión a json-server (es solo para verificar que
   el bundle se construyó bien).
-- `npm test -- --testPathPattern=NombreArchivo` corre solo los tests que coincidan.
+- `npm test -- NombreArchivo` corre solo los tests cuya ruta coincida (el argumento posicional es una regex; el flag
+  `--testPathPattern` fue eliminado en Jest 30).
 - `npm test -- --watch` activa el modo watch: re-corre los tests afectados cuando se guarda un archivo.
 
 ---
@@ -1411,7 +1412,21 @@ export default defineConfig([
 ## 14. Testing
 
 La filosofía: **probar comportamiento, no implementación**. Los tests simulan lo que haría un usuario real. Hay 5
-archivos de tests en `src/__tests__/`.
+archivos de tests en `src/__tests__/`, con 10 tests en total.
+
+Los comentarios `// Requisito N de la consigna` dentro de los archivos mapean cada test contra los 5 tipos de test
+pedidos por la consigna de la materia:
+
+| Requisito | Qué pide la consigna                                  | Test que lo cubre                          |
+|-----------|-------------------------------------------------------|--------------------------------------------|
+| 1         | Un componente renderiza el texto esperado             | `TarjetaAlbum` — nombre y artista          |
+| 2         | Una validación muestra error ante input inválido      | `SeccionResena` — guardar sin texto/puntaje |
+| 3         | Un botón ejecuta la acción correcta al hacer click    | `TarjetaAlbum` — click en la estrella      |
+| 4         | Datos provenientes de la API se renderizan            | `Inicio` y `Coleccion` — render del listado |
+| 5         | Una operación CRUD llama al endpoint correcto         | `albumes.test.js` — `agregarAColeccion`    |
+
+Los tests restantes (DELETE, PATCH, camino de error de `guardarResena`, colección vacía) están marcados como
+`// Complementario del requisito N`: amplían la cobertura de esos mismos requisitos.
 
 ---
 
@@ -1481,15 +1496,19 @@ fetchMock
 
 await agregarAColeccion(albumMock)
 
-expect(fetchMock).toHaveBeenNthCalledWith(2, `${BASE_URL}/coleccion`,
+expect(fetchMock).toHaveBeenCalledWith(`${BASE_URL}/coleccion`,
 	expect.objectContaining({method: 'POST', ...})
 )
 ```
 
-- `global.fetch = fetchMock` — inyecta el mock como el `fetch` global de Node.
+- `global.fetch = fetchMock` — inyecta el mock como el `fetch` global de Node. El setup (`beforeEach` que recrea el mock
+  y `afterEach` que lo elimina) está una sola vez a nivel de archivo y aplica a los 3 `describe`.
 - `mockResolvedValueOnce` (tres veces) — programa las respuestas en orden: `agregarAColeccion` hace 3 fetches (GET para
-  verificar duplicados, POST para crear, GET para retornar el estado final).
-- `toHaveBeenNthCalledWith(2, ...)` — verifica los argumentos de la 2ª llamada específicamente.
+  verificar duplicados, POST para crear, GET para retornar el estado final). La cola en orden es inevitable al mockear
+  un `fetch` secuencial.
+- `toHaveBeenCalledWith(...)` — verifica que **alguna** de las llamadas fue el POST correcto, sin fijar cuántas llamadas
+  hubo ni en qué posición: eso es un detalle interno de la implementación que podría cambiar (p. ej. si se optimizara
+  para no re-consultar la colección) sin que el comportamiento observable cambie.
 - `expect.objectContaining({...})` — matcher parcial, verifica que el objeto tenga al menos esas propiedades.
 
 ---
