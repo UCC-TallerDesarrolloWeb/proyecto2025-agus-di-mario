@@ -3,3 +3,5 @@
 /FRONTEND/node_modules
 /CLAUDE.md
 /.claude/
+/.remember/
+*.sarif.json
