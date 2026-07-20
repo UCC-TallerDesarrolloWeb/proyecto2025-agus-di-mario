@@ -18,8 +18,7 @@ function Coleccion() {
 			setElementos(data)
 			actualizarConteoColeccion?.(data.length)
 		})
-		// eslint-disable-next-line react-hooks/exhaustive-deps -- solo debe ejecutarse al montar
-	}, [])
+	}, [actualizarConteoColeccion])
 
 	/**
 	 * Quita un álbum de la colección y actualiza la lista.

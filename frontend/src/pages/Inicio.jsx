@@ -22,8 +22,7 @@ function Inicio() {
 			setColeccion(data)
 			actualizarConteoColeccion?.(data.length)
 		})
-		// eslint-disable-next-line react-hooks/exhaustive-deps -- solo debe reaccionar a limpiadoEn
-	}, [limpiadoEn])
+	}, [limpiadoEn, actualizarConteoColeccion])
 
 	const conjuntoColeccion = new Set(coleccion.map(item => item.id))
 

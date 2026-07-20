@@ -7,8 +7,9 @@ jest.mock('@api/albumes', () => ({
 	quitarDeColeccion: jest.fn(),
 }))
 
+const mockActualizarConteoColeccion = jest.fn()
 jest.mock('react-router-dom', () => ({
-	useOutletContext: jest.fn(() => ({actualizarConteoColeccion: jest.fn()})),
+	useOutletContext: jest.fn(() => ({actualizarConteoColeccion: mockActualizarConteoColeccion})),
 }))
 
 jest.mock('@components/SeccionResena', () => ({
