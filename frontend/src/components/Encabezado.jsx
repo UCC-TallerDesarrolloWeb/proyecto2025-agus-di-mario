@@ -32,11 +32,11 @@ function Encabezado({onLimpiar}) {
 			<Link className="link" to="/">Inicio</Link>
 			<Link className="link" to="/mi-coleccion">Mi colección</Link>
 			{onLimpiar && !confirmando && (
-				<button className="btn" onClick={pedirConfirmacion} id="boton-limpiar">Limpiar</button>)}
+				<button type="button" className="btn" onClick={pedirConfirmacion} id="boton-limpiar">Limpiar</button>)}
 			{confirmando && (<span className="confirmacion-limpiar">
 						<span>¿Limpiar todo?</span>
-						<button className="btn" onClick={confirmar}>Sí</button>
-						<button className="btn btn--neutro" onClick={cancelar}>No</button>
+						<button type="button" className="btn" onClick={confirmar}>Sí</button>
+						<button type="button" className="btn btn--neutro" onClick={cancelar}>No</button>
 					</span>)}
 		</nav>
 	</header>)
