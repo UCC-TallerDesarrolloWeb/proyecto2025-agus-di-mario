@@ -6,6 +6,7 @@ const BASE_URL = 'http://localhost:3001'
  */
 export const obtenerAlbumes = async () => {
 	const respuesta = await fetch(`${BASE_URL}/albumes`)
+	if (!respuesta.ok) throw new Error('No se pudo obtener el catálogo de álbumes')
 	return respuesta.json()
 }
 
@@ -15,6 +16,7 @@ export const obtenerAlbumes = async () => {
  */
 export const obtenerColeccion = async () => {
 	const respuesta = await fetch(`${BASE_URL}/coleccion`)
+	if (!respuesta.ok) throw new Error('No se pudo obtener la colección')
 	return respuesta.json()
 }
 
@@ -26,11 +28,12 @@ export const obtenerColeccion = async () => {
 export const agregarAColeccion = async (album) => {
 	const actual = await obtenerColeccion()
 	if (!actual.some(i => i.id === album.id)) { //agrega el album a la coleccion solo si no está ya en la coleccion
-		await fetch(`${BASE_URL}/coleccion`, {
+		const respuesta = await fetch(`${BASE_URL}/coleccion`, {
 			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify({...album, resena: null}),
 		})
+		if (!respuesta.ok) throw new Error('No se pudo agregar a la colección')
 	}
 	return obtenerColeccion()
 }
@@ -41,9 +44,10 @@ export const agregarAColeccion = async (album) => {
  * @returns {Promise<Array>} Colección resultante.
  */
 export const quitarDeColeccion = async (albumId) => {
-	await fetch(`${BASE_URL}/coleccion/${albumId}`, {
+	const respuesta = await fetch(`${BASE_URL}/coleccion/${albumId}`, {
 		method: 'DELETE'
 	})
+	if (!respuesta.ok) throw new Error('No se pudo quitar de la colección')
 	return obtenerColeccion()
 }
 
@@ -79,5 +83,8 @@ export const obtenerResena = async (albumId) => {
  */
 export const limpiarDatos = async () => {
 	const coleccion = await obtenerColeccion()
-	await Promise.all(coleccion.map(i => fetch(`${BASE_URL}/coleccion/${i.id}`, {method: 'DELETE'})))
+	const respuestas = await Promise.all(coleccion.map(i => fetch(`${BASE_URL}/coleccion/${i.id}`, {method: 'DELETE'})))
+	if (respuestas.some(r => !r.ok)) {
+		throw new Error('No se pudieron limpiar todos los datos de la colección')
+	}
 }
