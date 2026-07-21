@@ -14,9 +14,16 @@ jest.mock('@api/albumes', () => ({
 	quitarDeColeccion: jest.fn(),
 }))
 
-jest.mock('react-router-dom', () => ({
-	useOutletContext: jest.fn(() => ({limpiadoEn: null})),
-}))
+// actualizarConteo se crea una sola vez (fuera de la función que retorna
+// useOutletContext): si se recreara en cada llamada, cambiaría de referencia
+// en cada render y el useEffect que la tiene como dependencia se dispararía
+// en bucle.
+jest.mock('react-router-dom', () => {
+	const actualizarConteo = jest.fn()
+	return {
+		useOutletContext: jest.fn(() => ({limpiadoEn: null, actualizarConteo})),
+	}
+})
 
 describe('Inicio', () => {
 	beforeEach(() => {
