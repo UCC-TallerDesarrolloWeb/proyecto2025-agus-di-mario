@@ -9,7 +9,7 @@ import {agregarAColeccion, obtenerAlbumes, obtenerColeccion, quitarDeColeccion,}
  * @returns {JSX.Element}
  */
 function Inicio() {
-	const {limpiadoEn} = useOutletContext()
+	const {limpiadoEn, actualizarConteo} = useOutletContext()
 	const [albumes, setAlbumes] = useState([])
 	const [coleccion, setColeccion] = useState([])
 	const [error, setError] = useState('')
@@ -28,15 +28,17 @@ function Inicio() {
 	useEffect(() => {
 		async function cargarColeccion() {
 			try {
-				setColeccion(await obtenerColeccion())
+				const datos = await obtenerColeccion()
+				setColeccion(datos)
+				actualizarConteo(datos.length)
 			} catch {
 				setError('No se pudo cargar tu colección. Verificá que el servidor esté disponible e intentá de nuevo.')
 			}
 		}
 		cargarColeccion()
-	}, [limpiadoEn])
+	}, [limpiadoEn, actualizarConteo])
 
-	const conjuntoColeccion = new Set(coleccion.map(item => item.id))
+	const conjuntoColeccion = new Set(coleccion.map(item => item.albumId))
 
 	/**
 	 * Alterna un álbum entre agregado y quitado de la colección.
@@ -48,6 +50,7 @@ function Inicio() {
 				? await quitarDeColeccion(album.id)
 				: await agregarAColeccion(album)
 			setColeccion(actualizada)
+			actualizarConteo(actualizada.length)
 			setError('')
 		} catch {
 			setError('No se pudo actualizar tu colección. Intentá de nuevo.')

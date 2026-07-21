@@ -1,8 +1,8 @@
-import {useEffect, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import {Outlet, useLocation, useNavigate} from 'react-router-dom'
 import Encabezado from '@components/Encabezado'
 import Pie from '@components/Pie'
-import {limpiarDatos} from '@api/albumes'
+import {limpiarDatos, obtenerColeccion} from '@api/albumes'
 
 /**
  * Layout raíz de la aplicación: renderiza encabezado, mensaje global,
@@ -14,6 +14,7 @@ function Layout() {
 	const location = useLocation()
 	const [limpiadoEn, setLimpiadoEn] = useState(null)
 	const [mensajeGlobal, setMensajeGlobal] = useState('')
+	const [conteoColeccion, setConteoColeccion] = useState(0)
 
 	useEffect(() => {
 		if (!mensajeGlobal) return
@@ -25,6 +26,22 @@ function Layout() {
 		setMensajeGlobal('')
 	}, [location.pathname])
 
+	/* Carga inicial del conteo de la colección */
+	useEffect(() => {
+		obtenerColeccion()
+			.then(c => setConteoColeccion(c.length))
+			.catch(() => {})
+	}, [])
+
+	/**
+	 * Callback que los hijos invocan cuando la colección cambia,
+	 * para mantener actualizado el conteo en el Layout.
+	 * @param {number} nuevoConteo - Cantidad de ítems en la colección.
+	 */
+	const actualizarConteo = useCallback((nuevoConteo) => {
+		setConteoColeccion(nuevoConteo)
+	}, [])
+
 	/**
 	 * Limpia todos los datos del servidor, muestra confirmación
 	 * inline y navega a la página de inicio.
@@ -33,6 +50,7 @@ function Layout() {
 		try {
 			await limpiarDatos()
 			setMensajeGlobal('Datos limpiados correctamente.')
+			setConteoColeccion(0)
 			setLimpiadoEn(Date.now())
 			navigate('/')
 		} catch {
@@ -42,11 +60,11 @@ function Layout() {
 
 	return (
 		<>
-			<Encabezado onLimpiar={manejarLimpiar}/>
+			<Encabezado onLimpiar={conteoColeccion > 0 ? manejarLimpiar : null}/>
 			{mensajeGlobal && (
 				<p role="status" className="mensaje-global">{mensajeGlobal}</p>
 			)}
-			<Outlet context={{limpiadoEn}}/>
+			<Outlet context={{limpiadoEn, actualizarConteo}}/>
 			<Pie/>
 		</>
 	)

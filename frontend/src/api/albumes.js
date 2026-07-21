@@ -22,16 +22,18 @@ export const obtenerColeccion = async () => {
 
 /**
  * Agrega un álbum a la colección si no existe ya.
+ * Guarda el ID original del álbum en `albumId` porque json-server v1
+ * sobreescribe el campo `id` con un UUID autogenerado.
  * @param {Object} album - Álbum a agregar.
  * @returns {Promise<Array>} Colección actualizada.
  */
 export const agregarAColeccion = async (album) => {
 	const actual = await obtenerColeccion()
-	if (!actual.some(i => i.id === album.id)) { //agrega el album a la coleccion solo si no está ya en la coleccion
+	if (!actual.some(i => i.albumId === album.id)) { //agrega el album a la coleccion solo si no está ya en la coleccion
 		const respuesta = await fetch(`${BASE_URL}/coleccion`, {
 			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify({...album, resena: null}),
+			body: JSON.stringify({albumId: album.id, nombre: album.nombre, artista: album.artista, imagen: album.imagen, resena: null}),
 		})
 		if (!respuesta.ok) throw new Error('No se pudo agregar a la colección')
 	}
@@ -39,12 +41,15 @@ export const agregarAColeccion = async (album) => {
 }
 
 /**
- * Quita un álbum de la colección.
- * @param {number} albumId - ID del álbum a eliminar.
+ * Quita un álbum de la colección buscándolo por su albumId original.
+ * @param {string} albumId - ID original del álbum a eliminar.
  * @returns {Promise<Array>} Colección resultante.
  */
 export const quitarDeColeccion = async (albumId) => {
-	const respuesta = await fetch(`${BASE_URL}/coleccion/${albumId}`, {
+	const actual = await obtenerColeccion()
+	const item = actual.find(i => i.albumId === albumId)
+	if (!item) return obtenerColeccion()
+	const respuesta = await fetch(`${BASE_URL}/coleccion/${item.id}`, {
 		method: 'DELETE'
 	})
 	if (!respuesta.ok) throw new Error('No se pudo quitar de la colección')
@@ -53,12 +58,15 @@ export const quitarDeColeccion = async (albumId) => {
 
 /**
  * Guarda o actualiza la reseña de un álbum en la colección.
- * @param {number} albumId - Álbum objetivo.
+ * @param {string} albumId - ID original del álbum objetivo.
  * @param {{texto: string, puntaje: number}} resena - Datos de la reseña.
  * @returns {Promise<Object|null>} Registro actualizado o null si falla.
  */
 export const guardarResena = async (albumId, resena) => {
-	const respuesta = await fetch(`${BASE_URL}/coleccion/${albumId}`, {
+	const actual = await obtenerColeccion()
+	const item = actual.find(i => i.albumId === albumId)
+	if (!item) return null
+	const respuesta = await fetch(`${BASE_URL}/coleccion/${item.id}`, {
 		method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({resena}),
 	})
 	if (!respuesta.ok) return null
@@ -67,13 +75,13 @@ export const guardarResena = async (albumId, resena) => {
 
 /**
  * Recupera la reseña guardada de un álbum.
- * @param {number} albumId - Álbum objetivo.
+ * @param {string} albumId - ID original del álbum objetivo.
  * @returns {Promise<Object|null>} Reseña o null si no existe.
  */
 export const obtenerResena = async (albumId) => {
-	const respuesta = await fetch(`${BASE_URL}/coleccion/${albumId}`)
-	if (!respuesta.ok) return null
-	const item = await respuesta.json()
+	const actual = await obtenerColeccion()
+	const item = actual.find(i => i.albumId === albumId)
+	if (!item) return null
 	return item?.resena ?? null
 }
 
@@ -88,3 +96,4 @@ export const limpiarDatos = async () => {
 		throw new Error('No se pudieron limpiar todos los datos de la colección')
 	}
 }
+

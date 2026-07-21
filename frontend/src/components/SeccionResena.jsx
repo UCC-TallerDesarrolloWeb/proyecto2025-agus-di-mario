@@ -15,12 +15,13 @@ function SeccionResena({album}) {
 	const [mensajeError, setMensajeError] = useState('')
 	const [mensajeExito, setMensajeExito] = useState('')
 	const opcionesPuntaje = Array.from({length: 10}, (_, indice) => String(indice + 1))
-	const idTexto = `resena-texto-${album.id}`
-	const idPuntaje = `resena-puntaje-${album.id}`
+	const albumId = album.albumId || album.id
+	const idTexto = `resena-texto-${albumId}`
+	const idPuntaje = `resena-puntaje-${albumId}`
 
 	useEffect(() => {
 		;(async () => {
-			const almacenada = await obtenerResena(album.id)
+			const almacenada = await obtenerResena(albumId)
 			if (almacenada) {
 				setResenaGuardada(almacenada)
 				setTexto(almacenada.texto || '')
@@ -49,7 +50,7 @@ function SeccionResena({album}) {
 		setMensajeError('')
 		const puntajeNumero = Number(puntaje) || 1
 		try {
-			const resultado = await guardarResena(album.id, {texto: textoLimpio, puntaje: puntajeNumero})
+			const resultado = await guardarResena(albumId, {texto: textoLimpio, puntaje: puntajeNumero})
 			if (!resultado) {
 				setMensajeError('No se pudo guardar la reseña. Intentá de nuevo.')
 				return

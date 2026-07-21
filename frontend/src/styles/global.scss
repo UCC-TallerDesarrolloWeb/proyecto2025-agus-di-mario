@@ -165,10 +165,16 @@ main {
 }
 
 .estrella {
-	font-size: 20px;
+	font-size: 24px;
 	background: none;
 	border: 0;
 	cursor: pointer;
+	color: #ccc;
+	transition: color 0.2s ease, transform 0.2s ease;
+
+	&:hover {
+		transform: scale(1.2);
+	}
 
 	&.activo {
 		color: goldenrod;
