@@ -12,14 +12,15 @@ function Inicio() {
 	const {limpiadoEn, actualizarConteo} = useOutletContext()
 	const [albumes, setAlbumes] = useState([])
 	const [coleccion, setColeccion] = useState([])
-	const [error, setError] = useState('')
+	const [errorCatalogo, setErrorCatalogo] = useState('')
+	const [errorColeccion, setErrorColeccion] = useState('')
 
 	useEffect(() => {
 		async function cargarCatalogo() {
 			try {
 				setAlbumes(await obtenerAlbumes())
 			} catch {
-				setError('No se pudo cargar el catálogo. Verificá que el servidor esté disponible e intentá de nuevo.')
+				setErrorCatalogo('No se pudo cargar el catálogo. Verificá que el servidor esté disponible e intentá de nuevo.')
 			}
 		}
 		cargarCatalogo()
@@ -32,7 +33,7 @@ function Inicio() {
 				setColeccion(datos)
 				actualizarConteo(datos.length)
 			} catch {
-				setError('No se pudo cargar tu colección. Verificá que el servidor esté disponible e intentá de nuevo.')
+				setErrorColeccion('No se pudo cargar tu colección. Verificá que el servidor esté disponible e intentá de nuevo.')
 			}
 		}
 		cargarColeccion()
@@ -51,9 +52,9 @@ function Inicio() {
 				: await agregarAColeccion(album)
 			setColeccion(actualizada)
 			actualizarConteo(actualizada.length)
-			setError('')
+			setErrorColeccion('')
 		} catch {
-			setError('No se pudo actualizar tu colección. Intentá de nuevo.')
+			setErrorColeccion('No se pudo actualizar tu colección. Intentá de nuevo.')
 		}
 	}
 
@@ -61,8 +62,11 @@ function Inicio() {
 		<main>
 			<section id="catalogo">
 				<h2>Álbumes disponibles</h2>
-				{error && (
-					<p role="alert" className="mensaje-error">{error}</p>
+				{errorCatalogo && (
+					<p role="alert" className="mensaje-error">{errorCatalogo}</p>
+				)}
+				{errorColeccion && (
+					<p role="alert" className="mensaje-error">{errorColeccion}</p>
 				)}
 				<div className="lista-albumes" id="lista-albumes">
 					{albumes.map(album => (
