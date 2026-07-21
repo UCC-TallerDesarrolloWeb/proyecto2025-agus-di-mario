@@ -7,6 +7,7 @@ $color-danger-hover: #a93226;
 $color-card-border: #ddd;
 $color-card-bg: #fff;
 $color-muted: #555;
+$color-estrella-inactiva: #ccc;
 $grid-gap: 12px;
 
 @mixin flex-center {
@@ -169,7 +170,7 @@ main {
 	background: none;
 	border: 0;
 	cursor: pointer;
-	color: #ccc;
+	color: $color-estrella-inactiva;
 	transition: color 0.2s ease, transform 0.2s ease;
 
 	&:hover {
