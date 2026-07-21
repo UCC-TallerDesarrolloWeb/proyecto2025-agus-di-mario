@@ -21,17 +21,21 @@ function SeccionResena({album}) {
 
 	useEffect(() => {
 		;(async () => {
-			const almacenada = await obtenerResena(albumId)
-			if (almacenada) {
-				setResenaGuardada(almacenada)
-				setTexto(almacenada.texto || '')
-				setPuntaje(String(almacenada.puntaje || ''))
-				setEstaEditando(false)
-			} else {
-				setResenaGuardada(null)
-				setTexto('')
-				setPuntaje('')
-				setEstaEditando(true)
+			try {
+				const almacenada = await obtenerResena(albumId)
+				if (almacenada) {
+					setResenaGuardada(almacenada)
+					setTexto(almacenada.texto || '')
+					setPuntaje(String(almacenada.puntaje || ''))
+					setEstaEditando(false)
+				} else {
+					setResenaGuardada(null)
+					setTexto('')
+					setPuntaje('')
+					setEstaEditando(true)
+				}
+			} catch {
+				setMensajeError('No se pudo cargar la reseña guardada.')
 			}
 		})()
 	}, [album])

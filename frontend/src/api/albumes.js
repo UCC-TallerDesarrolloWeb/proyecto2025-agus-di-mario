@@ -63,8 +63,13 @@ export const quitarDeColeccion = async (albumId) => {
  * @returns {Promise<Object|null>} Registro actualizado o null si falla.
  */
 export const guardarResena = async (albumId, resena) => {
-	const actual = await obtenerColeccion()
-	const item = actual.find(i => i.albumId === albumId)
+	let item
+	try {
+		const actual = await obtenerColeccion()
+		item = actual.find(i => i.albumId === albumId)
+	} catch {
+		return null
+	}
 	if (!item) return null
 	const respuesta = await fetch(`${BASE_URL}/coleccion/${item.id}`, {
 		method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({resena}),
